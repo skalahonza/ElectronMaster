@@ -1,0 +1,208 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:electronMaster="clr-namespace:ElectronMaster"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="window" x:Class="ElectronMaster.MainWindow"
+        Title="Electron master" Height="612" Width="912" MinHeight="612" MinWidth="912" Icon="Obrázky/ikona.png" Loaded="window_Loaded">
+    <Window.Resources>
+        <ResourceDictionary Source="BileKomponenty.xaml"/>
+    </Window.Resources>
+    <Grid x:Name="MainGrid">
+        <Grid.Background>
+            <ImageBrush ImageSource="Obrázky/pozadi.png" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="75" Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer x:Name="scrollViewer" Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" MaxHeight="75" VerticalAlignment="Top" >
+            <RichTextBox x:Name="TextovaKonfiguraceTb" FontSize="18" Visibility="Collapsed" IsReadOnly="True" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="scrollViewer2"  Grid.Column="3" VerticalScrollBarVisibility="Auto" MaxHeight="75" VerticalAlignment="Top"  >
+            <RichTextBox x:Name="PlynovaKonfiguraceTb"  FontSize="18" Visibility="{Binding Visibility, ElementName=TextovaKonfiguraceTb}" IsReadOnly="True" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        </ScrollViewer>
+
+        <Separator Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Top" VerticalContentAlignment="Top" Visibility="{Binding Visibility, ElementName=TextovaKonfiguraceTb}" d:IsHidden="True" />
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" d:IsHidden="True">
+            <WrapPanel x:Name="SchematickaKonfigurace"/>
+        </ScrollViewer>
+        <Button Grid.Row="1" Grid.Column="3" ToolTip="Uložit schématickou konfiguraci jako obrázek" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="2,4" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Visibility="{Binding Visibility, ElementName=TextovaKonfiguraceTb}" Click="SaveAsImage">
+            <Button.Resources>
+                <Style x:Key="FocusVisual">
+                    <Setter Property="Control.Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+                <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+                <ImageBrush x:Key="Button.MouseOver.Background" ImageSource="Obrázky/floppy-disk-blue.png"/>
+                <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+                <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+                <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+                <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+                    <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+                    <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Padding" Value="1"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsDefaulted" Value="true">
+                                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                        
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter Property="Opacity" Value="0.5"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="false">
+                                        <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                        <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                        <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <ImageBrush ImageSource="Obrázky/floppy-disk.png"/>
+            </Button.Background>
+        </Button>
+        <Separator Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" Visibility="{Binding Visibility, ElementName=TextovaKonfiguraceTb}" d:IsHidden="True" />
+
+        <TextBlock x:Name="textBlock" Grid.Row="2" Text="Nekovy" Background="#FFE44424" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="0" TextAlignment="Center" Padding="5" FontSize="16"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Polokovy" Background="#FF67BCDB" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="1" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
+        <TextBlock Grid.Column="2" Grid.Row="2" Text="Kovy" Background="#FFA2AB58" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="2" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
+        <TextBlock Grid.Column="3" Grid.Row="2" Text="Umělé prvky" Background="#252526" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="3" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
+
+        <TextBox x:Name="SearchTextBox" Grid.Row="3" Grid.ColumnSpan="4" Text="Hledat..." FontSize="24" VerticalContentAlignment="Center" Padding="37.5,0,0,0" GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" TextChanged="SearchTextBox_TextChanged" Background="{x:Null}" Height="35"/>
+        <Border HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" Height="30" VerticalAlignment="Top" Width="{Binding Height, ElementName=SearchTextBox}" Margin="3" BorderBrush="#FFABADB3" BorderThickness="0,0,1,0">
+            <Image Source="Obrázky/magnifier12.png"/>
+        </Border>
+
+        <TabControl x:Name="tabControl" Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="4" Background="{x:Null}" BorderThickness="0">
+            <TabItem Header="Seznam">
+                <Grid x:Name="grid">
+                    <ListView x:Name="SeznamPrvku" Grid.ColumnSpan="3" ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectionChanged="SeznamPrvku_SelectionChanged" Background="{x:Null}" BorderThickness="0"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Tabulka">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid x:Name="PeriodickaTabulka">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <electronMaster:RamecPrvku NazevCesky="Vodík" NazevLatinsky="Hydrogenium"  Znacka="H" PocetElektronu="1" Kovovitost="Nekov" MouseDown="vybratRamec"/>
+                        <electronMaster:RamecPrvku Grid.Column="17" NazevCesky="Helium" NazevLatinsky="Helium" Znacka="He" PocetElektronu="2" Kovovitost="Nekov" MouseDown="vybratRamec"/>
+                        <electronMaster:RamecPrvku Grid.Row="1" NazevCesky="Lithium" NazevLatinsky="Lithium" Znacka="Li" Kovovitost="Kov" PocetElektronu="3" MouseDown="vybratRamec"/>
+                        <electronMaster:RamecPrvku Grid.Row="1" Grid.Column="1" NazevCesky="Beryllium" NazevLatinsky="Beryllium" Znacka="Be" Kovovitost="Kov" PocetElektronu="4" MouseDown="vybratRamec"/>
+                        <electronMaster:RamecPrvku Grid.Row="2" Grid.Column="0" NazevCesky="Sodík" NazevLatinsky="Natrium" Znacka="Na" Kovovitost="Kov" PocetElektronu="11" MouseDown="vybratRamec"/>
+                        <electronMaster:RamecPrvku Grid.Row="2" Grid.Column="1" NazevCesky="Hořčík" NazevLatinsky="Magnesium" Znacka="Mg" Kovovitost="Kov" PocetElektronu="12" MouseDown="vybratRamec"/>
+                        <electronMaster:RamecPrvku Grid.Row="5" Grid.Column="0" NazevCesky="Cesium" NazevLatinsky="Caesium" Znacka="Cs" Kovovitost="Kov" PocetElektronu="55" MouseDown="vybratRamec"/>
+                        <electronMaster:RamecPrvku Grid.Row="5" Grid.Column="1" NazevCesky="Baryum" NazevLatinsky="Baryum" Znacka="Ba" Kovovitost="Kov" PocetElektronu="56" MouseDown="vybratRamec"/>
+                        <electronMaster:RamecPrvku Grid.Row="6" Grid.Column="0" NazevCesky="Francium" NazevLatinsky="Francium" Znacka="Fr" Kovovitost="Kov" PocetElektronu="87" MouseDown="vybratRamec"/>
+                        <electronMaster:RamecPrvku Grid.Row="6" Grid.Column="1" NazevCesky="Radium" NazevLatinsky="Radium" Znacka="Ra" Kovovitost="Kov" PocetElektronu="88" MouseDown="vybratRamec"/>
+                        <electronMaster:RamecPrvku Grid.Row="5" Grid.Column="2" NazevCesky="Lanthan" NazevLatinsky="Lanthanum" Znacka="La" Kovovitost="Kov" PocetElektronu="57" Margin="0,0,5,0" MouseDown="vybratRamec"/>
+                        <electronMaster:RamecPrvku Grid.Row="6" Grid.Column="2" NazevCesky="Aktinium" NazevLatinsky="Actinium" Znacka="Ac" Kovovitost="Kov" PocetElektronu="89" Margin="0,0,5,0" MouseDown="vybratRamec"/>
+
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Informace">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!--<Image Grid.RowSpan="2" Source="Obrázky/GoID.jpg" Stretch="Fill" Grid.ColumnSpan="2" StretchDirection="DownOnly"/>-->
+                        <TextBlock Text="O programu" Style="{StaticResource nadpis}"/>
+                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource odstavec}" Text="Program slouží k vytvoření elektronové konfigurace jednotlivých prvků periodické tabulky. Prvek si, buď můžete vybrat ze seznamu anebo přímo z tabulky. Pro přehlednost můžete použít vyhledávací pole nebo kliknout na příslušnou kategorii (nekovy, polokovy, kovy, umělé prvky) a zvýrazní se vám prvky zvolené kategorie. Program vytvoří konfiguraci textovou i podle vzácného plynu a dokonce i vykreslí diagram. Pokud si přejete diagram uložit jako obrázek, klepněte na malou disketu." TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="2" Style="{StaticResource nadpis}" Text="Algoritmus konfigurace"/>
+                        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource odstavec}" Text="Celý proces elektronové konfigurace obstarává několik metod. Hlavní metoda spouští konfigurace pro jednotlivé periody 1 až 7. Pro každou periodu se nakonfigurují příslušné orbitaly." TextWrapping="Wrap"/>
+                        <Image Grid.Row="4" Grid.ColumnSpan="2" Source="Obrázky/diagram.png" />
+                        <Separator Grid.Row="5" Grid.ColumnSpan="2"/>
+                        <TextBlock Grid.Column="1" Grid.Row="6" Text="Copyright © 2015 Jan Skála" VerticalAlignment="Bottom"  TextAlignment="Right" Margin="2"/>
+                        <TextBlock Grid.Row="6" Text="http://goid.azurewebsites.net" VerticalAlignment="Bottom" HorizontalAlignment="Left" TextDecorations="Underline" Margin="2" MouseDown="TextBlock_MouseDown" >
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Foreground" Value="#3485b4"/>
+                                    <Style.Triggers>
+                                        <Trigger Property ="IsMouseOver" Value="True">
+                                            <Setter Property= "Foreground" Value="#FF303438"/>
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
