@@ -47,7 +47,7 @@ namespace ElectronMaster
         #region Vlastnosti
         public int CisloPeriody { get; private set; }
         public TypOrbitalu TypOrbitalu { get; private set; }
-        public int PocetElektronu { get; private set; }
+        public int PocetElektronu { get; set; }
         #endregion
 
     }
@@ -80,7 +80,30 @@ namespace ElectronMaster
             }
             //odberání možné null která mohla vzniknout důsledkem neúplné konfigurace
             vyslednaKonfigurace.RemoveAll(x => x == null); //mělo by odebrat všechny konfigurace které jsou null
-            elektronyKeKonfiguraci = PocetElektronu; // kdyby byla konfigrace požadována znovu je potřeba aby proměnná elektronyKeKonfiguraci nebyla prázdná
+            elektronyKeKonfiguraci = PocetElektronu;
+            // kdyby byla konfigrace požadována znovu je potřeba aby proměnná elektronyKeKonfiguraci nebyla prázdná
+
+            //kontrola pro stabilitu D5 a D10
+            //když je D4 nebo D9 tak elektron z orbitalu S se přesune do orbitalu D
+
+            for (int limit = 4; limit <= 9; limit += 5)
+            {
+                if (vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].TypOrbitalu == TypOrbitalu.D &&
+                    vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].PocetElektronu == limit)
+                {
+                    //přidání elektronu do orbitalu
+                    vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].PocetElektronu++;
+
+                    for (int i = vyslednaKonfigurace.Count - 1; i >= 0; i--)
+                        if (vyslednaKonfigurace[i].TypOrbitalu == TypOrbitalu.S)
+                        {
+                            vyslednaKonfigurace[i].PocetElektronu--;
+                            break;
+                        }
+                }
+            }
+
+
             return vyslednaKonfigurace;
         }
 
