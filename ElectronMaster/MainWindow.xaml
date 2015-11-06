@@ -20,6 +20,7 @@
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="75" Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -96,17 +97,19 @@
         </Button>
         <Separator Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" Visibility="{Binding Visibility, ElementName=TextovaKonfiguraceTb}" d:IsHidden="True" />
 
-        <TextBlock x:Name="textBlock" Grid.Row="2" Text="Nekovy" Background="#FFE44424" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="0" TextAlignment="Center" Padding="5" FontSize="16"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Polokovy" Background="#FF67BCDB" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="1" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
-        <TextBlock Grid.Column="2" Grid.Row="2" Text="Kovy" Background="#FFA2AB58" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="2" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
-        <TextBlock Grid.Column="3" Grid.Row="2" Text="Umělé prvky" Background="#252526" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="3" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
+        <TextBlock x:Name="StabilitaTB" Visibility="Collapsed" Grid.Row="2" Grid.ColumnSpan="4" Text="Prvek má specifickou elektronovou konfiguraci. Ordbital D poslední periody se zaplňuje jako první." FontSize="16" Foreground="#FFE44424" HorizontalAlignment="Center"/>
 
-        <TextBox x:Name="SearchTextBox" Grid.Row="3" Grid.ColumnSpan="4" Text="Hledat..." FontSize="24" VerticalContentAlignment="Center" Padding="37.5,0,0,0" GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" TextChanged="SearchTextBox_TextChanged" Background="{x:Null}" Height="35"/>
-        <Border HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" Height="30" VerticalAlignment="Top" Width="{Binding Height, ElementName=SearchTextBox}" Margin="3" BorderBrush="#FFABADB3" BorderThickness="0,0,1,0">
+        <TextBlock x:Name="textBlock" Grid.Row="3" Text="Nekovy" Background="#FFE44424" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="0" TextAlignment="Center" Padding="5" FontSize="16"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Polokovy" Background="#FF67BCDB" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="1" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
+        <TextBlock Grid.Column="2" Grid.Row="3" Text="Kovy" Background="#FFA2AB58" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="2" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
+        <TextBlock Grid.Column="3" Grid.Row="3" Text="Umělé prvky" Background="#252526" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="3" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
+
+        <TextBox x:Name="SearchTextBox" Grid.Row="4" Grid.ColumnSpan="4" Text="Hledat..." FontSize="24" VerticalContentAlignment="Center" Padding="37.5,0,0,0" GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" TextChanged="SearchTextBox_TextChanged" Background="{x:Null}" Height="35"/>
+        <Border HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0" Height="30" VerticalAlignment="Top" Width="{Binding Height, ElementName=SearchTextBox}" Margin="3" BorderBrush="#FFABADB3" BorderThickness="0,0,1,0">
             <Image Source="Obrázky/magnifier12.png"/>
         </Border>
 
-        <TabControl x:Name="tabControl" Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="4" Background="{x:Null}" BorderThickness="0">
+        <TabControl x:Name="tabControl" Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="5" Background="{x:Null}" BorderThickness="0">
             <TabItem Header="Seznam">
                 <Grid x:Name="grid">
                     <ListView x:Name="SeznamPrvku" Grid.ColumnSpan="3" ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectionChanged="SeznamPrvku_SelectionChanged" Background="{x:Null}" BorderThickness="0"/>

@@ -63,6 +63,7 @@ namespace ElectronMaster
             NazevLatinsky = nazevLatinsky;
             TypPrvku = typPrvku;
             PocetElektronu = elektronyKeKonfiguraci = pocetElektronu;
+            SpecialniKonfigurace = false;
         }
 
         /// <summary>
@@ -89,7 +90,8 @@ namespace ElectronMaster
             for (int limit = 4; limit <= 9; limit += 5)
             {
                 if (vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].TypOrbitalu == TypOrbitalu.D &&
-                    vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].PocetElektronu == limit)
+                    vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].PocetElektronu == limit
+                    && (limit != 4 || vyslednaKonfigurace[vyslednaKonfigurace.Count - 2].TypOrbitalu != TypOrbitalu.F))
                 {
                     //přidání elektronu do orbitalu
                     vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].PocetElektronu++;
@@ -98,12 +100,11 @@ namespace ElectronMaster
                         if (vyslednaKonfigurace[i].TypOrbitalu == TypOrbitalu.S)
                         {
                             vyslednaKonfigurace[i].PocetElektronu--;
+                            SpecialniKonfigurace = true;
                             break;
                         }
                 }
             }
-
-
             return vyslednaKonfigurace;
         }
 
@@ -256,6 +257,7 @@ namespace ElectronMaster
         public string NazevLatinsky { get; set; }
         public TypPrvku TypPrvku { get; set; }
         public int PocetElektronu { get; set; }
+        public bool SpecialniKonfigurace { get; set; }
         #endregion
 
     }

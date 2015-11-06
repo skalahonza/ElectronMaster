@@ -215,7 +215,6 @@ namespace ElectronMaster
             }
             #endregion
 
-            
             SearchTextBox_TextChanged(null,null);
         }
 
@@ -303,6 +302,10 @@ namespace ElectronMaster
             TextovaKonfigurace();
             ObrazovaKonfigurace();
             KonfiguracePodleVzacnehoPlynu();
+
+            StabilitaTB.Visibility = _praveZkoumanyPrvek.PrvekRadku.SpecialniKonfigurace
+                ? Visibility.Visible
+                : Visibility.Hidden;
         }
 
         /// <summary>
