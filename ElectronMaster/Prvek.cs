@@ -12,11 +12,11 @@ namespace ElectronMaster
 
     public enum TypOrbitalu
     {
-        S,
-        P,
-        D,
-        F,
-        G
+        s,
+        p,
+        d,
+        f,
+        g
     }
 
     public class Konfigurace
@@ -89,15 +89,15 @@ namespace ElectronMaster
 
             for (int limit = 4; limit <= 9; limit += 5)
             {
-                if (vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].TypOrbitalu == TypOrbitalu.D &&
+                if (vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].TypOrbitalu == TypOrbitalu.d &&
                     vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].PocetElektronu == limit
-                    && (limit != 4 || vyslednaKonfigurace[vyslednaKonfigurace.Count - 2].TypOrbitalu != TypOrbitalu.F))
+                    && (limit != 4 || vyslednaKonfigurace[vyslednaKonfigurace.Count - 2].TypOrbitalu != TypOrbitalu.f))
                 {
                     //přidání elektronu do orbitalu
                     vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].PocetElektronu++;
 
                     for (int i = vyslednaKonfigurace.Count - 1; i >= 0; i--)
-                        if (vyslednaKonfigurace[i].TypOrbitalu == TypOrbitalu.S)
+                        if (vyslednaKonfigurace[i].TypOrbitalu == TypOrbitalu.s)
                         {
                             vyslednaKonfigurace[i].PocetElektronu--;
                             SpecialniKonfigurace = true;
@@ -166,12 +166,12 @@ namespace ElectronMaster
             Konfigurace orbitalS;
             if (elektronyKeKonfiguraci >= 2) // pokud tam je 2 a více elektronů
             {
-                orbitalS = new Konfigurace(cisloPeriody, TypOrbitalu.S, 2);
+                orbitalS = new Konfigurace(cisloPeriody, TypOrbitalu.s, 2);
                 elektronyKeKonfiguraci -= 2;
             }
             else
             {
-                orbitalS = new Konfigurace(cisloPeriody, TypOrbitalu.S, elektronyKeKonfiguraci);
+                orbitalS = new Konfigurace(cisloPeriody, TypOrbitalu.s, elektronyKeKonfiguraci);
                 elektronyKeKonfiguraci = 0;
             }
             return orbitalS;
@@ -190,12 +190,12 @@ namespace ElectronMaster
             Konfigurace orbitalP;
             if (elektronyKeKonfiguraci >= 6) // pokud tam je 6 a více elektronů
             {
-                orbitalP = new Konfigurace(cisloPeriody, TypOrbitalu.P, 6);
+                orbitalP = new Konfigurace(cisloPeriody, TypOrbitalu.p, 6);
                 elektronyKeKonfiguraci -= 6;
             }
             else
             {
-                orbitalP = new Konfigurace(cisloPeriody, TypOrbitalu.P, elektronyKeKonfiguraci);
+                orbitalP = new Konfigurace(cisloPeriody, TypOrbitalu.p, elektronyKeKonfiguraci);
                 elektronyKeKonfiguraci = 0;
             }
             return orbitalP;
@@ -214,12 +214,12 @@ namespace ElectronMaster
             Konfigurace orbitalD;
             if (elektronyKeKonfiguraci >= 10) // pokud tam je 10 a více elektronů
             {
-                orbitalD = new Konfigurace(cisloPeriody - 1, TypOrbitalu.D, 10);
+                orbitalD = new Konfigurace(cisloPeriody - 1, TypOrbitalu.d, 10);
                 elektronyKeKonfiguraci -= 10;
             }
             else
             {
-                orbitalD = new Konfigurace(cisloPeriody - 1, TypOrbitalu.D, elektronyKeKonfiguraci);
+                orbitalD = new Konfigurace(cisloPeriody - 1, TypOrbitalu.d, elektronyKeKonfiguraci);
                 elektronyKeKonfiguraci = 0;
             }
             return orbitalD;
@@ -238,12 +238,12 @@ namespace ElectronMaster
             Konfigurace orbitalF;
             if (elektronyKeKonfiguraci >= 14) // pokud tam je 14 a více elektronů
             {
-                orbitalF = new Konfigurace(cisloPeriody - 2, TypOrbitalu.F, 14);
+                orbitalF = new Konfigurace(cisloPeriody - 2, TypOrbitalu.f, 14);
                 elektronyKeKonfiguraci -= 14;
             }
             else
             {
-                orbitalF = new Konfigurace(cisloPeriody - 2, TypOrbitalu.F, elektronyKeKonfiguraci);
+                orbitalF = new Konfigurace(cisloPeriody - 2, TypOrbitalu.f, elektronyKeKonfiguraci);
                 elektronyKeKonfiguraci = 0;
             }
             return orbitalF;

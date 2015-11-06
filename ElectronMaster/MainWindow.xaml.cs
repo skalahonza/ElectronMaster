@@ -358,7 +358,7 @@ namespace ElectronMaster
             var dostupneVzacnePlyny = _prvky.Where(
                 x =>
                     x.PocetElektronu < _praveZkoumanyPrvek.PrvekRadku.PocetElektronu &&
-                    x.ElektronovaKonfigurace().Last().TypOrbitalu == TypOrbitalu.P &&
+                    x.ElektronovaKonfigurace().Last().TypOrbitalu == TypOrbitalu.p &&
                     //pokud je poslední orbital typu P a navíc je zaplněný jedná se o vzácný plyn
                     x.ElektronovaKonfigurace().Last().PocetElektronu == 6);
 
