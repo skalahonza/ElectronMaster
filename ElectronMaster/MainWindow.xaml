@@ -97,7 +97,7 @@
         </Button>
         <Separator Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" Visibility="{Binding Visibility, ElementName=TextovaKonfiguraceTb}" d:IsHidden="True" />
 
-        <TextBlock x:Name="StabilitaTB" Visibility="Collapsed" Grid.Row="2" Grid.ColumnSpan="4" Text="Prvek má specifickou elektronovou konfiguraci. Ordbital D poslední periody se zaplňuje jako první." FontSize="16" Foreground="#FFE44424" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="StabilitaTB" Visibility="Collapsed" Grid.Row="2" Grid.ColumnSpan="4" Text="Prvek má specifickou elektronovou konfiguraci. Ordbital D poslední periody se zaplňuje dříve." FontSize="16" Foreground="#FFE44424" HorizontalAlignment="Center"/>
 
         <TextBlock x:Name="textBlock" Grid.Row="3" Text="Nekovy" Background="#FFE44424" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="0" TextAlignment="Center" Padding="5" FontSize="16"/>
         <TextBlock Grid.Column="1" Grid.Row="3" Text="Polokovy" Background="#FF67BCDB" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="1" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>

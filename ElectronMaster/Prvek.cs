@@ -91,11 +91,12 @@ namespace ElectronMaster
             {
                 if (vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].TypOrbitalu == TypOrbitalu.d &&
                     vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].PocetElektronu == limit
-                    && (limit != 4 || vyslednaKonfigurace[vyslednaKonfigurace.Count - 2].TypOrbitalu != TypOrbitalu.f))
+                    && PocetElektronu < 80)
                 {
                     //přidání elektronu do orbitalu
                     vyslednaKonfigurace[vyslednaKonfigurace.Count - 1].PocetElektronu++;
 
+                    //hledání nejbližšího s orbitalu
                     for (int i = vyslednaKonfigurace.Count - 1; i >= 0; i--)
                         if (vyslednaKonfigurace[i].TypOrbitalu == TypOrbitalu.s)
                         {
