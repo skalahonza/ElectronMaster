@@ -6,14 +6,14 @@ using ElectronMaster.Model;
 namespace ElectronMaster.View
 {
     /// <summary>
-    /// Interaction logic for RamecPrvku.xaml
+    /// Interaction logic for ElementFrame.xaml
     /// </summary>
-    public partial class RamecPrvku : UserControl
+    public partial class ElementFrame : UserControl
     {
-        private string _kovovitost;
+        private string _metality;
 
-        public string NazevCesky { get; set; }
-        public string NazevLatinsky {
+        public string CzechName { get; set; }
+        public string LatinName {
             get
             {
                 return (string)GetValue(LatinDependencyProperty);
@@ -24,16 +24,16 @@ namespace ElectronMaster.View
             }
         }
 
-        public string Znacka { get; set; }
-        public int PocetElektronu { get; set; }
-        public string Kovovitost
+        public string Symbol { get; set; }
+        public int Electrons { get; set; }
+        public string Metality
         {
-            get { return _kovovitost; }
+            get { return _metality; }
             set
             {
 
-                _kovovitost = value;
-                switch (_kovovitost)
+                _metality = value;
+                switch (_metality)
                 {
                     case "Kov":
                         ZnackaPozadi.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFA2AB58"));
@@ -51,24 +51,24 @@ namespace ElectronMaster.View
             }
         }
 
-        public static DependencyProperty CzechDependencyProperty = DependencyProperty.Register("NazevCesky", typeof(string), typeof(RamecPrvku));
-        public static DependencyProperty SymbolDependencyProperty = DependencyProperty.Register("Symbol", typeof(string), typeof(RamecPrvku));
-        public static DependencyProperty ElectronsDependencyProperty = DependencyProperty.Register("Electrons", typeof(int), typeof(RamecPrvku));
-        public static DependencyProperty LatinDependencyProperty = DependencyProperty.Register("LatinName", typeof(string), typeof(RamecPrvku), new PropertyMetadata(string.Empty));
+        public static DependencyProperty CzechDependencyProperty = DependencyProperty.Register("CzechName", typeof(string), typeof(ElementFrame));
+        public static DependencyProperty SymbolDependencyProperty = DependencyProperty.Register("Symbol", typeof(string), typeof(ElementFrame));
+        public static DependencyProperty ElectronsDependencyProperty = DependencyProperty.Register("Electrons", typeof(int), typeof(ElementFrame));
+        public static DependencyProperty LatinDependencyProperty = DependencyProperty.Register("LatinName", typeof(string), typeof(ElementFrame), new PropertyMetadata(string.Empty));
 
-        public RamecPrvku()
+        public ElementFrame()
         {
             InitializeComponent();
         }
 
-        public RamecPrvku(Element element)
+        public ElementFrame(Element element)
         {
             InitializeComponent();
-            NazevCesky = ceskyNazevTB.Text = element.CzechName;
-            NazevLatinsky = element.LatinName;
-            Znacka = znackaTB.Text = element.Symbol;
-            PocetElektronu = int.Parse(elektronyTB.Text = element.Electrons.ToString());
-            Kovovitost = element.ElementType.ToString();
+            CzechName = ceskyNazevTB.Text = element.CzechName;
+            LatinName = element.LatinName;
+            Symbol = znackaTB.Text = element.Symbol;
+            Electrons = int.Parse(elektronyTB.Text = element.Electrons.ToString());
+            Metality = element.ElementType.ToString();
         }
 
         private void UI_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -78,6 +78,5 @@ namespace ElectronMaster.View
             else
                 Opacity = 0.5;
         }
-
     }
 }

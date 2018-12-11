@@ -156,7 +156,7 @@ namespace ElectronMaster.View
             for (int radek = 3; radek < 5; radek++)
                 for (int sloupec = 0; sloupec < 18; sloupec ++)
                 {
-                    var ramec = new RamecPrvku(_prvky[protonoveCislo - 1]);
+                    var ramec = new ElementFrame(_prvky[protonoveCislo - 1]);
                     if (sloupec == 2) //pokud jsou to prvky třetí periody tak se oddělí od právě části tabulky
                         ramec.Margin = new Thickness(0, 0, 5, 0);
                     ramec.MouseDown += vybratRamec;
@@ -171,7 +171,7 @@ namespace ElectronMaster.View
             {
                 for (int sloupec = 3; sloupec < 18; sloupec++)
                 {
-                    var ramec = new RamecPrvku(_prvky[protonoveCislo - 1]);
+                    var ramec = new ElementFrame(_prvky[protonoveCislo - 1]);
                     ramec.MouseDown += vybratRamec;
                     PeriodickaTabulka.Children.Add(ramec);
                     Grid.SetColumn(ramec, sloupec);
@@ -187,7 +187,7 @@ namespace ElectronMaster.View
             {
                 for (int sloupec = 3; sloupec < 18; sloupec++)
                 {
-                    var ramec = new RamecPrvku(_prvky[protonoveCislo - 1]);
+                    var ramec = new ElementFrame(_prvky[protonoveCislo - 1]);
                     if(radek == 7)
                         ramec.Margin = new Thickness(0, 5, 0, 0); //oddělení lantanoidů a aktinoidů od zbytku tabulky
 
@@ -205,7 +205,7 @@ namespace ElectronMaster.View
             {
                 for (int sloupec = 12; sloupec < 18; sloupec++)
                 {
-                    var ramec = new RamecPrvku(_prvky[protonoveCislo - 1]);
+                    var ramec = new ElementFrame(_prvky[protonoveCislo - 1]);
                     ramec.MouseDown += vybratRamec;
                     PeriodickaTabulka.Children.Add(ramec);
                     Grid.SetColumn(ramec, sloupec);
@@ -238,7 +238,7 @@ namespace ElectronMaster.View
             {
               SeznamPrvku.Items.Clear();
                 foreach (var ramec in PeriodickaTabulka.Children)
-                    ((RamecPrvku) ramec).IsEnabled = true;    //zapnutí všech položek v tabluce
+                    ((ElementFrame) ramec).IsEnabled = true;    //zapnutí všech položek v tabluce
             }
             catch
             {
@@ -269,9 +269,9 @@ namespace ElectronMaster.View
             if(SearchTextBox.Text != "Hledat..." && SearchTextBox.Text.Length > 0)
                 foreach (
                     var ramec in
-                        PeriodickaTabulka.Children.OfType<RamecPrvku>()
+                        PeriodickaTabulka.Children.OfType<ElementFrame>()
                             .Where(x => !x.ceskyNazevTB.Text.ToLower().Contains(SearchTextBox.Text.ToLower()) &&
-                                        !x.NazevLatinsky.ToLower().Contains(SearchTextBox.Text.ToLower())))
+                                        !x.LatinName.ToLower().Contains(SearchTextBox.Text.ToLower())))
                 {
                     ramec.IsEnabled = false; // vypnutí neodpovídajících prvků
                 }
@@ -385,7 +385,7 @@ namespace ElectronMaster.View
 
         private void vybratRamec(object sender, MouseButtonEventArgs e)
         {
-            ZvoleniZkoumanehoPrvku(_prvky.First(x => x.CzechName == ((RamecPrvku)sender).ceskyNazevTB.Text)); 
+            ZvoleniZkoumanehoPrvku(_prvky.First(x => x.CzechName == ((ElementFrame)sender).ceskyNazevTB.Text)); 
         }
 
         /// <summary>
@@ -400,7 +400,7 @@ namespace ElectronMaster.View
                 SeznamPrvku.Items.Clear();
 
                 foreach (var ramec in PeriodickaTabulka.Children)
-                    ((RamecPrvku) ramec).IsEnabled = true; //zapnutí všech položek v tabluce
+                    ((ElementFrame) ramec).IsEnabled = true; //zapnutí všech položek v tabluce
             }
             catch
             {
@@ -413,8 +413,8 @@ namespace ElectronMaster.View
                 SeznamPrvku.Items.Add(new RadekPrvku(prvek));
 
             //schovej všechny rámce, které nesjou stejného typu
-            foreach (var ramec in PeriodickaTabulka.Children.OfType<RamecPrvku>().Where(x =>
-                ((ElementType) Enum.Parse(typeof (ElementType), x.Kovovitost, true)) !=
+            foreach (var ramec in PeriodickaTabulka.Children.OfType<ElementFrame>().Where(x =>
+                ((ElementType) Enum.Parse(typeof (ElementType), x.Metality, true)) !=
                 (ElementType) int.Parse(((TextBlock) sender).Tag.ToString())))
                 ramec.IsEnabled = false;
         }

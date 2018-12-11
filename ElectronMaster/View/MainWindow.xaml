@@ -151,18 +151,18 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <view:RamecPrvku NazevCesky="Vodík" NazevLatinsky="Hydrogenium"  Znacka="H" PocetElektronu="1" Kovovitost="Nekov" MouseDown="vybratRamec"/>
-                        <view:RamecPrvku Grid.Column="17" NazevCesky="Helium" NazevLatinsky="Helium" Znacka="He" PocetElektronu="2" Kovovitost="Nekov" MouseDown="vybratRamec"/>
-                        <view:RamecPrvku Grid.Row="1" NazevCesky="Lithium" NazevLatinsky="Lithium" Znacka="Li" Kovovitost="Kov" PocetElektronu="3" MouseDown="vybratRamec"/>
-                        <view:RamecPrvku Grid.Row="1" Grid.Column="1" NazevCesky="Beryllium" NazevLatinsky="Beryllium" Znacka="Be" Kovovitost="Kov" PocetElektronu="4" MouseDown="vybratRamec"/>
-                        <view:RamecPrvku Grid.Row="2" Grid.Column="0" NazevCesky="Sodík" NazevLatinsky="Natrium" Znacka="Na" Kovovitost="Kov" PocetElektronu="11" MouseDown="vybratRamec"/>
-                        <view:RamecPrvku Grid.Row="2" Grid.Column="1" NazevCesky="Hořčík" NazevLatinsky="Magnesium" Znacka="Mg" Kovovitost="Kov" PocetElektronu="12" MouseDown="vybratRamec"/>
-                        <view:RamecPrvku Grid.Row="5" Grid.Column="0" NazevCesky="Cesium" NazevLatinsky="Caesium" Znacka="Cs" Kovovitost="Kov" PocetElektronu="55" MouseDown="vybratRamec"/>
-                        <view:RamecPrvku Grid.Row="5" Grid.Column="1" NazevCesky="Baryum" NazevLatinsky="Baryum" Znacka="Ba" Kovovitost="Kov" PocetElektronu="56" MouseDown="vybratRamec"/>
-                        <view:RamecPrvku Grid.Row="6" Grid.Column="0" NazevCesky="Francium" NazevLatinsky="Francium" Znacka="Fr" Kovovitost="Kov" PocetElektronu="87" MouseDown="vybratRamec"/>
-                        <view:RamecPrvku Grid.Row="6" Grid.Column="1" NazevCesky="Radium" NazevLatinsky="Radium" Znacka="Ra" Kovovitost="Kov" PocetElektronu="88" MouseDown="vybratRamec"/>
-                        <view:RamecPrvku Grid.Row="5" Grid.Column="2" NazevCesky="Lanthan" NazevLatinsky="Lanthanum" Znacka="La" Kovovitost="Kov" PocetElektronu="57" Margin="0,0,5,0" MouseDown="vybratRamec"/>
-                        <view:RamecPrvku Grid.Row="6" Grid.Column="2" NazevCesky="Aktinium" NazevLatinsky="Actinium" Znacka="Ac" Kovovitost="Kov" PocetElektronu="89" Margin="0,0,5,0" MouseDown="vybratRamec"/>
+                        <view:ElementFrame CzechName="Vodík" LatinName="Hydrogenium"  Symbol="H" Electrons="1" Metality="Nekov" MouseDown="vybratRamec"/>
+                        <view:ElementFrame Grid.Column="17" CzechName="Helium" LatinName="Helium" Symbol="He" Electrons="2" Metality="Nekov" MouseDown="vybratRamec"/>
+                        <view:ElementFrame Grid.Row="1" CzechName="Lithium" LatinName="Lithium" Symbol="Li" Metality="Kov" Electrons="3" MouseDown="vybratRamec"/>
+                        <view:ElementFrame Grid.Row="1" Grid.Column="1" CzechName="Beryllium" LatinName="Beryllium" Symbol="Be" Metality="Kov" Electrons="4" MouseDown="vybratRamec"/>
+                        <view:ElementFrame Grid.Row="2" Grid.Column="0" CzechName="Sodík" LatinName="Natrium" Symbol="Na" Metality="Kov" Electrons="11" MouseDown="vybratRamec"/>
+                        <view:ElementFrame Grid.Row="2" Grid.Column="1" CzechName="Hořčík" LatinName="Magnesium" Symbol="Mg" Metality="Kov" Electrons="12" MouseDown="vybratRamec"/>
+                        <view:ElementFrame Grid.Row="5" Grid.Column="0" CzechName="Cesium" LatinName="Caesium" Symbol="Cs" Metality="Kov" Electrons="55" MouseDown="vybratRamec"/>
+                        <view:ElementFrame Grid.Row="5" Grid.Column="1" CzechName="Baryum" LatinName="Baryum" Symbol="Ba" Metality="Kov" Electrons="56" MouseDown="vybratRamec"/>
+                        <view:ElementFrame Grid.Row="6" Grid.Column="0" CzechName="Francium" LatinName="Francium" Symbol="Fr" Metality="Kov" Electrons="87" MouseDown="vybratRamec"/>
+                        <view:ElementFrame Grid.Row="6" Grid.Column="1" CzechName="Radium" LatinName="Radium" Symbol="Ra" Metality="Kov" Electrons="88" MouseDown="vybratRamec"/>
+                        <view:ElementFrame Grid.Row="5" Grid.Column="2" CzechName="Lanthan" LatinName="Lanthanum" Symbol="La" Metality="Kov" Electrons="57" Margin="0,0,5,0" MouseDown="vybratRamec"/>
+                        <view:ElementFrame Grid.Row="6" Grid.Column="2" CzechName="Aktinium" LatinName="Actinium" Symbol="Ac" Metality="Kov" Electrons="89" Margin="0,0,5,0" MouseDown="vybratRamec"/>
 
                     </Grid>
                 </ScrollViewer>

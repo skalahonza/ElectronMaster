@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ElectronMaster.View.RamecPrvku"
+﻿<UserControl x:Class="ElectronMaster.View.ElementFrame"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,8 +14,8 @@
         </Grid.RowDefinitions>
         <Canvas x:Name="ZnackaPozadi" Grid.RowSpan="3" Grid.ColumnSpan="2" Background="#FFC51717"/>
 
-        <TextBlock x:Name="ceskyNazevTB" Grid.Row="2" Text="{Binding NazevCesky, ElementName=UI}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
-        <TextBlock x:Name="znackaTB" Grid.Row="1" Text="{Binding Znacka, ElementName=UI}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <TextBlock x:Name="elektronyTB" Text="{Binding PocetElektronu, ElementName=UI}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" />
+        <TextBlock x:Name="ceskyNazevTB" Grid.Row="2" Text="{Binding CzechName, ElementName=UI}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+        <TextBlock x:Name="znackaTB" Grid.Row="1" Text="{Binding Symbol, ElementName=UI}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock x:Name="elektronyTB" Text="{Binding Electrons, ElementName=UI}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" />
     </Grid>
 </UserControl>

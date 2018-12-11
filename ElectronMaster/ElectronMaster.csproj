@@ -92,8 +92,8 @@
     <Compile Include="View\RadekPrvku.xaml.cs">
       <DependentUpon>RadekPrvku.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RamecPrvku.xaml.cs">
-      <DependentUpon>RamecPrvku.xaml</DependentUpon>
+    <Compile Include="View\ElementFrame.xaml.cs">
+      <DependentUpon>ElementFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\SizeConverter.cs" />
     <Page Include="View\BileKomponenty.xaml">
@@ -120,7 +120,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RamecPrvku.xaml">
+    <Page Include="View\ElementFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
