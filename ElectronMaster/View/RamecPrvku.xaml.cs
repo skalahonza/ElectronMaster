@@ -1,8 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using ElectronMaster.Model;
 
-namespace ElectronMaster
+namespace ElectronMaster.View
 {
     /// <summary>
     /// Interaction logic for RamecPrvku.xaml

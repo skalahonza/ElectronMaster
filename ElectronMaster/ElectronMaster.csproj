@@ -53,7 +53,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Obrázky\ikona.ico</ApplicationIcon>
+    <ApplicationIcon>Images\ikona.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>ElectronMaster.App</StartupObject>
@@ -82,26 +82,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ElektronovyDiagram.xaml.cs">
+    <Compile Include="Model\Konfigurace.cs" />
+    <Compile Include="Model\Prvek.cs" />
+    <Compile Include="Model\TypOrbitalu.cs" />
+    <Compile Include="Model\TypPrvku.cs" />
+    <Compile Include="View\ElektronovyDiagram.xaml.cs">
       <DependentUpon>ElektronovyDiagram.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Prvek.cs" />
-    <Compile Include="RadekPrvku.xaml.cs">
+    <Compile Include="View\RadekPrvku.xaml.cs">
       <DependentUpon>RadekPrvku.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RamecPrvku.xaml.cs">
+    <Compile Include="View\RamecPrvku.xaml.cs">
       <DependentUpon>RamecPrvku.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SizeConverter.cs" />
-    <Page Include="BileKomponenty.xaml">
+    <Compile Include="Converters\SizeConverter.cs" />
+    <Page Include="View\BileKomponenty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ElektronovyDiagram.xaml">
+    <Page Include="View\ElektronovyDiagram.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -109,15 +112,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="RadekPrvku.xaml">
+    <Page Include="View\RadekPrvku.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RamecPrvku.xaml">
+    <Page Include="View\RamecPrvku.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,18 +153,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Obrázky\GoID.jpg" />
-    <Resource Include="Obrázky\floppy-disk.png" />
-    <Resource Include="Obrázky\floppy-disk-blue.png" />
-    <Resource Include="Obrázky\pozadi.png" />
-    <Resource Include="Obrázky\ikona.ico" />
-    <Resource Include="Obrázky\ikona.png" />
+    <Resource Include="Images\GoID.jpg" />
+    <Resource Include="Images\floppy-disk.png" />
+    <Resource Include="Images\floppy-disk-blue.png" />
+    <Resource Include="Images\pozadi.png" />
+    <Resource Include="Images\ikona.ico" />
+    <Resource Include="Images\ikona.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Obrázky\magnifier12.png" />
+    <Resource Include="Images\magnifier12.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Obrázky\diagram.png" />
+    <Resource Include="Images\diagram.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -179,6 +182,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

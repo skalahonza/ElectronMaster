@@ -8,9 +8,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using ElectronMaster.Model;
 using Microsoft.Win32;
 
-namespace ElectronMaster
+namespace ElectronMaster.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -140,7 +141,7 @@ namespace ElectronMaster
             new Prvek("Uus", "Ununseptium", "Ununseptium", TypPrvku.Umělý, 117),
             new Prvek("Uuo", "Ununoctium", "Ununoctium", TypPrvku.Umělý, 118)
         };
-#endregion
+        #endregion
 
         public MainWindow()
         {

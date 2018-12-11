@@ -1,6 +1,7 @@
 ﻿using System.Windows.Media;
+using ElectronMaster.Model;
 
-namespace ElectronMaster
+namespace ElectronMaster.View
 {
     /// <summary>
     /// Interaction logic for RadekPrvku.xaml

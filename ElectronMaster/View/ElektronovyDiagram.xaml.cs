@@ -2,21 +2,23 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using ElectronMaster.Model;
 
-namespace ElectronMaster
+namespace ElectronMaster.View
 {
     /// <summary>
     /// Interaction logic for ElektronovyDiagram.xaml
     /// </summary>
     public partial class ElektronovyDiagram : UserControl
     {
-        const int odsazeni = 5;  //čím menší tím budou šipky blíže k sobě
+        const int margin = 5;  //čím menší tím budou šipky blíže k sobě
 
         public ElektronovyDiagram(Konfigurace subKonfigurace)
         {
             InitializeComponent();
-            //rozpoznání orbitalu
-            
+            //rozpoznání orbitalu            
+
+
             int elektronyKeKonfiguraci = subKonfigurace.PocetElektronu;
 
             ToolTip = subKonfigurace.ToString();
@@ -60,9 +62,9 @@ namespace ElectronMaster
                 Points = new PointCollection()
                 
                 {
-                    new Point(xStredu - odsazeni -5, yStredu - 3),
-                    new Point(xStredu - odsazeni, yStredu - 10),
-                    new Point(xStredu - odsazeni, yStredu + 15)
+                    new Point(xStredu - margin -5, yStredu - 3),
+                    new Point(xStredu - margin, yStredu - 10),
+                    new Point(xStredu - margin, yStredu + 15)
                     
                 },
                 Stroke = Brushes.CadetBlue,
@@ -78,9 +80,9 @@ namespace ElectronMaster
                 Points = new PointCollection()
                 
                 {
-                    new Point(xStredu + odsazeni, yStredu - 13),
-                    new Point(xStredu + odsazeni, yStredu + 11),
-                    new Point(xStredu + odsazeni + 5, yStredu + 3)
+                    new Point(xStredu + margin, yStredu - 13),
+                    new Point(xStredu + margin, yStredu + 11),
+                    new Point(xStredu + margin + 5, yStredu + 3)
                 },
                 Stroke = Brushes.Tomato,
                 Fill = Brushes.Transparent,
