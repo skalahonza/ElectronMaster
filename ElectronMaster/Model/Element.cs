@@ -13,8 +13,8 @@ namespace ElectronMaster.Model
             CzechName = czechName;
             LatinName = latinName;
             ElementType = elementType;
-            PocetElektronu = _electronsForConfiguration = electrons;
-            SpecialniKonfigurace = false;
+            Electrons = _electronsForConfiguration = electrons;
+            SpecialConfiguration = false;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace ElectronMaster.Model
             }
             //odberání možné null která mohla vzniknout důsledkem neúplné konfigurace
             result.RemoveAll(x => x == null); //mělo by odebrat všechny konfigurace které jsou null
-            _electronsForConfiguration = PocetElektronu;
+            _electronsForConfiguration = Electrons;
             // kdyby byla konfigrace požadována znovu je potřeba aby proměnná elektronyKeKonfiguraci nebyla prázdná
 
             //kontrola pro stabilitu D5 a D10
@@ -42,7 +42,7 @@ namespace ElectronMaster.Model
             {
                 if (result[result.Count - 1].OrbitalType == OrbitalType.d &&
                     result[result.Count - 1].Electrons == limit
-                    && PocetElektronu < 80)
+                    && Electrons < 80)
                 {
                     //přidání elektronu do orbitalu
                     result[result.Count - 1].Electrons++;
@@ -52,7 +52,7 @@ namespace ElectronMaster.Model
                         if (result[i].OrbitalType == OrbitalType.s)
                         {
                             result[i].Electrons--;
-                            SpecialniKonfigurace = true;
+                            SpecialConfiguration = true;
                             break;
                         }
                 }
@@ -71,27 +71,27 @@ namespace ElectronMaster.Model
             switch (period)// pro každou periodu se nakofigurují jen ty orbitaly, které jsou potřeba
             {
                 case 1:
-                    result.Add(Skonfigurace(period)); //obsahuje pouze orbital s
+                    result.Add(SConfiguration(period)); //obsahuje pouze orbital s
                     break;
 
                 case 2:
                 case 3:
-                    result.Add(Skonfigurace(period));
-                    result.Add(Pkonfigurace(period));
+                    result.Add(SConfiguration(period));
+                    result.Add(PConfiguration(period));
                     break;
 
                 case 4:
                 case 5:
-                    result.Add(Skonfigurace(period));
-                    result.Add(Dkonfigurace(period));
-                    result.Add(Pkonfigurace(period));
+                    result.Add(SConfiguration(period));
+                    result.Add(DConfiguration(period));
+                    result.Add(PConfiguration(period));
                     break;
                 case 6:
                 case 7:
-                    result.Add(Skonfigurace(period));
-                    result.Add(Fkonfigurace(period));
-                    result.Add(Dkonfigurace(period));
-                    result.Add(Pkonfigurace(period));
+                    result.Add(SConfiguration(period));
+                    result.Add(FConfiguration(period));
+                    result.Add(DConfiguration(period));
+                    result.Add(PConfiguration(period));
                     break;
                 default:
                     throw new NotImplementedException("Elements with greater period than 7 are not supported.");
@@ -109,9 +109,9 @@ namespace ElectronMaster.Model
         /// <summary>
         /// Vytvoří konfiguraci pro orbital s
         /// </summary>
-        /// <param name="cisloPeriody"></param>
+        /// <param name="period"></param>
         /// <returns>Konfiguraci pro orbital s</returns>
-        private Configuration Skonfigurace(int cisloPeriody)
+        private Configuration SConfiguration(int period)
         {
             if (_electronsForConfiguration == 0)
                 return null;
@@ -119,12 +119,12 @@ namespace ElectronMaster.Model
             Configuration orbitalS;
             if (_electronsForConfiguration >= 2) // pokud tam je 2 a více elektronů
             {
-                orbitalS = new Configuration(cisloPeriody, OrbitalType.s, 2);
+                orbitalS = new Configuration(period, OrbitalType.s, 2);
                 _electronsForConfiguration -= 2;
             }
             else
             {
-                orbitalS = new Configuration(cisloPeriody, OrbitalType.s, _electronsForConfiguration);
+                orbitalS = new Configuration(period, OrbitalType.s, _electronsForConfiguration);
                 _electronsForConfiguration = 0;
             }
             return orbitalS;
@@ -133,9 +133,9 @@ namespace ElectronMaster.Model
         /// <summary>
         /// Vytvoří konfiguraci pro orbital P
         /// </summary>
-        /// <param name="cisloPeriody"></param>
+        /// <param name="period"></param>
         /// <returns>Konfigurace orbitalu P</returns>
-        private Configuration Pkonfigurace(int cisloPeriody)
+        private Configuration PConfiguration(int period)
         {
             if (_electronsForConfiguration == 0)
                 return null;
@@ -143,12 +143,12 @@ namespace ElectronMaster.Model
             Configuration orbitalP;
             if (_electronsForConfiguration >= 6) // pokud tam je 6 a více elektronů
             {
-                orbitalP = new Configuration(cisloPeriody, OrbitalType.p, 6);
+                orbitalP = new Configuration(period, OrbitalType.p, 6);
                 _electronsForConfiguration -= 6;
             }
             else
             {
-                orbitalP = new Configuration(cisloPeriody, OrbitalType.p, _electronsForConfiguration);
+                orbitalP = new Configuration(period, OrbitalType.p, _electronsForConfiguration);
                 _electronsForConfiguration = 0;
             }
             return orbitalP;
@@ -157,9 +157,9 @@ namespace ElectronMaster.Model
         /// <summary>
         /// Vytvoří konfiguraci pro orbital D
         /// </summary>
-        /// <param name="cisloPeriody"></param>
+        /// <param name="period"></param>
         /// <returns>Konfigurace orbitalu D</returns>
-        private Configuration Dkonfigurace(int cisloPeriody)
+        private Configuration DConfiguration(int period)
         {
             if (_electronsForConfiguration == 0)
                 return null;
@@ -167,12 +167,12 @@ namespace ElectronMaster.Model
             Configuration orbitalD;
             if (_electronsForConfiguration >= 10) // pokud tam je 10 a více elektronů
             {
-                orbitalD = new Configuration(cisloPeriody - 1, OrbitalType.d, 10);
+                orbitalD = new Configuration(period - 1, OrbitalType.d, 10);
                 _electronsForConfiguration -= 10;
             }
             else
             {
-                orbitalD = new Configuration(cisloPeriody - 1, OrbitalType.d, _electronsForConfiguration);
+                orbitalD = new Configuration(period - 1, OrbitalType.d, _electronsForConfiguration);
                 _electronsForConfiguration = 0;
             }
             return orbitalD;
@@ -181,9 +181,9 @@ namespace ElectronMaster.Model
         /// <summary>
         /// Vytvoří konfiguraci pro orbital F
         /// </summary>
-        /// <param name="cisloPeriody"></param>
+        /// <param name="period"></param>
         /// <returns>Konfigurace orbitalu F</returns>
-        private Configuration Fkonfigurace(int cisloPeriody)
+        private Configuration FConfiguration(int period)
         {
             if (_electronsForConfiguration == 0)
                 return null;
@@ -191,12 +191,12 @@ namespace ElectronMaster.Model
             Configuration orbitalF;
             if (_electronsForConfiguration >= 14) // pokud tam je 14 a více elektronů
             {
-                orbitalF = new Configuration(cisloPeriody - 2, OrbitalType.f, 14);
+                orbitalF = new Configuration(period - 2, OrbitalType.f, 14);
                 _electronsForConfiguration -= 14;
             }
             else
             {
-                orbitalF = new Configuration(cisloPeriody - 2, OrbitalType.f, _electronsForConfiguration);
+                orbitalF = new Configuration(period - 2, OrbitalType.f, _electronsForConfiguration);
                 _electronsForConfiguration = 0;
             }
             return orbitalF;
@@ -209,9 +209,8 @@ namespace ElectronMaster.Model
         public string CzechName { get; set; }
         public string LatinName { get; set; }
         public ElementType ElementType { get; set; }
-        public int PocetElektronu { get; set; }
-        public bool SpecialniKonfigurace { get; set; }
+        public int Electrons { get; set; }
+        public bool SpecialConfiguration { get; set; }
         #endregion
-
     }
 }

@@ -16,7 +16,7 @@ namespace ElectronMaster.View
 
             NazevCesky.Text = element.CzechName;
             TypPrvkuTb.Text = element.ElementType.ToString();
-            PocetElektronu.Text = element.PocetElektronu.ToString();
+            PocetElektronu.Text = element.Electrons.ToString();
 
             Znacka.Text = element.Symbol;
             NazevLatinsky.Text = element.LatinName;

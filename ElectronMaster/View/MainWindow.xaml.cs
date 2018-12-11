@@ -304,7 +304,7 @@ namespace ElectronMaster.View
             ObrazovaKonfigurace();
             KonfiguracePodleVzacnehoPlynu();
 
-            StabilitaTB.Visibility = _praveZkoumanyPrvek.RowRadku.SpecialniKonfigurace
+            StabilitaTB.Visibility = _praveZkoumanyPrvek.RowRadku.SpecialConfiguration
                 ? Visibility.Visible
                 : Visibility.Hidden;
         }
@@ -348,7 +348,7 @@ namespace ElectronMaster.View
             PlynovaKonfiguraceTb.Document = new FlowDocument();
             Paragraph text = new Paragraph();
 
-            if (_praveZkoumanyPrvek.RowRadku.PocetElektronu <= 2)
+            if (_praveZkoumanyPrvek.RowRadku.Electrons <= 2)
             {
                 text.Inlines.Add(new Run("Nelze napsat zkrácenou konfiguraci."));
                 PlynovaKonfiguraceTb.Document.Blocks.Add(text);
@@ -358,7 +358,7 @@ namespace ElectronMaster.View
             Element nejblizsiVzacnyPlyn = _prvky[1]; //nejbližší vzácný plyn se zvolí helium
             var dostupneVzacnePlyny = _prvky.Where(
                 x =>
-                    x.PocetElektronu < _praveZkoumanyPrvek.RowRadku.PocetElektronu &&
+                    x.Electrons < _praveZkoumanyPrvek.RowRadku.Electrons &&
                     x.ElectronConfiguration().Last().OrbitalType == OrbitalType.p &&
                     //pokud je poslední orbital typu P a navíc je zaplněný jedná se o vzácný plyn
                     x.ElectronConfiguration().Last().Electrons == 6);
@@ -367,7 +367,7 @@ namespace ElectronMaster.View
                 nejblizsiVzacnyPlyn = dostupneVzacnePlyny.Last();
             {
              text.Inlines.Add(new Run("["));
-             text.Inlines.Add(new Run(nejblizsiVzacnyPlyn.PocetElektronu.ToString()){BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10});
+             text.Inlines.Add(new Run(nejblizsiVzacnyPlyn.Electrons.ToString()){BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10});
              text.Inlines.Add(new Run(nejblizsiVzacnyPlyn.Symbol + "]"));
             }
 

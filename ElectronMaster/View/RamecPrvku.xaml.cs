@@ -67,7 +67,7 @@ namespace ElectronMaster.View
             NazevCesky = ceskyNazevTB.Text = element.CzechName;
             NazevLatinsky = element.LatinName;
             Znacka = znackaTB.Text = element.Symbol;
-            PocetElektronu = int.Parse(elektronyTB.Text = element.PocetElektronu.ToString());
+            PocetElektronu = int.Parse(elektronyTB.Text = element.Electrons.ToString());
             Kovovitost = element.ElementType.ToString();
         }
 
