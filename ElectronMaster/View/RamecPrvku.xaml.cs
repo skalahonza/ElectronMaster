@@ -16,11 +16,11 @@ namespace ElectronMaster.View
         public string NazevLatinsky {
             get
             {
-                return (string)GetValue(LatinskyDependencyProperty);
+                return (string)GetValue(LatinDependencyProperty);
             }
             set
             {
-                SetValue(LatinskyDependencyProperty,value);
+                SetValue(LatinDependencyProperty,value);
             }
         }
 
@@ -51,10 +51,10 @@ namespace ElectronMaster.View
             }
         }
 
-        public static DependencyProperty CeskyDependencyProperty = DependencyProperty.Register("NazevCesky", typeof(string), typeof(RamecPrvku));
-        public static DependencyProperty ZnackaDependencyProperty = DependencyProperty.Register("Symbol", typeof(string), typeof(RamecPrvku));
-        public static DependencyProperty ElektronyDependencyProperty = DependencyProperty.Register("Electrons", typeof(int), typeof(RamecPrvku));
-        public static DependencyProperty LatinskyDependencyProperty = DependencyProperty.Register("LatinName", typeof(string), typeof(RamecPrvku), new PropertyMetadata(string.Empty));
+        public static DependencyProperty CzechDependencyProperty = DependencyProperty.Register("NazevCesky", typeof(string), typeof(RamecPrvku));
+        public static DependencyProperty SymbolDependencyProperty = DependencyProperty.Register("Symbol", typeof(string), typeof(RamecPrvku));
+        public static DependencyProperty ElectronsDependencyProperty = DependencyProperty.Register("Electrons", typeof(int), typeof(RamecPrvku));
+        public static DependencyProperty LatinDependencyProperty = DependencyProperty.Register("LatinName", typeof(string), typeof(RamecPrvku), new PropertyMetadata(string.Empty));
 
         public RamecPrvku()
         {
