@@ -99,7 +99,7 @@
         </Button>
         <Separator Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" Visibility="{Binding Visibility, ElementName=TextovaKonfiguraceTb}" d:IsHidden="True" />
 
-        <TextBlock x:Name="StabilitaTB" Visibility="Collapsed" Grid.Row="2" Grid.ColumnSpan="4" Text="Prvek má specifickou elektronovou konfiguraci. Ordbital D poslední periody se zaplňuje dříve." FontSize="16" Foreground="#FFE44424" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="StabilitaTB" Visibility="Collapsed" Grid.Row="2" Grid.ColumnSpan="4" Text="Element má specifickou elektronovou konfiguraci. Ordbital D poslední periody se zaplňuje dříve." FontSize="16" Foreground="#FFE44424" HorizontalAlignment="Center"/>
 
         <TextBlock x:Name="textBlock" Grid.Row="3" Text="Nekovy" Background="#FFE44424" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="0" TextAlignment="Center" Padding="5" FontSize="16"/>
         <TextBlock Grid.Column="1" Grid.Row="3" Text="Polokovy" Background="#FF67BCDB" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="1" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
@@ -185,7 +185,7 @@
                         </Grid.RowDefinitions>
                         <!--<Image Grid.RowSpan="2" Source="Obrázky/GoID.jpg" Stretch="Fill" Grid.ColumnSpan="2" StretchDirection="DownOnly"/>-->
                         <TextBlock Text="O programu" Style="{StaticResource nadpis}"/>
-                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource odstavec}" Text="Program slouží k vytvoření elektronové konfigurace jednotlivých prvků periodické tabulky. Prvek si, buď můžete vybrat ze seznamu anebo přímo z tabulky. Pro přehlednost můžete použít vyhledávací pole nebo kliknout na příslušnou kategorii (nekovy, polokovy, kovy, umělé prvky) a zvýrazní se vám prvky zvolené kategorie. Program vytvoří konfiguraci textovou i podle vzácného plynu a dokonce i vykreslí diagram. Pokud si přejete diagram uložit jako obrázek, klepněte na malou disketu." TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource odstavec}" Text="Program slouží k vytvoření elektronové konfigurace jednotlivých prvků periodické tabulky. Element si, buď můžete vybrat ze seznamu anebo přímo z tabulky. Pro přehlednost můžete použít vyhledávací pole nebo kliknout na příslušnou kategorii (nekovy, polokovy, kovy, umělé prvky) a zvýrazní se vám prvky zvolené kategorie. Program vytvoří konfiguraci textovou i podle vzácného plynu a dokonce i vykreslí diagram. Pokud si přejete diagram uložit jako obrázek, klepněte na malou disketu." TextWrapping="Wrap"/>
                         <TextBlock Grid.Row="2" Style="{StaticResource nadpis}" Text="Algoritmus konfigurace"/>
                         <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource odstavec}" Text="Celý proces elektronové konfigurace obstarává několik metod. Hlavní metoda spouští konfigurace pro jednotlivé periody 1 až 7. Pro každou periodu se nakonfigurují příslušné orbitaly." TextWrapping="Wrap"/>
                         <Image Grid.Row="4" Grid.ColumnSpan="2" Source="Obrázky/diagram.png" />

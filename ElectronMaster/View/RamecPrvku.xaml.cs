@@ -51,24 +51,24 @@ namespace ElectronMaster.View
             }
         }
 
-        public static DependencyProperty CeskyDependencyProperty = DependencyProperty.Register("NazevCesky", typeof(string), typeof(RamecPrvku)); //registrace vlastnosti jako dependency <-- bude se aktualizovat a hlavně to půjde nastavit z xaml
-        public static DependencyProperty ZnackaDependencyProperty = DependencyProperty.Register("Znacka", typeof(string), typeof(RamecPrvku));
-        public static DependencyProperty ElektronyDependencyProperty = DependencyProperty.Register("PocetElektronu", typeof(int), typeof(RamecPrvku));
-        public static DependencyProperty LatinskyDependencyProperty = DependencyProperty.Register("NazevLatinsky", typeof(string), typeof(RamecPrvku), new PropertyMetadata(string.Empty));
+        public static DependencyProperty CeskyDependencyProperty = DependencyProperty.Register("NazevCesky", typeof(string), typeof(RamecPrvku));
+        public static DependencyProperty ZnackaDependencyProperty = DependencyProperty.Register("Symbol", typeof(string), typeof(RamecPrvku));
+        public static DependencyProperty ElektronyDependencyProperty = DependencyProperty.Register("Electrons", typeof(int), typeof(RamecPrvku));
+        public static DependencyProperty LatinskyDependencyProperty = DependencyProperty.Register("LatinName", typeof(string), typeof(RamecPrvku), new PropertyMetadata(string.Empty));
 
         public RamecPrvku()
         {
             InitializeComponent();
         }
 
-        public RamecPrvku(Prvek prvek)
+        public RamecPrvku(Element element)
         {
             InitializeComponent();
-            NazevCesky = ceskyNazevTB.Text = prvek.NazevCesky;
-            NazevLatinsky = prvek.NazevLatinsky;
-            Znacka = znackaTB.Text = prvek.Znacka;
-            PocetElektronu = int.Parse(elektronyTB.Text = prvek.PocetElektronu.ToString());
-            Kovovitost = prvek.TypPrvku.ToString();
+            NazevCesky = ceskyNazevTB.Text = element.CzechName;
+            NazevLatinsky = element.LatinName;
+            Znacka = znackaTB.Text = element.Symbol;
+            PocetElektronu = int.Parse(elektronyTB.Text = element.PocetElektronu.ToString());
+            Kovovitost = element.ElementType.ToString();
         }
 
         private void UI_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)

@@ -1,6 +1,6 @@
 ﻿namespace ElectronMaster.Model
 {
-    public enum TypOrbitalu
+    public enum OrbitalType
     {
         s,
         p,

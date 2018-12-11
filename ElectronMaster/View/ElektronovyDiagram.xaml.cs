@@ -13,19 +13,19 @@ namespace ElectronMaster.View
     {
         const int margin = 5;  //čím menší tím budou šipky blíže k sobě
 
-        public ElektronovyDiagram(Konfigurace subKonfigurace)
+        public ElektronovyDiagram(Configuration subConfiguration)
         {
             InitializeComponent();
             //rozpoznání orbitalu            
 
 
-            int elektronyKeKonfiguraci = subKonfigurace.PocetElektronu;
+            int elektronyKeKonfiguraci = subConfiguration.Electrons;
 
-            ToolTip = subKonfigurace.ToString();
-            Width = (int) (subKonfigurace.TypOrbitalu)*100 + 50; //přizpůsobení šířky
+            ToolTip = subConfiguration.ToString();
+            Width = (int) (subConfiguration.OrbitalType)*100 + 50; //přizpůsobení šířky
 
             //vykreslení potřebného množství čtverečku
-            for (int count = 0; count < (int) subKonfigurace.TypOrbitalu * 2 + 1; count++)
+            for (int count = 0; count < (int) subConfiguration.OrbitalType * 2 + 1; count++)
             {
                 Rectangle rect = new Rectangle() {Width = 50,Height = 50, Stroke = Brushes.Gray, Fill = Brushes.White,StrokeThickness = 3};
                 
@@ -36,7 +36,7 @@ namespace ElectronMaster.View
             //výstavbový princip
             //spinové pravidlo
             //elektrony s kladným spinem
-            for (int count = 0; count < (int)subKonfigurace.TypOrbitalu * 2 + 1; count++)
+            for (int count = 0; count < (int)subConfiguration.OrbitalType * 2 + 1; count++)
             {
                 if (elektronyKeKonfiguraci > 0)
                 {
@@ -45,7 +45,7 @@ namespace ElectronMaster.View
                 }
             }
             //elektrony s opačným spinem
-            for (int count = 0; count < (int)subKonfigurace.TypOrbitalu * 2 + 1; count++)
+            for (int count = 0; count < (int)subConfiguration.OrbitalType * 2 + 1; count++)
             {
                 if (elektronyKeKonfiguraci > 0)
                 {

@@ -8,28 +8,28 @@ namespace ElectronMaster.View
     /// </summary>
     public partial class RadekPrvku
     {
-        public RadekPrvku(Prvek prvek)
+        public RadekPrvku(Element element)
         {
             InitializeComponent();
 
-            PrvekRadku = prvek;
+            RowRadku = element;
 
-            NazevCesky.Text = prvek.NazevCesky;
-            TypPrvkuTb.Text = prvek.TypPrvku.ToString();
-            PocetElektronu.Text = prvek.PocetElektronu.ToString();
+            NazevCesky.Text = element.CzechName;
+            TypPrvkuTb.Text = element.ElementType.ToString();
+            PocetElektronu.Text = element.PocetElektronu.ToString();
 
-            Znacka.Text = prvek.Znacka;
-            NazevLatinsky.Text = prvek.NazevLatinsky;
+            Znacka.Text = element.Symbol;
+            NazevLatinsky.Text = element.LatinName;
 
-            switch (prvek.TypPrvku)
+            switch (element.ElementType)
             {
-                case TypPrvku.Nekov:
+                case ElementType.Nekov:
                     ZnackaPozadi.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFE44424"));
                     break;
-                case TypPrvku.Polokov:
+                case ElementType.Polokov:
                     ZnackaPozadi.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF67BCDB"));
                     break;
-                case TypPrvku.Kov:
+                case ElementType.Kov:
                     ZnackaPozadi.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFA2AB58"));
                     break;
                 default:
@@ -38,6 +38,6 @@ namespace ElectronMaster.View
             }
         }
 
-        public Prvek PrvekRadku { get; private set; }
+        public Element RowRadku { get; private set; }
     }
 }

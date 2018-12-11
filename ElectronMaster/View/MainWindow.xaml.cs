@@ -20,126 +20,126 @@ namespace ElectronMaster.View
     {
         #region Globální proměnné
         RadekPrvku _praveZkoumanyPrvek;
-        private readonly Prvek[] _prvky = new Prvek[118]
+        private readonly Element[] _prvky = new Element[118]
         {
-            new Prvek("H", "Vodík", "Hydrogenium", TypPrvku.Nekov, 1),
-            new Prvek("He", "Helium", "Helium", TypPrvku.Nekov, 2),
-            new Prvek("Li", "Lithium", "Lithium", TypPrvku.Kov, 3),
-            new Prvek("Be", "Beryllium", "Beryllium", TypPrvku.Kov, 4),
-            new Prvek("B", "Bor", "Borum", TypPrvku.Polokov, 5),
-            new Prvek("C", "Uhlík", "Carboneum", TypPrvku.Nekov, 6),
-            new Prvek("N", "Dusík", "Nitrogenium", TypPrvku.Nekov, 7),
-            new Prvek("O", "Kyslík", "Oxygenium", TypPrvku.Nekov, 8),
-            new Prvek("F", "Fluor", "Fluorum", TypPrvku.Nekov, 9),
-            new Prvek("Ne", "Neon", "Neon", TypPrvku.Nekov, 10),
-            new Prvek("Na", "Sodík", "Natrium", TypPrvku.Kov, 11),
-            new Prvek("Mg", "Hořčík", "Magnesium", TypPrvku.Kov, 12),
-            new Prvek("Al", "Hliník", "Aluminium", TypPrvku.Kov, 13),
-            new Prvek("Si", "Křemík", "Silicium", TypPrvku.Polokov, 14),
-            new Prvek("P", "Fosfor", "Phosphorus", TypPrvku.Nekov, 15),
-            new Prvek("S", "Síra", "Sulphur", TypPrvku.Nekov, 16),
-            new Prvek("Cl", "Chlor", "Chlorum", TypPrvku.Nekov, 17),
-            new Prvek("Ar", "Argon", "Argon", TypPrvku.Nekov, 18),
-            new Prvek("K", "Draslík", "Kalium", TypPrvku.Kov, 19),
-            new Prvek("Ca", "Vápník", "Calcium", TypPrvku.Kov, 20),
-            new Prvek("Sc", "Skandium", "Scandium", TypPrvku.Kov, 21),                                                  
-            new Prvek("Ti", "Titan", "Titanium", TypPrvku.Kov, 22),
-            new Prvek("V", "Vanad", "Vanadium", TypPrvku.Kov, 23),
-            new Prvek("Cr", "Chrom", "Chromium", TypPrvku.Kov, 24),
-            new Prvek("Mn", "Mangan", "Manganum", TypPrvku.Kov, 25),
-            new Prvek("Fe", "Železo", "Ferrum", TypPrvku.Kov, 26),
-            new Prvek("Co", "Kobalt", "Cobaltum", TypPrvku.Kov, 27),
-            new Prvek("Ni", "Nikl", "Niccolum", TypPrvku.Kov, 28),
-            new Prvek("Cu", "Měď", "Cuprum", TypPrvku.Kov, 29),
-            new Prvek("Zn", "Zinek", "Zincum", TypPrvku.Kov, 30),
-            new Prvek("Ga", "Gallium", "Gallium", TypPrvku.Kov, 31),
-            new Prvek("Ge", "Germanium", "Germanium", TypPrvku.Polokov, 32),
-            new Prvek("As", "Arsen", "Arsenicum", TypPrvku.Polokov, 33),
-            new Prvek("Se", "Selen", "Selenium", TypPrvku.Nekov, 34),
-            new Prvek("Br", "Brom", "Bromum", TypPrvku.Nekov, 35),
-            new Prvek("Kr", "Krypton", "Krypton", TypPrvku.Nekov, 36),
-            new Prvek("Rb", "Rubidium", "Rubidium", TypPrvku.Kov, 37),
-            new Prvek("Sr", "Stroncium", "Strontium", TypPrvku.Kov, 38),
-            new Prvek("Y", "Yttrium", "Yttrium", TypPrvku.Kov, 39),
-            new Prvek("Zr", "Zirkonium", "Zirconium", TypPrvku.Kov, 40),
-            new Prvek("Nb", "Niob", "Niobium", TypPrvku.Kov, 41),
-            new Prvek("Mo", "Molybden", "Molybdaenum", TypPrvku.Kov, 42),
-            new Prvek("Tc", "Technecium", "Technetium", TypPrvku.Kov, 43),
-            new Prvek("Ru", "Ruthenium", "Ruthenium", TypPrvku.Kov, 44),
-            new Prvek("Rh", "Rhodium", "Rhodium", TypPrvku.Kov, 45),
-            new Prvek("Pd", "Palladium", "Palladium", TypPrvku.Kov, 46),
-            new Prvek("Ag", "Stříbro", "Argentum", TypPrvku.Kov, 47),
-            new Prvek("Cd", "Kadmium", "Cadmium", TypPrvku.Kov, 48),
-            new Prvek("In", "Indium", "Indium", TypPrvku.Kov, 49),
-            new Prvek("Sn", "Cín", "Stannum", TypPrvku.Kov, 50),
-            new Prvek("Sb", "Antimon", "Stibium", TypPrvku.Polokov, 51),
-            new Prvek("Te", "Tellur", "Tellurium", TypPrvku.Polokov, 52),
-            new Prvek("I", "Jod", "Iodium", TypPrvku.Nekov, 53),
-            new Prvek("Xe", "Xenon", "Xenon", TypPrvku.Nekov, 54),
-            new Prvek("Cs", "Cesium", "Caesium", TypPrvku.Kov, 55),
-            new Prvek("Ba", "Baryum", "Baryum", TypPrvku.Kov, 56),
-            new Prvek("La", "Lanthan", "Lanthanum", TypPrvku.Kov, 57),
-            new Prvek("Ce", "Cer", "Cerium", TypPrvku.Kov, 58),
-            new Prvek("Pr", "Praseodym", "Praseodymium", TypPrvku.Kov, 59),
-            new Prvek("Nd", "Neodym", "Neodymium", TypPrvku.Kov, 60),
-            new Prvek("Pm", "Promethium", "Promethium", TypPrvku.Kov, 61),
-            new Prvek("Sm", "Samarium", "Samarium", TypPrvku.Kov, 62),
-            new Prvek("Eu", "Europium", "Europium", TypPrvku.Kov, 63),
-            new Prvek("Gd", "Gadolinium", "Gadolinium", TypPrvku.Kov, 64),
-            new Prvek("Tb", "Terbium", "Terbium", TypPrvku.Kov, 65),
-            new Prvek("Dy", "Dysprosium", "Dysprosium", TypPrvku.Kov, 66),
-            new Prvek("Ho", "Holmium", "Holmium", TypPrvku.Kov, 67),
-            new Prvek("Er", "Erbium", "Erbium", TypPrvku.Kov, 68),
-            new Prvek("Tm", "Thulium", "Thulium", TypPrvku.Kov, 69),
-            new Prvek("Yb", "Ytterbium", "Ytterbium", TypPrvku.Kov, 70),
-            new Prvek("Lu", "Lutecium", "Lutetium", TypPrvku.Kov, 71),
-            new Prvek("Hf", "Hafnium", "Hafnium", TypPrvku.Kov, 72),
-            new Prvek("Ta", "Tantal", "Tantalum", TypPrvku.Kov, 73),
-            new Prvek("W", "Wolfram", "Wolframium", TypPrvku.Kov, 74),
-            new Prvek("Re", "Rhenium", "Rhenium", TypPrvku.Kov, 75),
-            new Prvek("Os", "Osmium", "Osmium", TypPrvku.Kov, 76),
-            new Prvek("Ir", "Iridium", "Iridium", TypPrvku.Kov, 77),
-            new Prvek("Pt", "Platina", "Platinium", TypPrvku.Kov, 78),
-            new Prvek("Au", "Zlato", "Aurum", TypPrvku.Kov, 79),
-            new Prvek("Hg", "Rtuť", "Hydrargyrum", TypPrvku.Kov, 80),
-            new Prvek("Tl", "Thallium", "Thallium", TypPrvku.Kov, 81),
-            new Prvek("Pb", "Olovo", "Plumbum", TypPrvku.Kov, 82),
-            new Prvek("Bi", "Bismut", "Bismuthum", TypPrvku.Kov, 83),
-            new Prvek("Po", "Polonium", "Polonium", TypPrvku.Polokov, 84),
-            new Prvek("At", "Astat", "Astatum", TypPrvku.Nekov, 85),
-            new Prvek("Rn", "Radon", "Radon", TypPrvku.Nekov, 86),
-            new Prvek("Fr", "Francium", "Francium", TypPrvku.Kov, 87),
-            new Prvek("Ra", "Radium", "Radium", TypPrvku.Kov, 88),
-            new Prvek("Ac", "Aktinium", "Actinium", TypPrvku.Kov, 89),
-            new Prvek("Th", "Thorium", "Thorium", TypPrvku.Kov, 90),
-            new Prvek("Pa", "Protaktinium", "Protaktinium", TypPrvku.Kov, 91),
-            new Prvek("U", "Uran", "Uranium", TypPrvku.Kov, 92),
-            new Prvek("Np", "Neptunium", "Neptunium", TypPrvku.Kov, 93),
-            new Prvek("Pu", "Plutonium", "Plutonium", TypPrvku.Kov, 94),
-            new Prvek("Am", "Americium", "Americium", TypPrvku.Kov, 95),
-            new Prvek("Cm", "Curium", "Curium", TypPrvku.Kov, 96),
-            new Prvek("Bk", "Berkelium", "Berkelium", TypPrvku.Kov, 97),
-            new Prvek("Cf", "Kalifornium", "Californium", TypPrvku.Kov, 98),
-            new Prvek("Es", "Einsteinium", "Einsteinium", TypPrvku.Kov, 99),
-            new Prvek("Fm", "Fermium", "Fermium", TypPrvku.Kov, 100),
-            new Prvek("Md", "Mendelevium", "Mendelevium", TypPrvku.Kov, 101),
-            new Prvek("No", "Nobelium", "Nobelium", TypPrvku.Kov, 102),
-            new Prvek("Lr", "Lawrencium", "Lawrencium", TypPrvku.Kov, 103),
-            new Prvek("Rf", "Rutherfordium", "Rutherfordium", TypPrvku.Kov, 104),
-            new Prvek("Db", "Dubnium", "Dubnium", TypPrvku.Kov, 105),
-            new Prvek("Sg", "Seaborgium", "Seaborgium", TypPrvku.Kov, 106),
-            new Prvek("Bh", "Bohrium", "Bohrium", TypPrvku.Kov, 107),
-            new Prvek("Hs", "Hassium", "Hassium", TypPrvku.Kov, 108),
-            new Prvek("Mt", "Meitnerium", "Meitnerium", TypPrvku.Kov, 109),
-            new Prvek("Ds", "Darmstadtium", "Darmstadtium", TypPrvku.Kov, 110),
-            new Prvek("Rg", "Roentgenium", "Roentgenium", TypPrvku.Kov, 111),
-            new Prvek("Cn", "Kopernicium", "Copernicium", TypPrvku.Umělý, 112),
-            new Prvek("Uut", "Ununtrium", "Ununtrium", TypPrvku.Umělý, 113),
-            new Prvek("Fl", "Flerovium", "Flerovium", TypPrvku.Umělý, 114),
-            new Prvek("Uup", "Ununpentium", "Ununpentium", TypPrvku.Umělý, 115),
-            new Prvek("Lv", "Livermorium", "Livermorium", TypPrvku.Umělý, 116),
-            new Prvek("Uus", "Ununseptium", "Ununseptium", TypPrvku.Umělý, 117),
-            new Prvek("Uuo", "Ununoctium", "Ununoctium", TypPrvku.Umělý, 118)
+            new Element("H", "Vodík", "Hydrogenium", ElementType.Nekov, 1),
+            new Element("He", "Helium", "Helium", ElementType.Nekov, 2),
+            new Element("Li", "Lithium", "Lithium", ElementType.Kov, 3),
+            new Element("Be", "Beryllium", "Beryllium", ElementType.Kov, 4),
+            new Element("B", "Bor", "Borum", ElementType.Polokov, 5),
+            new Element("C", "Uhlík", "Carboneum", ElementType.Nekov, 6),
+            new Element("N", "Dusík", "Nitrogenium", ElementType.Nekov, 7),
+            new Element("O", "Kyslík", "Oxygenium", ElementType.Nekov, 8),
+            new Element("F", "Fluor", "Fluorum", ElementType.Nekov, 9),
+            new Element("Ne", "Neon", "Neon", ElementType.Nekov, 10),
+            new Element("Na", "Sodík", "Natrium", ElementType.Kov, 11),
+            new Element("Mg", "Hořčík", "Magnesium", ElementType.Kov, 12),
+            new Element("Al", "Hliník", "Aluminium", ElementType.Kov, 13),
+            new Element("Si", "Křemík", "Silicium", ElementType.Polokov, 14),
+            new Element("P", "Fosfor", "Phosphorus", ElementType.Nekov, 15),
+            new Element("S", "Síra", "Sulphur", ElementType.Nekov, 16),
+            new Element("Cl", "Chlor", "Chlorum", ElementType.Nekov, 17),
+            new Element("Ar", "Argon", "Argon", ElementType.Nekov, 18),
+            new Element("K", "Draslík", "Kalium", ElementType.Kov, 19),
+            new Element("Ca", "Vápník", "Calcium", ElementType.Kov, 20),
+            new Element("Sc", "Skandium", "Scandium", ElementType.Kov, 21),                                                  
+            new Element("Ti", "Titan", "Titanium", ElementType.Kov, 22),
+            new Element("V", "Vanad", "Vanadium", ElementType.Kov, 23),
+            new Element("Cr", "Chrom", "Chromium", ElementType.Kov, 24),
+            new Element("Mn", "Mangan", "Manganum", ElementType.Kov, 25),
+            new Element("Fe", "Železo", "Ferrum", ElementType.Kov, 26),
+            new Element("Co", "Kobalt", "Cobaltum", ElementType.Kov, 27),
+            new Element("Ni", "Nikl", "Niccolum", ElementType.Kov, 28),
+            new Element("Cu", "Měď", "Cuprum", ElementType.Kov, 29),
+            new Element("Zn", "Zinek", "Zincum", ElementType.Kov, 30),
+            new Element("Ga", "Gallium", "Gallium", ElementType.Kov, 31),
+            new Element("Ge", "Germanium", "Germanium", ElementType.Polokov, 32),
+            new Element("As", "Arsen", "Arsenicum", ElementType.Polokov, 33),
+            new Element("Se", "Selen", "Selenium", ElementType.Nekov, 34),
+            new Element("Br", "Brom", "Bromum", ElementType.Nekov, 35),
+            new Element("Kr", "Krypton", "Krypton", ElementType.Nekov, 36),
+            new Element("Rb", "Rubidium", "Rubidium", ElementType.Kov, 37),
+            new Element("Sr", "Stroncium", "Strontium", ElementType.Kov, 38),
+            new Element("Y", "Yttrium", "Yttrium", ElementType.Kov, 39),
+            new Element("Zr", "Zirkonium", "Zirconium", ElementType.Kov, 40),
+            new Element("Nb", "Niob", "Niobium", ElementType.Kov, 41),
+            new Element("Mo", "Molybden", "Molybdaenum", ElementType.Kov, 42),
+            new Element("Tc", "Technecium", "Technetium", ElementType.Kov, 43),
+            new Element("Ru", "Ruthenium", "Ruthenium", ElementType.Kov, 44),
+            new Element("Rh", "Rhodium", "Rhodium", ElementType.Kov, 45),
+            new Element("Pd", "Palladium", "Palladium", ElementType.Kov, 46),
+            new Element("Ag", "Stříbro", "Argentum", ElementType.Kov, 47),
+            new Element("Cd", "Kadmium", "Cadmium", ElementType.Kov, 48),
+            new Element("In", "Indium", "Indium", ElementType.Kov, 49),
+            new Element("Sn", "Cín", "Stannum", ElementType.Kov, 50),
+            new Element("Sb", "Antimon", "Stibium", ElementType.Polokov, 51),
+            new Element("Te", "Tellur", "Tellurium", ElementType.Polokov, 52),
+            new Element("I", "Jod", "Iodium", ElementType.Nekov, 53),
+            new Element("Xe", "Xenon", "Xenon", ElementType.Nekov, 54),
+            new Element("Cs", "Cesium", "Caesium", ElementType.Kov, 55),
+            new Element("Ba", "Baryum", "Baryum", ElementType.Kov, 56),
+            new Element("La", "Lanthan", "Lanthanum", ElementType.Kov, 57),
+            new Element("Ce", "Cer", "Cerium", ElementType.Kov, 58),
+            new Element("Pr", "Praseodym", "Praseodymium", ElementType.Kov, 59),
+            new Element("Nd", "Neodym", "Neodymium", ElementType.Kov, 60),
+            new Element("Pm", "Promethium", "Promethium", ElementType.Kov, 61),
+            new Element("Sm", "Samarium", "Samarium", ElementType.Kov, 62),
+            new Element("Eu", "Europium", "Europium", ElementType.Kov, 63),
+            new Element("Gd", "Gadolinium", "Gadolinium", ElementType.Kov, 64),
+            new Element("Tb", "Terbium", "Terbium", ElementType.Kov, 65),
+            new Element("Dy", "Dysprosium", "Dysprosium", ElementType.Kov, 66),
+            new Element("Ho", "Holmium", "Holmium", ElementType.Kov, 67),
+            new Element("Er", "Erbium", "Erbium", ElementType.Kov, 68),
+            new Element("Tm", "Thulium", "Thulium", ElementType.Kov, 69),
+            new Element("Yb", "Ytterbium", "Ytterbium", ElementType.Kov, 70),
+            new Element("Lu", "Lutecium", "Lutetium", ElementType.Kov, 71),
+            new Element("Hf", "Hafnium", "Hafnium", ElementType.Kov, 72),
+            new Element("Ta", "Tantal", "Tantalum", ElementType.Kov, 73),
+            new Element("W", "Wolfram", "Wolframium", ElementType.Kov, 74),
+            new Element("Re", "Rhenium", "Rhenium", ElementType.Kov, 75),
+            new Element("Os", "Osmium", "Osmium", ElementType.Kov, 76),
+            new Element("Ir", "Iridium", "Iridium", ElementType.Kov, 77),
+            new Element("Pt", "Platina", "Platinium", ElementType.Kov, 78),
+            new Element("Au", "Zlato", "Aurum", ElementType.Kov, 79),
+            new Element("Hg", "Rtuť", "Hydrargyrum", ElementType.Kov, 80),
+            new Element("Tl", "Thallium", "Thallium", ElementType.Kov, 81),
+            new Element("Pb", "Olovo", "Plumbum", ElementType.Kov, 82),
+            new Element("Bi", "Bismut", "Bismuthum", ElementType.Kov, 83),
+            new Element("Po", "Polonium", "Polonium", ElementType.Polokov, 84),
+            new Element("At", "Astat", "Astatum", ElementType.Nekov, 85),
+            new Element("Rn", "Radon", "Radon", ElementType.Nekov, 86),
+            new Element("Fr", "Francium", "Francium", ElementType.Kov, 87),
+            new Element("Ra", "Radium", "Radium", ElementType.Kov, 88),
+            new Element("Ac", "Aktinium", "Actinium", ElementType.Kov, 89),
+            new Element("Th", "Thorium", "Thorium", ElementType.Kov, 90),
+            new Element("Pa", "Protaktinium", "Protaktinium", ElementType.Kov, 91),
+            new Element("U", "Uran", "Uranium", ElementType.Kov, 92),
+            new Element("Np", "Neptunium", "Neptunium", ElementType.Kov, 93),
+            new Element("Pu", "Plutonium", "Plutonium", ElementType.Kov, 94),
+            new Element("Am", "Americium", "Americium", ElementType.Kov, 95),
+            new Element("Cm", "Curium", "Curium", ElementType.Kov, 96),
+            new Element("Bk", "Berkelium", "Berkelium", ElementType.Kov, 97),
+            new Element("Cf", "Kalifornium", "Californium", ElementType.Kov, 98),
+            new Element("Es", "Einsteinium", "Einsteinium", ElementType.Kov, 99),
+            new Element("Fm", "Fermium", "Fermium", ElementType.Kov, 100),
+            new Element("Md", "Mendelevium", "Mendelevium", ElementType.Kov, 101),
+            new Element("No", "Nobelium", "Nobelium", ElementType.Kov, 102),
+            new Element("Lr", "Lawrencium", "Lawrencium", ElementType.Kov, 103),
+            new Element("Rf", "Rutherfordium", "Rutherfordium", ElementType.Kov, 104),
+            new Element("Db", "Dubnium", "Dubnium", ElementType.Kov, 105),
+            new Element("Sg", "Seaborgium", "Seaborgium", ElementType.Kov, 106),
+            new Element("Bh", "Bohrium", "Bohrium", ElementType.Kov, 107),
+            new Element("Hs", "Hassium", "Hassium", ElementType.Kov, 108),
+            new Element("Mt", "Meitnerium", "Meitnerium", ElementType.Kov, 109),
+            new Element("Ds", "Darmstadtium", "Darmstadtium", ElementType.Kov, 110),
+            new Element("Rg", "Roentgenium", "Roentgenium", ElementType.Kov, 111),
+            new Element("Cn", "Kopernicium", "Copernicium", ElementType.Umělý, 112),
+            new Element("Uut", "Ununtrium", "Ununtrium", ElementType.Umělý, 113),
+            new Element("Fl", "Flerovium", "Flerovium", ElementType.Umělý, 114),
+            new Element("Uup", "Ununpentium", "Ununpentium", ElementType.Umělý, 115),
+            new Element("Lv", "Livermorium", "Livermorium", ElementType.Umělý, 116),
+            new Element("Uus", "Ununseptium", "Ununseptium", ElementType.Umělý, 117),
+            new Element("Uuo", "Ununoctium", "Ununoctium", ElementType.Umělý, 118)
         };
         #endregion
 
@@ -261,8 +261,8 @@ namespace ElectronMaster.View
                     var prvek in
                         _prvky.Where(
                             x =>
-                                x.NazevCesky.ToLower().Contains(SearchTextBox.Text.ToLower()) ||
-                                x.NazevLatinsky.ToLower().Contains(SearchTextBox.Text.ToLower())))
+                                x.CzechName.ToLower().Contains(SearchTextBox.Text.ToLower()) ||
+                                x.LatinName.ToLower().Contains(SearchTextBox.Text.ToLower())))
                     SeznamPrvku.Items.Add(new RadekPrvku(prvek));
 
             //vypnutí nepotřebných prvků
@@ -280,19 +280,19 @@ namespace ElectronMaster.View
         private void SeznamPrvku_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (SeznamPrvku.SelectedIndex != -1) //ošetření proti výjimce
-                ZvoleniZkoumanehoPrvku(((RadekPrvku) SeznamPrvku.SelectedItem).PrvekRadku);
+                ZvoleniZkoumanehoPrvku(((RadekPrvku) SeznamPrvku.SelectedItem).RowRadku);
         } 
 
         /// <summary>
-        /// Nastaví prvek který si vybral uživatel jako právě zkoumaný, zobrazí ho vlevo nahoře a provede jeho konfiguraci
+        /// Nastaví element který si vybral uživatel jako právě zkoumaný, zobrazí ho vlevo nahoře a provede jeho konfiguraci
         /// </summary>
-        /// <param name="zvolenyPrvek">zvolený prvek ze seznamu nebo z tabulky</param>
-        private void ZvoleniZkoumanehoPrvku(Prvek zvolenyPrvek)
+        /// <param name="chosenElement">zvolený element ze seznamu nebo z tabulky</param>
+        private void ZvoleniZkoumanehoPrvku(Element chosenElement)
         {
             if (MainGrid.Children.Contains(_praveZkoumanyPrvek))
                 MainGrid.Children.Remove(_praveZkoumanyPrvek);//smazání starého prvku pokud tam je
 
-            MainGrid.Children.Add(_praveZkoumanyPrvek = new RadekPrvku(zvolenyPrvek));
+            MainGrid.Children.Add(_praveZkoumanyPrvek = new RadekPrvku(chosenElement));
 
             Grid.SetRow(_praveZkoumanyPrvek, 0);
             Grid.SetColumn(_praveZkoumanyPrvek, 0);
@@ -304,24 +304,24 @@ namespace ElectronMaster.View
             ObrazovaKonfigurace();
             KonfiguracePodleVzacnehoPlynu();
 
-            StabilitaTB.Visibility = _praveZkoumanyPrvek.PrvekRadku.SpecialniKonfigurace
+            StabilitaTB.Visibility = _praveZkoumanyPrvek.RowRadku.SpecialniKonfigurace
                 ? Visibility.Visible
                 : Visibility.Hidden;
         }
 
         /// <summary>
-        /// Zobrazí textovou konfiguraci proi právě zkoumaný prvek
+        /// Zobrazí textovou konfiguraci proi právě zkoumaný element
         /// </summary>
         private void TextovaKonfigurace()
         {
             TextovaKonfiguraceTb.Visibility = Visibility.Visible;
             Paragraph text = new Paragraph();
 
-            foreach (var konfigurace in _praveZkoumanyPrvek.PrvekRadku.ElektronovaKonfigurace())
+            foreach (var konfigurace in _praveZkoumanyPrvek.RowRadku.ElectronConfiguration())
             {
-              text.Inlines.Add(new Run(konfigurace.CisloPeriody.ToString()));
-              text.Inlines.Add(new Run(konfigurace.TypOrbitalu.ToString()));
-              text.Inlines.Add(new Run(konfigurace.PocetElektronu.ToString()){BaselineAlignment = BaselineAlignment.Superscript, FontSize = 10});
+              text.Inlines.Add(new Run(konfigurace.PeriodNumber.ToString()));
+              text.Inlines.Add(new Run(konfigurace.OrbitalType.ToString()));
+              text.Inlines.Add(new Run(konfigurace.Electrons.ToString()){BaselineAlignment = BaselineAlignment.Superscript, FontSize = 10});
               text.Inlines.Add(new Run(" "));
             }
             text.Inlines.Remove(text.Inlines.Last(x => true));
@@ -330,14 +330,14 @@ namespace ElectronMaster.View
         }
 
         /// <summary>
-        /// Zobrazí grafickou konfiguraci pro právě zkoumaný prvek
+        /// Zobrazí grafickou konfiguraci pro právě zkoumaný element
         /// </summary>
         private void ObrazovaKonfigurace()
         {
             if (SchematickaKonfigurace.Children.Count != 0) 
                 SchematickaKonfigurace.Children.Clear();
 
-            foreach (var subKonfigurace in _praveZkoumanyPrvek.PrvekRadku.ElektronovaKonfigurace())
+            foreach (var subKonfigurace in _praveZkoumanyPrvek.RowRadku.ElectronConfiguration())
             {
                 SchematickaKonfigurace.Children.Add(new ElektronovyDiagram(subKonfigurace){Margin = new Thickness(5,5,5,55)});
             }
@@ -348,36 +348,36 @@ namespace ElectronMaster.View
             PlynovaKonfiguraceTb.Document = new FlowDocument();
             Paragraph text = new Paragraph();
 
-            if (_praveZkoumanyPrvek.PrvekRadku.PocetElektronu <= 2)
+            if (_praveZkoumanyPrvek.RowRadku.PocetElektronu <= 2)
             {
                 text.Inlines.Add(new Run("Nelze napsat zkrácenou konfiguraci."));
                 PlynovaKonfiguraceTb.Document.Blocks.Add(text);
                 return;
             }
 
-            Prvek nejblizsiVzacnyPlyn = _prvky[1]; //nejbližší vzácný plyn se zvolí helium
+            Element nejblizsiVzacnyPlyn = _prvky[1]; //nejbližší vzácný plyn se zvolí helium
             var dostupneVzacnePlyny = _prvky.Where(
                 x =>
-                    x.PocetElektronu < _praveZkoumanyPrvek.PrvekRadku.PocetElektronu &&
-                    x.ElektronovaKonfigurace().Last().TypOrbitalu == TypOrbitalu.p &&
+                    x.PocetElektronu < _praveZkoumanyPrvek.RowRadku.PocetElektronu &&
+                    x.ElectronConfiguration().Last().OrbitalType == OrbitalType.p &&
                     //pokud je poslední orbital typu P a navíc je zaplněný jedná se o vzácný plyn
-                    x.ElektronovaKonfigurace().Last().PocetElektronu == 6);
+                    x.ElectronConfiguration().Last().Electrons == 6);
 
             if (dostupneVzacnePlyny.Any())
                 nejblizsiVzacnyPlyn = dostupneVzacnePlyny.Last();
             {
              text.Inlines.Add(new Run("["));
              text.Inlines.Add(new Run(nejblizsiVzacnyPlyn.PocetElektronu.ToString()){BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10});
-             text.Inlines.Add(new Run(nejblizsiVzacnyPlyn.Znacka + "]"));
+             text.Inlines.Add(new Run(nejblizsiVzacnyPlyn.Symbol + "]"));
             }
 
-            for (int i = nejblizsiVzacnyPlyn.ElektronovaKonfigurace().Count;
-                i < _praveZkoumanyPrvek.PrvekRadku.ElektronovaKonfigurace().Count;
+            for (int i = nejblizsiVzacnyPlyn.ElectronConfiguration().Count;
+                i < _praveZkoumanyPrvek.RowRadku.ElectronConfiguration().Count;
                 i++)
             {
                 text.Inlines.Add(new Run(" "));
-                text.Inlines.Add(new Run(_praveZkoumanyPrvek.PrvekRadku.ElektronovaKonfigurace()[i].CisloPeriody + _praveZkoumanyPrvek.PrvekRadku.ElektronovaKonfigurace()[i].TypOrbitalu.ToString()));
-                text.Inlines.Add(new Run(_praveZkoumanyPrvek.PrvekRadku.ElektronovaKonfigurace()[i].PocetElektronu.ToString()) { BaselineAlignment = BaselineAlignment.Superscript, FontSize = 10 });
+                text.Inlines.Add(new Run(_praveZkoumanyPrvek.RowRadku.ElectronConfiguration()[i].PeriodNumber + _praveZkoumanyPrvek.RowRadku.ElectronConfiguration()[i].OrbitalType.ToString()));
+                text.Inlines.Add(new Run(_praveZkoumanyPrvek.RowRadku.ElectronConfiguration()[i].Electrons.ToString()) { BaselineAlignment = BaselineAlignment.Superscript, FontSize = 10 });
             }
 
             PlynovaKonfiguraceTb.Document.Blocks.Add(text);
@@ -385,7 +385,7 @@ namespace ElectronMaster.View
 
         private void vybratRamec(object sender, MouseButtonEventArgs e)
         {
-            ZvoleniZkoumanehoPrvku(_prvky.First(x => x.NazevCesky == ((RamecPrvku)sender).ceskyNazevTB.Text)); 
+            ZvoleniZkoumanehoPrvku(_prvky.First(x => x.CzechName == ((RamecPrvku)sender).ceskyNazevTB.Text)); 
         }
 
         /// <summary>
@@ -409,13 +409,13 @@ namespace ElectronMaster.View
 
             //přidej jen prvky stejného typu
             foreach (
-                var prvek in _prvky.Where(x => x.TypPrvku == (TypPrvku) int.Parse(((TextBlock) sender).Tag.ToString())))
+                var prvek in _prvky.Where(x => x.ElementType == (ElementType) int.Parse(((TextBlock) sender).Tag.ToString())))
                 SeznamPrvku.Items.Add(new RadekPrvku(prvek));
 
             //schovej všechny rámce, které nesjou stejného typu
             foreach (var ramec in PeriodickaTabulka.Children.OfType<RamecPrvku>().Where(x =>
-                ((TypPrvku) Enum.Parse(typeof (TypPrvku), x.Kovovitost, true)) !=
-                (TypPrvku) int.Parse(((TextBlock) sender).Tag.ToString())))
+                ((ElementType) Enum.Parse(typeof (ElementType), x.Kovovitost, true)) !=
+                (ElementType) int.Parse(((TextBlock) sender).Tag.ToString())))
                 ramec.IsEnabled = false;
         }
 

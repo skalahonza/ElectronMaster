@@ -82,10 +82,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\Konfigurace.cs" />
-    <Compile Include="Model\Prvek.cs" />
-    <Compile Include="Model\TypOrbitalu.cs" />
-    <Compile Include="Model\TypPrvku.cs" />
+    <Compile Include="Model\Configuration.cs" />
+    <Compile Include="Model\Element.cs" />
+    <Compile Include="Model\OrbitalType.cs" />
+    <Compile Include="Model\ElementType.cs" />
     <Compile Include="View\ElektronovyDiagram.xaml.cs">
       <DependentUpon>ElektronovyDiagram.xaml</DependentUpon>
     </Compile>

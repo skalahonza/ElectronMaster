@@ -1,6 +1,6 @@
 ﻿namespace ElectronMaster.Model
 {
-    public enum TypPrvku
+    public enum ElementType
     {
         Nekov,
         Polokov,
