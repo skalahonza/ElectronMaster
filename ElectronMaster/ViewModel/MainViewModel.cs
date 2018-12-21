@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using ElectronMaster.Model;
 using ElectronMaster.Extensions;
+using ElectronMaster.View;
 
 namespace ElectronMaster.ViewModel
 {
-    public class MainViewModel:ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
-        private ElementViewModel _examinedElement;
+        private ElementFrameViewModel _examinedElement;
         private string _searchText;
         private readonly Element[] _elements = new Element[]
         {
@@ -137,10 +139,10 @@ namespace ElectronMaster.ViewModel
 
         public MainViewModel()
         {
-            Elements = new ObservableCollection<ElementViewModel>(_elements.Select(x => new ElementViewModel(x)));
+            RenderPeriodicTable();
         }
 
-        public ElementViewModel ExaminedElement
+        public ElementFrameViewModel ExaminedElement
         {
             get => _examinedElement;
             set
@@ -150,11 +152,11 @@ namespace ElectronMaster.ViewModel
                 Configurations = new ObservableCollection<Configuration>(ExaminedElement.Element.ElectronConfiguration());
                 OnPropertyChanged(nameof(TextConfiguration));
                 OnPropertyChanged(nameof(Configurations));
-                OnPropertyChanged(nameof(RareGasConfiguration));                
+                OnPropertyChanged(nameof(RareGasConfiguration));
             }
         }
 
-        public ObservableCollection<ElementViewModel> Elements { get; set; }
+        public ObservableCollection<ElementFrameViewModel> Elements { get; set; } = new ObservableCollection<ElementFrameViewModel>();
 
         public string SearchText
         {
@@ -179,7 +181,7 @@ namespace ElectronMaster.ViewModel
                     text.Inlines.Add(new Run(configuration.OrbitalType.ToString()));
                     text.Inlines.Add(new Run(configuration.Electrons.ToString()) { BaselineAlignment = BaselineAlignment.Superscript, FontSize = 10 });
                     text.Inlines.Add(new Run(" "));
-                }                    
+                }
                 text.Inlines.Remove(text.Inlines.Last(x => true));
                 return text;
             }
@@ -191,7 +193,7 @@ namespace ElectronMaster.ViewModel
             {
                 var text = new Paragraph();
                 if (ExaminedElement.Element.Electrons <= 2)
-                {                    
+                {
                     text.Inlines.Add(new Run("Nelze napsat zkrácenou konfiguraci."));
                 }
                 else
@@ -259,5 +261,88 @@ namespace ElectronMaster.ViewModel
                 //ExaminedElement = element;                
                 //jednotlivé rendrovací komponenty budou mít referenci na tento prvek a hotovo
             });
+
+        private void RenderPeriodicTable()
+        {
+            var elements = new List<ElementFrameViewModel>();
+
+            void AddElement(int protonsNumber, int row, int column)
+            {
+                var frame = new ElementFrameViewModel(_elements[protonsNumber - 1])
+                {
+                    Column = column,
+                    Row = row
+                };
+                //TODO pokud jsou to prvky třetí periody tak se oddělí od právě části tabulky
+                elements.Add(frame);
+            }
+
+            //add hoc elements
+            foreach (var adHocElement in AdHocElements())
+                elements.Add(adHocElement);
+
+            //perioda 4 a 5
+            int protons = 19;
+            for (int row = 3; row < 5; row++)
+                for (int column = 0; column < 18; column++)
+                {
+                    AddElement(protons, row, column);
+                    protons++;
+                }
+            //4 až 8 skupina 6. a 7. periody
+            protons = 72;
+            for (int row = 5; row < 7; row++)
+            {
+                for (int column = 3; column < 18; column++)
+                {
+                    AddElement(protons, row, column);
+                    protons++;
+                }
+                protons = 104;
+            }
+
+            //lantanoidy a aktinoidy
+            protons = 58;
+            for (int row = 7; row < 9; row++)
+            {
+                for (int column = 3; column < 18; column++)
+                {
+                    //TODO oddělení lantanoidů a aktinoidů od zbytku tabulky
+                    AddElement(protons, row, column);
+                    protons++;
+                }
+                protons = 90;
+            }
+            //prvky třetí až osmé skupiny
+            protons = 5;
+            for (int row = 1; row < 3; row++)
+            {
+                for (int column = 12; column < 18; column++)
+                {
+                    AddElement(protons, row, column);
+                    protons++;
+                }
+                protons = 13;
+            }
+
+            foreach (var elementFrameViewModel in elements.OrderBy(x => x.Element.Electrons))
+                Elements.Add(elementFrameViewModel);
+        }        
+
+        private IEnumerable<ElementFrameViewModel> AdHocElements()
+        {
+            yield return new ElementFrameViewModel(_elements[0]){Column = 0,Row = 0};
+            yield return new ElementFrameViewModel(_elements[1]){Column = 17,Row = 0};
+            yield return new ElementFrameViewModel(_elements[2]){Column = 0,Row = 1};
+            yield return new ElementFrameViewModel(_elements[3]){Column = 1,Row = 1};
+            yield return new ElementFrameViewModel(_elements[10]){Column = 0,Row = 2};
+            yield return new ElementFrameViewModel(_elements[11]){Column = 1,Row = 2};
+            yield return new ElementFrameViewModel(_elements[54]){Column = 0,Row = 5};
+            yield return new ElementFrameViewModel(_elements[55]){Column = 1,Row = 5};
+            yield return new ElementFrameViewModel(_elements[86]){Column = 0,Row = 6};
+            yield return new ElementFrameViewModel(_elements[87]){Column = 1,Row = 6};
+            yield return new ElementFrameViewModel(_elements[57]){Column = 2,Row = 5};
+            yield return new ElementFrameViewModel(_elements[88]){Column = 2,Row = 6};
+        }
     }
 }

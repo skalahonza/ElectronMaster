@@ -146,72 +146,7 @@ namespace ElectronMaster.View
         {
             InitializeComponent();
         }
-
-        private void window_Loaded(object sender, RoutedEventArgs e)
-        {
-            #region nakreslení tabulky prvků
-            //perioda 4 a 5
-            int protonoveCislo = 19;
-            for (int radek = 3; radek < 5; radek++)
-                for (int sloupec = 0; sloupec < 18; sloupec ++)
-                {
-                    var ramec = new ElementFrame(_prvky[protonoveCislo - 1]);
-                    if (sloupec == 2) //pokud jsou to prvky třetí periody tak se oddělí od právě části tabulky
-                        ramec.Margin = new Thickness(0, 0, 5, 0);
-                    PeriodickaTabulka.Children.Add(ramec);
-                    Grid.SetColumn(ramec, sloupec);
-                    Grid.SetRow(ramec, radek);
-                    protonoveCislo++;
-                }
-            //4 až 8 skupina 6. a 7. periody
-            protonoveCislo = 72;
-            for(int radek = 5; radek < 7; radek++)
-            {
-                for (int sloupec = 3; sloupec < 18; sloupec++)
-                {
-                    var ramec = new ElementFrame(_prvky[protonoveCislo - 1]);
-                    PeriodickaTabulka.Children.Add(ramec);
-                    Grid.SetColumn(ramec, sloupec);
-                    Grid.SetRow(ramec, radek);
-                    protonoveCislo++;
-                }
-                protonoveCislo = 104;
-            }
-
-            //lantanoidy a aktinoidy
-            protonoveCislo = 58;
-            for (int radek = 7; radek < 9; radek++)
-            {
-                for (int sloupec = 3; sloupec < 18; sloupec++)
-                {
-                    var ramec = new ElementFrame(_prvky[protonoveCislo - 1]);
-                    if(radek == 7)
-                        ramec.Margin = new Thickness(0, 5, 0, 0); //oddělení lantanoidů a aktinoidů od zbytku tabulky
-
-                    PeriodickaTabulka.Children.Add(ramec);
-                    Grid.SetColumn(ramec, sloupec);
-                    Grid.SetRow(ramec, radek);
-                    protonoveCislo++;
-                }
-                protonoveCislo = 90;
-            }
-            //prvky třetí až osmé skupiny
-            protonoveCislo = 5;
-            for (int radek = 1; radek < 3; radek++)
-            {
-                for (int sloupec = 12; sloupec < 18; sloupec++)
-                {
-                    var ramec = new ElementFrame(_prvky[protonoveCislo - 1]);
-                    PeriodickaTabulka.Children.Add(ramec);
-                    Grid.SetColumn(ramec, sloupec);
-                    Grid.SetRow(ramec, radek);
-                    protonoveCislo++;
-                }
-                protonoveCislo = 13;
-            }
-            #endregion
-        }
-
+       
         private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             if (((TextBox)sender).Text == "Hledat...")

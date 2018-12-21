@@ -7,7 +7,7 @@
     xmlns:viewModel="clr-namespace:ElectronMaster.ViewModel"
     xmlns:controls="clr-namespace:ElectronMaster.Controls"
     mc:Ignorable="d" x:Name="window" x:Class="ElectronMaster.View.MainWindow"
-        Title="Electron master" Height="612" Width="912" MinHeight="612" MinWidth="912" Icon="../Images/ikona.png" Loaded="window_Loaded">
+        Title="Electron master" Height="612" Width="912" MinHeight="612" MinWidth="912" Icon="../Images/ikona.png">
     <Window.Resources>
         <ResourceDictionary Source="BileKomponenty.xaml"/>
     </Window.Resources>
@@ -135,52 +135,56 @@
             </TabItem>
             <TabItem Header="Tabulka">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <Grid x:Name="PeriodickaTabulka">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <view:ElementFrame CzechName="Vodík" LatinName="Hydrogenium"  Symbol="H" Electrons="1" Metality="Nekov" />
-                        <view:ElementFrame Grid.Column="17" CzechName="Helium" LatinName="Helium" Symbol="He" Electrons="2" Metality="Nekov" />
-                        <view:ElementFrame Grid.Row="1" CzechName="Lithium" LatinName="Lithium" Symbol="Li" Metality="Kov" Electrons="3" />
-                        <view:ElementFrame Grid.Row="1" Grid.Column="1" CzechName="Beryllium" LatinName="Beryllium" Symbol="Be" Metality="Kov" Electrons="4" />
-                        <view:ElementFrame Grid.Row="2" Grid.Column="0" CzechName="Sodík" LatinName="Natrium" Symbol="Na" Metality="Kov" Electrons="11" />
-                        <view:ElementFrame Grid.Row="2" Grid.Column="1" CzechName="Hořčík" LatinName="Magnesium" Symbol="Mg" Metality="Kov" Electrons="12" />
-                        <view:ElementFrame Grid.Row="5" Grid.Column="0" CzechName="Cesium" LatinName="Caesium" Symbol="Cs" Metality="Kov" Electrons="55" />
-                        <view:ElementFrame Grid.Row="5" Grid.Column="1" CzechName="Baryum" LatinName="Baryum" Symbol="Ba" Metality="Kov" Electrons="56" />
-                        <view:ElementFrame Grid.Row="6" Grid.Column="0" CzechName="Francium" LatinName="Francium" Symbol="Fr" Metality="Kov" Electrons="87" />
-                        <view:ElementFrame Grid.Row="6" Grid.Column="1" CzechName="Radium" LatinName="Radium" Symbol="Ra" Metality="Kov" Electrons="88" />
-                        <view:ElementFrame Grid.Row="5" Grid.Column="2" CzechName="Lanthan" LatinName="Lanthanum" Symbol="La" Metality="Kov" Electrons="57" Margin="0,0,5,0" />
-                        <view:ElementFrame Grid.Row="6" Grid.Column="2" CzechName="Aktinium" LatinName="Actinium" Symbol="Ac" Metality="Kov" Electrons="89" Margin="0,0,5,0" />
-
-                    </Grid>
+                    <ItemsControl ItemsSource="{Binding Elements}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                </Grid>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="Grid.Column" Value="{Binding Column}"/>
+                                <Setter Property="Grid.Row" Value="{Binding Row}"/>
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <controls:ElementContainer Element="{Binding}" Style="{StaticResource FrameStyle}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="Informace">
