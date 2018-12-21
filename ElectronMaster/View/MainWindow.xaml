@@ -33,7 +33,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!-- Examined element -->
-        <view:RadekPrvku DataContext="{Binding ExaminedElement}" Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"/>
+        <controls:ElementContainer DataContext="{Binding ExaminedElement}"                                    
+                                   Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"/>
 
         <ScrollViewer x:Name="scrollViewer" Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" MaxHeight="75" VerticalAlignment="Top" >
             <RichTextBox x:Name="TextovaKonfiguraceTb" FontSize="18" Visibility="Collapsed" IsReadOnly="True" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"/>
@@ -128,7 +129,7 @@
                               SelectedItem="{Binding ExaminedElement, Mode=TwoWay}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <controls:ElementRow Element="{Binding}"/>
+                                <controls:ElementContainer Element="{Binding}" Style="{StaticResource FrameStyle}"/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

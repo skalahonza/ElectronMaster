@@ -3,10 +3,10 @@ using ElectronMaster.Model;
 
 namespace ElectronMaster.Controls
 {
-    public class ElementRow:AppUserControl
+    public class ElementContainer:AppUserControl
     {
         public static readonly DependencyProperty ElementProperty = DependencyProperty.Register(
-            nameof(Element), typeof(Element), typeof(ElementRow), new PropertyMetadata(default(Element)));
+            nameof(Element), typeof(Element), typeof(ElementContainer), new PropertyMetadata(default(Element)));
 
         public Element Element
         {

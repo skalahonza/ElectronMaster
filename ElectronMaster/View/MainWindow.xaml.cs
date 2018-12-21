@@ -19,7 +19,6 @@ namespace ElectronMaster.View
     public partial class MainWindow : Window
     {
         #region Globální proměnné
-        RadekPrvku _praveZkoumanyPrvek;
         private readonly Element[] _prvky = new Element[118]
         {
             new Element("H", "Vodík", "Hydrogenium", ElementType.Nekov, 1),
