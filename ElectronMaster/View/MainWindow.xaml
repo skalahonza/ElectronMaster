@@ -123,17 +123,15 @@
 
         <TabControl x:Name="tabControl" Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="5" Background="{x:Null}" BorderThickness="0">
             <TabItem Header="Seznam">
-                <Grid x:Name="grid">
-                    <ListView x:Name="SeznamPrvku" Grid.ColumnSpan="3" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+                <ListView ItemContainerStyle="{StaticResource ListBoxItemStyle}"
                               Background="{x:Null}" BorderThickness="0" ItemsSource="{Binding Elements}" 
-                              SelectedItem="{Binding ExaminedElement, Mode=TwoWay}">
+                              SelectedItem="{Binding ExaminedElement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <controls:ElementContainer Element="{Binding}" Style="{StaticResource FrameStyle}"/>
+                                <controls:ElementContainer Element="{Binding}" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </Grid>
             </TabItem>
             <TabItem Header="Tabulka">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">

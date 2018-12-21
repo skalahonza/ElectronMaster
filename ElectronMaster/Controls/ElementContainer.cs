@@ -11,7 +11,11 @@ namespace ElectronMaster.Controls
         public Element Element
         {
             get => (Element) GetValue(ElementProperty);
-            set => SetValue(ElementProperty, FluentOnPropertyChanged(value));
+            set
+            {
+                SetValue(ElementProperty, value);
+                OnPropertyChanged();
+            }
         }
     }
 }

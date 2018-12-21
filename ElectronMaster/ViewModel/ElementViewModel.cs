@@ -18,13 +18,21 @@ namespace ElectronMaster.ViewModel
         public Element Element
         {
             get => _element;
-            set => _element = FluentOnPropertyChanged(value);
+            set
+            {
+                _element = value;
+                OnPropertyChanged();
+            }
         }
 
         public bool IsActive
         {
             get => _isActive;
-            set => _isActive = FluentOnPropertyChanged(value);
+            set
+            {
+                _isActive = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

@@ -220,39 +220,67 @@ namespace ElectronMaster.Model
         public string Symbol
         {
             get => _symbol;
-            set => _symbol = FluentOnPropertyChanged(value);
+            set
+            {
+                _symbol = value;
+                OnPropertyChanged();
+            }
         }
 
         public string CzechName
         {
             get => _czechName;
-            set => _czechName = FluentOnPropertyChanged(value);
+            set
+            {
+                if (value == _czechName) return;
+                _czechName = value;
+                OnPropertyChanged();
+            }
         }
 
         public string LatinName
         {
             get => _latinName;
-            set => _latinName = FluentOnPropertyChanged(value);
+            set
+            {
+                if (value == _latinName) return;
+                _latinName = value;
+                OnPropertyChanged();
+            }
         }
 
         public ElementType ElementType
         {
             get => _elementType;
-            set => _elementType = FluentOnPropertyChanged(value);
+            set
+            {
+                if (value == _elementType) return;
+                _elementType = value;
+                OnPropertyChanged();
+            }
         }
 
         public int Electrons
         {
             get => _electrons;
-            set => _electrons = FluentOnPropertyChanged(value);
+            set
+            {
+                if (value == _electrons) return;
+                _electrons = value;
+                OnPropertyChanged();
+            }
         }
 
         public bool SpecialConfiguration
         {
             get => _specialConfiguration;
-            set => _specialConfiguration = FluentOnPropertyChanged(value);
+            set
+            {
+                if (value == _specialConfiguration) return;
+                _specialConfiguration = value;
+                OnPropertyChanged();
+            }
         }
-
         #endregion
     }
 }

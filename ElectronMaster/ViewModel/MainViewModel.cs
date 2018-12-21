@@ -8,27 +8,9 @@ using ElectronMaster.Extensions;
 
 namespace ElectronMaster.ViewModel
 {
-    public class ElementFrameViewModel : ElementViewModel
-    {        
-        private int _col;
-        private int _row;        
-
-        public int Col
-        {
-            get => _col;
-            set => _col = FluentOnPropertyChanged(value);
-        }
-
-        public int Row
-        {
-            get => _row;
-            set => _row = FluentOnPropertyChanged(value);
-        }
-    }
-
     public class MainViewModel:ViewModelBase
     {
-        private Element _examinedElement;
+        private ElementViewModel _examinedElement;
         private string _searchText;
         private readonly Element[] _elements = new Element[]
         {
@@ -158,16 +140,17 @@ namespace ElectronMaster.ViewModel
             Elements = new ObservableCollection<ElementViewModel>(_elements.Select(x => new ElementViewModel(x)));
         }
 
-        public Element ExaminedElement
+        public ElementViewModel ExaminedElement
         {
             get => _examinedElement;
             set
             {
-                Configurations = new ObservableCollection<Configuration>(ExaminedElement.ElectronConfiguration());
+                _examinedElement = value;
+                OnPropertyChanged();
+                Configurations = new ObservableCollection<Configuration>(ExaminedElement.Element.ElectronConfiguration());
                 OnPropertyChanged(nameof(TextConfiguration));
                 OnPropertyChanged(nameof(Configurations));
-                OnPropertyChanged(nameof(RareGasConfiguration));
-                _examinedElement = FluentOnPropertyChanged(value);
+                OnPropertyChanged(nameof(RareGasConfiguration));                
             }
         }
 
@@ -176,7 +159,11 @@ namespace ElectronMaster.ViewModel
         public string SearchText
         {
             get => _searchText;
-            set => _searchText = FluentOnPropertyChanged(value);
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged();
+            }
         }
 
         public ObservableCollection<Configuration> Configurations { get; private set; } = new ObservableCollection<Configuration>();
@@ -203,14 +190,14 @@ namespace ElectronMaster.ViewModel
             get
             {
                 var text = new Paragraph();
-                if (ExaminedElement.Electrons <= 2)
+                if (ExaminedElement.Element.Electrons <= 2)
                 {                    
                     text.Inlines.Add(new Run("Nelze napsat zkrácenou konfiguraci."));
                 }
                 else
                 {
                     var closestRareGas = _elements[1]; // zvolit Helium
-                    var rareGases = _elements.RareGases(ExaminedElement.Electrons).ToList();
+                    var rareGases = _elements.RareGases(ExaminedElement.Element.Electrons).ToList();
                     if (rareGases.Any())
                         closestRareGas = rareGases.Last();
                     {
@@ -220,7 +207,7 @@ namespace ElectronMaster.ViewModel
                     }
 
                     for (int i = closestRareGas.ElectronConfiguration().Count;
-                        i < ExaminedElement.ElectronConfiguration().Count;
+                        i < ExaminedElement.Element.ElectronConfiguration().Count;
                         i++)
                     {
                         text.Inlines.Add(new Run(" "));
@@ -236,7 +223,7 @@ namespace ElectronMaster.ViewModel
         public ElementType? SelectedElementType
         {
             get => _selectedElementType;
-            set => _selectedElementType = FluentOnPropertyChanged(value);
+            set { _selectedElementType = value; OnPropertyChanged(); }
         }
 
         public GenericRelayCommand<object> ClearFilter => new GenericRelayCommand<object>(o =>
@@ -269,7 +256,7 @@ namespace ElectronMaster.ViewModel
                 //změnit ramecek zkoumaného rpvku
                 // text orazek plyn konfiurace
                 //hlaska o textu     
-                ExaminedElement = element;                
+                //ExaminedElement = element;                
                 //jednotlivé rendrovací komponenty budou mít referenci na tento prvek a hotovo
             });
     }

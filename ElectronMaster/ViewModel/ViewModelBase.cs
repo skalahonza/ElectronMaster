@@ -13,11 +13,5 @@ namespace ElectronMaster.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        protected T FluentOnPropertyChanged<T>(T value, [CallerMemberName] string propertyName = null)
-        {
-            OnPropertyChanged(propertyName);
-            return value;
-        }
     }
 }
