@@ -4,11 +4,15 @@
         xmlns:electronMaster="clr-namespace:ElectronMaster"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:view="clr-namespace:ElectronMaster.View"
+    xmlns:viewModel="clr-namespace:ElectronMaster.ViewModel"
     mc:Ignorable="d" x:Name="window" x:Class="ElectronMaster.View.MainWindow"
         Title="Electron master" Height="612" Width="912" MinHeight="612" MinWidth="912" Icon="../Images/ikona.png" Loaded="window_Loaded">
     <Window.Resources>
         <ResourceDictionary Source="BileKomponenty.xaml"/>
     </Window.Resources>
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
     <Grid x:Name="MainGrid">
         <Grid.Background>
             <ImageBrush ImageSource="../Images/pozadi.png" Stretch="UniformToFill"/>
@@ -101,12 +105,13 @@
 
         <TextBlock x:Name="StabilitaTB" Visibility="Collapsed" Grid.Row="2" Grid.ColumnSpan="4" Text="Element má specifickou elektronovou konfiguraci. Ordbital D poslední periody se zaplňuje dříve." FontSize="16" Foreground="#FFE44424" HorizontalAlignment="Center"/>
 
-        <TextBlock x:Name="textBlock" Grid.Row="3" Text="Nekovy" Background="#FFE44424" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="0" TextAlignment="Center" Padding="5" FontSize="16"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Polokovy" Background="#FF67BCDB" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="1" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
-        <TextBlock Grid.Column="2" Grid.Row="3" Text="Kovy" Background="#FFA2AB58" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="2" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
-        <TextBlock Grid.Column="3" Grid.Row="3" Text="Umělé prvky" Background="#252526" Foreground="White" MouseLeftButtonDown="zvoleniTypuPrvku" Tag="3" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
+        <TextBlock x:Name="textBlock" Grid.Row="3" Text="Nekovy" Background="#FFE44424" Foreground="White" Tag="0" TextAlignment="Center" Padding="5" FontSize="16"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Polokovy" Background="#FF67BCDB" Foreground="White" Tag="1" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
+        <TextBlock Grid.Column="2" Grid.Row="3" Text="Kovy" Background="#FFA2AB58" Foreground="White" Tag="2" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
+        <TextBlock Grid.Column="3" Grid.Row="3" Text="Umělé prvky" Background="#252526" Foreground="White" Tag="3" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" FontSize="{Binding FontSize, ElementName=textBlock}"/>
 
-        <TextBox x:Name="SearchTextBox" Grid.Row="4" Grid.ColumnSpan="4" Text="Hledat..." FontSize="24" VerticalContentAlignment="Center" Padding="37.5,0,0,0" GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus" TextChanged="SearchTextBox_TextChanged" Background="{x:Null}" Height="35"/>
+        <TextBox x:Name="SearchTextBox" Grid.Row="4" Grid.ColumnSpan="4" Text="Hledat..." FontSize="24" VerticalContentAlignment="Center" Padding="37.5,0,0,0" GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus"
+                 Background="{x:Null}" Height="35"/>
         <Border HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0" Height="30" VerticalAlignment="Top" Width="{Binding Height, ElementName=SearchTextBox}" Margin="3" BorderBrush="#FFABADB3" BorderThickness="0,0,1,0">
             <Image Source="../Images/magnifier12.png"/>
         </Border>
@@ -114,7 +119,8 @@
         <TabControl x:Name="tabControl" Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="5" Background="{x:Null}" BorderThickness="0">
             <TabItem Header="Seznam">
                 <Grid x:Name="grid">
-                    <ListView x:Name="SeznamPrvku" Grid.ColumnSpan="3" ItemContainerStyle="{StaticResource ListBoxItemStyle}" SelectionChanged="SeznamPrvku_SelectionChanged" Background="{x:Null}" BorderThickness="0"/>
+                    <ListView x:Name="SeznamPrvku" Grid.ColumnSpan="3" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+                              Background="{x:Null}" BorderThickness="0"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Tabulka">
@@ -151,18 +157,18 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <view:ElementFrame CzechName="Vodík" LatinName="Hydrogenium"  Symbol="H" Electrons="1" Metality="Nekov" MouseDown="vybratRamec"/>
-                        <view:ElementFrame Grid.Column="17" CzechName="Helium" LatinName="Helium" Symbol="He" Electrons="2" Metality="Nekov" MouseDown="vybratRamec"/>
-                        <view:ElementFrame Grid.Row="1" CzechName="Lithium" LatinName="Lithium" Symbol="Li" Metality="Kov" Electrons="3" MouseDown="vybratRamec"/>
-                        <view:ElementFrame Grid.Row="1" Grid.Column="1" CzechName="Beryllium" LatinName="Beryllium" Symbol="Be" Metality="Kov" Electrons="4" MouseDown="vybratRamec"/>
-                        <view:ElementFrame Grid.Row="2" Grid.Column="0" CzechName="Sodík" LatinName="Natrium" Symbol="Na" Metality="Kov" Electrons="11" MouseDown="vybratRamec"/>
-                        <view:ElementFrame Grid.Row="2" Grid.Column="1" CzechName="Hořčík" LatinName="Magnesium" Symbol="Mg" Metality="Kov" Electrons="12" MouseDown="vybratRamec"/>
-                        <view:ElementFrame Grid.Row="5" Grid.Column="0" CzechName="Cesium" LatinName="Caesium" Symbol="Cs" Metality="Kov" Electrons="55" MouseDown="vybratRamec"/>
-                        <view:ElementFrame Grid.Row="5" Grid.Column="1" CzechName="Baryum" LatinName="Baryum" Symbol="Ba" Metality="Kov" Electrons="56" MouseDown="vybratRamec"/>
-                        <view:ElementFrame Grid.Row="6" Grid.Column="0" CzechName="Francium" LatinName="Francium" Symbol="Fr" Metality="Kov" Electrons="87" MouseDown="vybratRamec"/>
-                        <view:ElementFrame Grid.Row="6" Grid.Column="1" CzechName="Radium" LatinName="Radium" Symbol="Ra" Metality="Kov" Electrons="88" MouseDown="vybratRamec"/>
-                        <view:ElementFrame Grid.Row="5" Grid.Column="2" CzechName="Lanthan" LatinName="Lanthanum" Symbol="La" Metality="Kov" Electrons="57" Margin="0,0,5,0" MouseDown="vybratRamec"/>
-                        <view:ElementFrame Grid.Row="6" Grid.Column="2" CzechName="Aktinium" LatinName="Actinium" Symbol="Ac" Metality="Kov" Electrons="89" Margin="0,0,5,0" MouseDown="vybratRamec"/>
+                        <view:ElementFrame CzechName="Vodík" LatinName="Hydrogenium"  Symbol="H" Electrons="1" Metality="Nekov" />
+                        <view:ElementFrame Grid.Column="17" CzechName="Helium" LatinName="Helium" Symbol="He" Electrons="2" Metality="Nekov" />
+                        <view:ElementFrame Grid.Row="1" CzechName="Lithium" LatinName="Lithium" Symbol="Li" Metality="Kov" Electrons="3" />
+                        <view:ElementFrame Grid.Row="1" Grid.Column="1" CzechName="Beryllium" LatinName="Beryllium" Symbol="Be" Metality="Kov" Electrons="4" />
+                        <view:ElementFrame Grid.Row="2" Grid.Column="0" CzechName="Sodík" LatinName="Natrium" Symbol="Na" Metality="Kov" Electrons="11" />
+                        <view:ElementFrame Grid.Row="2" Grid.Column="1" CzechName="Hořčík" LatinName="Magnesium" Symbol="Mg" Metality="Kov" Electrons="12" />
+                        <view:ElementFrame Grid.Row="5" Grid.Column="0" CzechName="Cesium" LatinName="Caesium" Symbol="Cs" Metality="Kov" Electrons="55" />
+                        <view:ElementFrame Grid.Row="5" Grid.Column="1" CzechName="Baryum" LatinName="Baryum" Symbol="Ba" Metality="Kov" Electrons="56" />
+                        <view:ElementFrame Grid.Row="6" Grid.Column="0" CzechName="Francium" LatinName="Francium" Symbol="Fr" Metality="Kov" Electrons="87" />
+                        <view:ElementFrame Grid.Row="6" Grid.Column="1" CzechName="Radium" LatinName="Radium" Symbol="Ra" Metality="Kov" Electrons="88" />
+                        <view:ElementFrame Grid.Row="5" Grid.Column="2" CzechName="Lanthan" LatinName="Lanthanum" Symbol="La" Metality="Kov" Electrons="57" Margin="0,0,5,0" />
+                        <view:ElementFrame Grid.Row="6" Grid.Column="2" CzechName="Aktinium" LatinName="Actinium" Symbol="Ac" Metality="Kov" Electrons="89" Margin="0,0,5,0" />
 
                     </Grid>
                 </ScrollViewer>

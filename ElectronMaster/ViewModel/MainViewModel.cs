@@ -1,26 +1,36 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using ElectronMaster.Model;
-using Microsoft.Win32;
+using ElectronMaster.Extensions;
 
-namespace ElectronMaster.View
+namespace ElectronMaster.ViewModel
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public class ElementFrameViewModel : ElementViewModel
+    {        
+        private int _col;
+        private int _row;        
+
+        public int Col
+        {
+            get => _col;
+            set => _col = FluentOnPropertyChanged(value);
+        }
+
+        public int Row
+        {
+            get => _row;
+            set => _row = FluentOnPropertyChanged(value);
+        }
+    }
+
+    public class MainViewModel:ViewModelBase
     {
-        #region Globální proměnné
-        RadekPrvku _praveZkoumanyPrvek;
-        private readonly Element[] _prvky = new Element[118]
+        private Element _examinedElement;
+        private string _searchText;
+        private readonly Element[] _elements = new Element[]
         {
             new Element("H", "Vodík", "Hydrogenium", ElementType.Nekov, 1),
             new Element("He", "Helium", "Helium", ElementType.Nekov, 2),
@@ -42,7 +52,7 @@ namespace ElectronMaster.View
             new Element("Ar", "Argon", "Argon", ElementType.Nekov, 18),
             new Element("K", "Draslík", "Kalium", ElementType.Kov, 19),
             new Element("Ca", "Vápník", "Calcium", ElementType.Kov, 20),
-            new Element("Sc", "Skandium", "Scandium", ElementType.Kov, 21),                                                  
+            new Element("Sc", "Skandium", "Scandium", ElementType.Kov, 21),
             new Element("Ti", "Titan", "Titanium", ElementType.Kov, 22),
             new Element("V", "Vanad", "Vanadium", ElementType.Kov, 23),
             new Element("Cr", "Chrom", "Chromium", ElementType.Kov, 24),
@@ -141,136 +151,126 @@ namespace ElectronMaster.View
             new Element("Uus", "Ununseptium", "Ununseptium", ElementType.Umělý, 117),
             new Element("Uuo", "Ununoctium", "Ununoctium", ElementType.Umělý, 118)
         };
-        #endregion
+        private ElementType? _selectedElementType;
 
-        public MainWindow()
+        public MainViewModel()
         {
-            InitializeComponent();
+            Elements = new ObservableCollection<ElementViewModel>(_elements.Select(x => new ElementViewModel(x)));
         }
 
-        private void window_Loaded(object sender, RoutedEventArgs e)
+        public Element ExaminedElement
         {
-            #region nakreslení tabulky prvků
-            //perioda 4 a 5
-            int protonoveCislo = 19;
-            for (int radek = 3; radek < 5; radek++)
-                for (int sloupec = 0; sloupec < 18; sloupec ++)
+            get => _examinedElement;
+            set
+            {
+                Configurations = new ObservableCollection<Configuration>(ExaminedElement.ElectronConfiguration());
+                OnPropertyChanged(nameof(TextConfiguration));
+                OnPropertyChanged(nameof(Configurations));
+                OnPropertyChanged(nameof(RareGasConfiguration));
+                _examinedElement = FluentOnPropertyChanged(value);
+            }
+        }
+
+        public ObservableCollection<ElementViewModel> Elements { get; set; }
+
+        public string SearchText
+        {
+            get => _searchText;
+            set => _searchText = FluentOnPropertyChanged(value);
+        }
+
+        public ObservableCollection<Configuration> Configurations { get; private set; } = new ObservableCollection<Configuration>();
+
+        public Paragraph TextConfiguration
+        {
+            get
+            {
+                var text = new Paragraph();
+                foreach (var configuration in Configurations)
                 {
-                    var ramec = new ElementFrame(_prvky[protonoveCislo - 1]);
-                    if (sloupec == 2) //pokud jsou to prvky třetí periody tak se oddělí od právě části tabulky
-                        ramec.Margin = new Thickness(0, 0, 5, 0);
-                    PeriodickaTabulka.Children.Add(ramec);
-                    Grid.SetColumn(ramec, sloupec);
-                    Grid.SetRow(ramec, radek);
-                    protonoveCislo++;
-                }
-            //4 až 8 skupina 6. a 7. periody
-            protonoveCislo = 72;
-            for(int radek = 5; radek < 7; radek++)
+                    text.Inlines.Add(new Run(configuration.PeriodNumber.ToString()));
+                    text.Inlines.Add(new Run(configuration.OrbitalType.ToString()));
+                    text.Inlines.Add(new Run(configuration.Electrons.ToString()) { BaselineAlignment = BaselineAlignment.Superscript, FontSize = 10 });
+                    text.Inlines.Add(new Run(" "));
+                }                    
+                text.Inlines.Remove(text.Inlines.Last(x => true));
+                return text;
+            }
+        }
+
+        public Paragraph RareGasConfiguration
+        {
+            get
             {
-                for (int sloupec = 3; sloupec < 18; sloupec++)
+                var text = new Paragraph();
+                if (ExaminedElement.Electrons <= 2)
+                {                    
+                    text.Inlines.Add(new Run("Nelze napsat zkrácenou konfiguraci."));
+                }
+                else
                 {
-                    var ramec = new ElementFrame(_prvky[protonoveCislo - 1]);
-                    PeriodickaTabulka.Children.Add(ramec);
-                    Grid.SetColumn(ramec, sloupec);
-                    Grid.SetRow(ramec, radek);
-                    protonoveCislo++;
+                    var closestRareGas = _elements[1]; // zvolit Helium
+                    var rareGases = _elements.RareGases(ExaminedElement.Electrons).ToList();
+                    if (rareGases.Any())
+                        closestRareGas = rareGases.Last();
+                    {
+                        text.Inlines.Add(new Run("["));
+                        text.Inlines.Add(new Run(closestRareGas.Electrons.ToString()) { BaselineAlignment = BaselineAlignment.Subscript, FontSize = 10 });
+                        text.Inlines.Add(new Run(closestRareGas.Symbol + "]"));
+                    }
+
+                    for (int i = closestRareGas.ElectronConfiguration().Count;
+                        i < ExaminedElement.ElectronConfiguration().Count;
+                        i++)
+                    {
+                        text.Inlines.Add(new Run(" "));
+                        text.Inlines.Add(new Run(Configurations[i].PeriodNumber + Configurations[i].OrbitalType.ToString()));
+                        text.Inlines.Add(new Run(Configurations[i].Electrons.ToString()) { BaselineAlignment = BaselineAlignment.Superscript, FontSize = 10 });
+                    }
                 }
-                protonoveCislo = 104;
-            }
 
-            //lantanoidy a aktinoidy
-            protonoveCislo = 58;
-            for (int radek = 7; radek < 9; radek++)
+                return text;
+            }
+        }
+
+        public ElementType? SelectedElementType
+        {
+            get => _selectedElementType;
+            set => _selectedElementType = FluentOnPropertyChanged(value);
+        }
+
+        public GenericRelayCommand<object> ClearFilter => new GenericRelayCommand<object>(o =>
             {
-                for (int sloupec = 3; sloupec < 18; sloupec++)
-                {
-                    var ramec = new ElementFrame(_prvky[protonoveCislo - 1]);
-                    if(radek == 7)
-                        ramec.Margin = new Thickness(0, 5, 0, 0); //oddělení lantanoidů a aktinoidů od zbytku tabulky
+                SelectedElementType = null;
+                SearchText = "";
+                ApplyFilter.Execute(null);
+            });
 
-                    PeriodickaTabulka.Children.Add(ramec);
-                    Grid.SetColumn(ramec, sloupec);
-                    Grid.SetRow(ramec, radek);
-                    protonoveCislo++;
-                }
-                protonoveCislo = 90;
-            }
-            //prvky třetí až osmé skupiny
-            protonoveCislo = 5;
-            for (int radek = 1; radek < 3; radek++)
+        public GenericRelayCommand<object> ApplyFilter => new GenericRelayCommand<object>(o =>
+        {
+            //deactivate all
+            foreach (var elementFrameViewModel in Elements)
+                elementFrameViewModel.IsActive = false;
+
+            //use filter
+            var active = Elements.Where(x =>
+                x.Element.CzechName.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+                || x.Element.LatinName.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+
+            if (SelectedElementType != null)
+                active = active.Where(x => x.Element.ElementType == SelectedElementType.Value);
+
+            foreach (var elementFrameViewModel in active)
+                elementFrameViewModel.IsActive = true;
+        });
+
+        public GenericRelayCommand<Element> ExaminedElementChanged => new GenericRelayCommand<Element>(element =>
             {
-                for (int sloupec = 12; sloupec < 18; sloupec++)
-                {
-                    var ramec = new ElementFrame(_prvky[protonoveCislo - 1]);
-                    PeriodickaTabulka.Children.Add(ramec);
-                    Grid.SetColumn(ramec, sloupec);
-                    Grid.SetRow(ramec, radek);
-                    protonoveCislo++;
-                }
-                protonoveCislo = 13;
-            }
-            #endregion
-        }
-
-        private void SearchTextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (((TextBox)sender).Text == "Hledat...")
-                ((TextBox)sender).Text = "";
-        }
-
-        private void SearchTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (((TextBox)sender).Text == "")
-                ((TextBox)sender).Text = "Hledat...";
-        }        
-
-        /// <summary>
-        /// Odkaz na GoID
-        /// </summary>
-        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Process.Start("http://goid.azurewebsites.net/");
-        }
-
-        /// <summary>
-        /// Uloží schématickou konfiguraci jako obrázek
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SaveAsImage(object sender, RoutedEventArgs e)
-        {
-            var sfd = new SaveFileDialog { Filter = "Obrázek PNG|*.png" };
-            if (sfd.ShowDialog() == true)
-            {
-                const int dpi = 92;
-
-                var rtb = new RenderTargetBitmap(
-                    (int)SchematickaKonfigurace.ActualWidth, //width 
-                    (int)SchematickaKonfigurace.ActualHeight, //height 
-                    dpi, //dpi x 
-                    dpi, //dpi y 
-                    PixelFormats.Pbgra32 // pixelformat 
-                    );
-                rtb.Render(SchematickaKonfigurace);
-                SaveRTBAsPNG(rtb, sfd.FileName);
-            }
-        }
-
-        /// <summary>
-        /// Vyexportuje vyrendrovaný obrázek jako soubor
-        /// </summary>
-        /// <param name="bmp">Cílový obrázek</param>
-        /// <param name="filename">Cíl souboru</param>
-        private void SaveRTBAsPNG(RenderTargetBitmap bmp, string filename)
-        {
-            var enc = new PngBitmapEncoder();
-            enc.Frames.Add(BitmapFrame.Create(bmp));
-
-            using (var stm = File.Create(filename))
-            {
-                enc.Save(stm);
-            }
-        }
-    }    
+                //změnit ramecek zkoumaného rpvku
+                // text orazek plyn konfiurace
+                //hlaska o textu     
+                ExaminedElement = element;                
+                //jednotlivé rendrovací komponenty budou mít referenci na tento prvek a hotovo
+            });
+    }
 }

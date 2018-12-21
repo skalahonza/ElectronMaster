@@ -1,11 +1,18 @@
-﻿<UserControl x:Class="ElectronMaster.View.RadekPrvku"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d"
-            
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModel="clr-namespace:ElectronMaster.ViewModel"
+             xmlns:ElectronMaster="clr-namespace:ElectronMaster" x:Class="ElectronMaster.View.RadekPrvku"
+             mc:Ignorable="d"            
             Height="80" >
+    <UserControl.Resources>
+        <ElectronMaster:ElementTypeToColorConverter x:Key="ElementTypeToColorConverter"/>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewModel:ElementViewModel/>
+    </UserControl.DataContext>
     <Grid HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -17,13 +24,13 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Canvas x:Name="ZnackaPozadi" Grid.RowSpan="3"/>
-        <TextBlock x:Name="NazevCesky" Grid.Column="1" FontSize="14" Text="Název česky" Margin="5,0,0,0" ToolTip="Název prvku česky"/>
-        <TextBlock x:Name="TypPrvkuTb" Grid.Column="1" Grid.Row="1" FontSize="14" Text="Kov/Nekov/Polokov" Margin="5,0,0,0"/>
-        <TextBlock x:Name="PocetElektronu"  Grid.Column="1" Grid.Row="2" FontSize="14" Text="Počet elektronů" Margin="5,0,0,0" ToolTip="Počet elektronů"/>
+        <Rectangle x:Name="ZnackaPozadi" Grid.RowSpan="3" Fill="{Binding Element.ElementType, Converter={StaticResource ElementTypeToColorConverter}}"/>
+        <TextBlock x:Name="NazevCesky" Grid.Column="1" FontSize="14" Text="{Binding Element.CzechName}" Margin="5,0,0,0" ToolTip="Název prvku česky"/>
+        <TextBlock x:Name="TypPrvkuTb" Grid.Column="1" Grid.Row="1" FontSize="14" Text="{Binding Element.ElementType}" Margin="5,0,0,0"/>
+        <TextBlock x:Name="PocetElektronu"  Grid.Column="1" Grid.Row="2" FontSize="14" Text="{Binding Element.Electrons}" Margin="5,0,0,0" ToolTip="Počet elektronů"/>
 
-        <TextBlock x:Name="Znacka" Grid.RowSpan="2" FontSize="40" Text="ZN" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock x:Name="NazevLatinsky" Grid.Row="2" FontSize="14" Text="Latinsky" Foreground="White" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="Znacka" Grid.RowSpan="2" FontSize="40" Text="{Binding Element.Symbol}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="NazevLatinsky" Grid.Row="2" FontSize="14" Text="{Binding Element.LatinName}" Foreground="White" HorizontalAlignment="Center"/>
         <Separator Grid.Row="3" Grid.ColumnSpan="2" Margin="0,4,0,0" />
     </Grid>
 </UserControl>

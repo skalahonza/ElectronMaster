@@ -82,12 +82,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\ElementTypeToColorConverter.cs" />
+    <Compile Include="Extensions\ElementExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\Element.cs" />
     <Compile Include="Model\OrbitalType.cs" />
     <Compile Include="Model\ElementType.cs" />
-    <Compile Include="View\ElektronovyDiagram.xaml.cs">
-      <DependentUpon>ElektronovyDiagram.xaml</DependentUpon>
+    <Compile Include="ViewModel\ElementViewModel.cs" />
+    <Compile Include="ViewModel\GenericRelayCommand.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\ElectronDiagram.xaml.cs">
+      <DependentUpon>ElectronDiagram.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RadekPrvku.xaml.cs">
       <DependentUpon>RadekPrvku.xaml</DependentUpon>
@@ -100,7 +107,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ElektronovyDiagram.xaml">
+    <Page Include="View\ElectronDiagram.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,9 +190,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

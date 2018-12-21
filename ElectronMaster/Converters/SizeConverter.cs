@@ -1,10 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Data;
 
 namespace ElectronMaster
 {
-    public class SizeConverter :IValueConverter
+    public class SizeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter,
     CultureInfo culture)

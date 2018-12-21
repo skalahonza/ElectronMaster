@@ -7,13 +7,13 @@ using ElectronMaster.Model;
 namespace ElectronMaster.View
 {
     /// <summary>
-    /// Interaction logic for ElektronovyDiagram.xaml
+    /// Interaction logic for ElectronDiagram.xaml
     /// </summary>
-    public partial class ElektronovyDiagram : UserControl
+    public partial class ElectronDiagram : UserControl
     {
         const int margin = 5;  //čím menší tím budou šipky blíže k sobě
 
-        public ElektronovyDiagram(Configuration subConfiguration)
+        public ElectronDiagram(Configuration subConfiguration)
         {
             InitializeComponent();
             //rozpoznání orbitalu            
@@ -40,7 +40,7 @@ namespace ElectronMaster.View
             {
                 if (elektronyKeKonfiguraci > 0)
                 {
-                    KresliciPlocha.Children.Add(sipkaNahoru(count*50 + 25));
+                    KresliciPlocha.Children.Add(ArrowUp(count*50 + 25));
                     elektronyKeKonfiguraci--;
                 }
             }
@@ -49,13 +49,13 @@ namespace ElectronMaster.View
             {
                 if (elektronyKeKonfiguraci > 0)
                 {
-                    KresliciPlocha.Children.Add(sipkaDolu(count * 50 + 25));
+                    KresliciPlocha.Children.Add(ArrowDown(count * 50 + 25));
                     elektronyKeKonfiguraci--;
                 }
             }
         }
 
-        private Polyline sipkaNahoru(int xStredu, int yStredu = 25)
+        private Polyline ArrowUp(int xStredu, int yStredu = 25)
         {
             return new Polyline() //šipka nahoru
             { 
@@ -73,7 +73,7 @@ namespace ElectronMaster.View
             };
         }
 
-        private Polyline sipkaDolu(int xStredu, int yStredu = 25)
+        private Polyline ArrowDown(int xStredu, int yStredu = 25)
         {
             return new Polyline() //šipka nahoru
             {
