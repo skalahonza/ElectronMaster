@@ -47,7 +47,13 @@
         </ScrollViewer>
 
         <ScrollViewer x:Name="scrollViewer2"  Grid.Column="3" VerticalScrollBarVisibility="Auto" MaxHeight="75" VerticalAlignment="Top"  >
-            <RichTextBox x:Name="PlynovaKonfiguraceTb"  FontSize="18" Visibility="{Binding ExaminedElement, Converter={StaticResource NullVisibilityConverter}}" IsReadOnly="True" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            <controls:BindableRichTextBox x:Name="PlynovaKonfiguraceTb" 
+                         FontSize="18" Visibility="{Binding ExaminedElement, Converter={StaticResource NullVisibilityConverter}}" 
+                         IsReadOnly="True" 
+                         BorderThickness="0"
+                         Document="{Binding RareGasConfiguration}"
+                         Background="{x:Null}" 
+                         BorderBrush="{x:Null}"/>
         </ScrollViewer>
 
         <Separator Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Top" VerticalContentAlignment="Top" Visibility="{Binding ExaminedElement,Converter={StaticResource NullVisibilityConverter}}" d:IsHidden="True" />
