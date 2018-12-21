@@ -82,13 +82,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\AppUserControl.cs" />
+    <Compile Include="Controls\ElementRow.cs" />
     <Compile Include="Converters\ElementTypeToColorConverter.cs" />
+    <Compile Include="Converters\NullVisibilityConverter.cs" />
     <Compile Include="Extensions\ElementExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\Element.cs" />
+    <Compile Include="Model\IElement.cs" />
     <Compile Include="Model\OrbitalType.cs" />
     <Compile Include="Model\ElementType.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\ElementViewModel.cs" />
     <Compile Include="ViewModel\GenericRelayCommand.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -190,7 +195,10 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="View\Controls\" />
+    <Folder Include="View\Style\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

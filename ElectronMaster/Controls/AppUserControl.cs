@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 using ElectronMaster.Annotations;
 
-namespace ElectronMaster.ViewModel
+namespace ElectronMaster.Controls
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    public class AppUserControl:UserControl,INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

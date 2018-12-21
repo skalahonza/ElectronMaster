@@ -1,11 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using ElectronMaster.ViewModel;
 
 namespace ElectronMaster.Model
 {
-    public class Element
+    public class Element : ViewModelBase,IElement
     {
         private int _electronsForConfiguration;
+        private string _symbol;
+        private string _czechName;
+        private string _latinName;
+        private ElementType _elementType;
+        private int _electrons;
+        private bool _specialConfiguration;
+
+        public Element()
+        {
+        }
 
         public Element(string symbol, string czechName, string latinName, ElementType elementType, int electrons)
         {
@@ -205,12 +216,43 @@ namespace ElectronMaster.Model
         #endregion
 
         #region Vlastnosti
-        public string Symbol { get; set; }
-        public string CzechName { get; set; }
-        public string LatinName { get; set; }
-        public ElementType ElementType { get; set; }
-        public int Electrons { get; set; }
-        public bool SpecialConfiguration { get; set; }
+
+        public string Symbol
+        {
+            get => _symbol;
+            set => _symbol = FluentOnPropertyChanged(value);
+        }
+
+        public string CzechName
+        {
+            get => _czechName;
+            set => _czechName = FluentOnPropertyChanged(value);
+        }
+
+        public string LatinName
+        {
+            get => _latinName;
+            set => _latinName = FluentOnPropertyChanged(value);
+        }
+
+        public ElementType ElementType
+        {
+            get => _elementType;
+            set => _elementType = FluentOnPropertyChanged(value);
+        }
+
+        public int Electrons
+        {
+            get => _electrons;
+            set => _electrons = FluentOnPropertyChanged(value);
+        }
+
+        public bool SpecialConfiguration
+        {
+            get => _specialConfiguration;
+            set => _specialConfiguration = FluentOnPropertyChanged(value);
+        }
+
         #endregion
     }
 }

@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:view="clr-namespace:ElectronMaster.View"
     xmlns:viewModel="clr-namespace:ElectronMaster.ViewModel"
+    xmlns:controls="clr-namespace:ElectronMaster.Controls"
     mc:Ignorable="d" x:Name="window" x:Class="ElectronMaster.View.MainWindow"
         Title="Electron master" Height="612" Width="912" MinHeight="612" MinWidth="912" Icon="../Images/ikona.png" Loaded="window_Loaded">
     <Window.Resources>
@@ -31,6 +32,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <!-- Examined element -->
+        <view:RadekPrvku DataContext="{Binding ExaminedElement}" Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"/>
+
         <ScrollViewer x:Name="scrollViewer" Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" MaxHeight="75" VerticalAlignment="Top" >
             <RichTextBox x:Name="TextovaKonfiguraceTb" FontSize="18" Visibility="Collapsed" IsReadOnly="True" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"/>
         </ScrollViewer>
@@ -120,7 +124,14 @@
             <TabItem Header="Seznam">
                 <Grid x:Name="grid">
                     <ListView x:Name="SeznamPrvku" Grid.ColumnSpan="3" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
-                              Background="{x:Null}" BorderThickness="0"/>
+                              Background="{x:Null}" BorderThickness="0" ItemsSource="{Binding Elements}" 
+                              SelectedItem="{Binding ExaminedElement, Mode=TwoWay}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <controls:ElementRow Element="{Binding}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </Grid>
             </TabItem>
             <TabItem Header="Tabulka">
@@ -194,7 +205,7 @@
                         <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource odstavec}" Text="Program slouží k vytvoření elektronové konfigurace jednotlivých prvků periodické tabulky. Element si, buď můžete vybrat ze seznamu anebo přímo z tabulky. Pro přehlednost můžete použít vyhledávací pole nebo kliknout na příslušnou kategorii (nekovy, polokovy, kovy, umělé prvky) a zvýrazní se vám prvky zvolené kategorie. Program vytvoří konfiguraci textovou i podle vzácného plynu a dokonce i vykreslí diagram. Pokud si přejete diagram uložit jako obrázek, klepněte na malou disketu." TextWrapping="Wrap"/>
                         <TextBlock Grid.Row="2" Style="{StaticResource nadpis}" Text="Algoritmus konfigurace"/>
                         <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource odstavec}" Text="Celý proces elektronové konfigurace obstarává několik metod. Hlavní metoda spouští konfigurace pro jednotlivé periody 1 až 7. Pro každou periodu se nakonfigurují příslušné orbitaly." TextWrapping="Wrap"/>
-                        <Image Grid.Row="4" Grid.ColumnSpan="2" Source="Obrázky/diagram.png" />
+                        <Image Grid.Row="4" Grid.ColumnSpan="2" Source="../Images/diagram.png" />
                         <Separator Grid.Row="5" Grid.ColumnSpan="2"/>
                         <TextBlock Grid.Column="1" Grid.Row="6" Text="Copyright © 2015 Jan Skála" VerticalAlignment="Bottom"  TextAlignment="Right" Margin="2"/>
                         <TextBlock Grid.Row="6" Text="http://goid.azurewebsites.net" VerticalAlignment="Bottom" HorizontalAlignment="Left" TextDecorations="Underline" Margin="2" MouseDown="TextBlock_MouseDown" >
