@@ -170,10 +170,12 @@ namespace ElectronMaster.ViewModel
 
         public ObservableCollection<Configuration> Configurations { get; private set; } = new ObservableCollection<Configuration>();
 
-        public Paragraph TextConfiguration
+        public FlowDocument TextConfiguration
         {
             get
             {
+                if (ExaminedElement == null)
+                    return null;
                 var text = new Paragraph();
                 foreach (var configuration in Configurations)
                 {
@@ -183,14 +185,16 @@ namespace ElectronMaster.ViewModel
                     text.Inlines.Add(new Run(" "));
                 }
                 text.Inlines.Remove(text.Inlines.Last(x => true));
-                return text;
+                return new FlowDocument(text);
             }
         }
 
-        public Paragraph RareGasConfiguration
+        public FlowDocument RareGasConfiguration
         {
             get
             {
+                if (ExaminedElement == null)
+                    return null;
                 var text = new Paragraph();
                 if (ExaminedElement.Element.Electrons <= 2)
                 {
@@ -218,7 +222,7 @@ namespace ElectronMaster.ViewModel
                     }
                 }
 
-                return text;
+                return new FlowDocument(text);
             }
         }
 

@@ -37,18 +37,25 @@
                                    Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"/>
 
         <ScrollViewer x:Name="scrollViewer" Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" MaxHeight="75" VerticalAlignment="Top" >
-            <RichTextBox x:Name="TextovaKonfiguraceTb" FontSize="18" Visibility="Collapsed" IsReadOnly="True" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            <controls:BindableRichTextBox x:Name="TextovaKonfiguraceTb" FontSize="18" 
+                                          Visibility="{Binding ExaminedElement, Converter={StaticResource NullVisibilityConverter}}"
+                                          IsReadOnly="True" 
+                         Document="{Binding TextConfiguration}"
+                         BorderThickness="0" 
+                         Background="{x:Null}" 
+                         BorderBrush="{x:Null}"/>
         </ScrollViewer>
 
         <ScrollViewer x:Name="scrollViewer2"  Grid.Column="3" VerticalScrollBarVisibility="Auto" MaxHeight="75" VerticalAlignment="Top"  >
-            <RichTextBox x:Name="PlynovaKonfiguraceTb"  FontSize="18" Visibility="{Binding Visibility, ElementName=TextovaKonfiguraceTb}" IsReadOnly="True" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            <RichTextBox x:Name="PlynovaKonfiguraceTb"  FontSize="18" Visibility="{Binding ExaminedElement, Converter={StaticResource NullVisibilityConverter}}" IsReadOnly="True" BorderThickness="0" Background="{x:Null}" BorderBrush="{x:Null}"/>
         </ScrollViewer>
 
-        <Separator Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Top" VerticalContentAlignment="Top" Visibility="{Binding Visibility, ElementName=TextovaKonfiguraceTb}" d:IsHidden="True" />
+        <Separator Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Top" VerticalContentAlignment="Top" Visibility="{Binding ExaminedElement,Converter={StaticResource NullVisibilityConverter}}" d:IsHidden="True" />
         <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" d:IsHidden="True">
             <WrapPanel x:Name="SchematickaKonfigurace"/>
         </ScrollViewer>
-        <Button Grid.Row="1" Grid.Column="3" ToolTip="Uložit schématickou konfiguraci jako obrázek" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="2,4" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Visibility="{Binding Visibility, ElementName=TextovaKonfiguraceTb}" Click="SaveAsImage">
+        <Button Grid.Row="1" Grid.Column="3" ToolTip="Uložit schématickou konfiguraci jako obrázek" Width="20" Height="20" HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" Margin="2,4" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Visibility="{Binding ExaminedElement,Converter={StaticResource NullVisibilityConverter}}" Click="SaveAsImage">
             <Button.Resources>
                 <Style x:Key="FocusVisual">
                     <Setter Property="Control.Template">

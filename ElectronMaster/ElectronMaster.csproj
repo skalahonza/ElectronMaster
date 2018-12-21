@@ -101,9 +101,6 @@
     <Compile Include="View\ElectronDiagram.xaml.cs">
       <DependentUpon>ElectronDiagram.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ElementFrame.xaml.cs">
-      <DependentUpon>ElementFrame.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Converters\SizeConverter.cs" />
     <Page Include="View\BileKomponenty.xaml">
       <SubType>Designer</SubType>
@@ -125,10 +122,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\ElementFrame.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -189,7 +182,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="View\Controls\" />
     <Folder Include="View\Style\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
