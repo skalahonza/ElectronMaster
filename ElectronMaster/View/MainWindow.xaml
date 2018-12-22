@@ -8,10 +8,11 @@
     xmlns:viewModel="clr-namespace:ElectronMaster.ViewModel"
     xmlns:controls="clr-namespace:ElectronMaster.Controls"
     xmlns:model="clr-namespace:ElectronMaster.Model"
+    WindowState="Maximized"
     mc:Ignorable="d" x:Name="window" x:Class="ElectronMaster.View.MainWindow"
         Title="Electron master" Height="612" Width="912" MinHeight="612" MinWidth="912" Icon="../Images/ikona.png">
     <Window.Resources>
-        <ResourceDictionary Source="BileKomponenty.xaml"/>
+        <ResourceDictionary Source="Style/General.xaml"/>
     </Window.Resources>
     <Window.DataContext>
         <viewModel:MainViewModel/>
