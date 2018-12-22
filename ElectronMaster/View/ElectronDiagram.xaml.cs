@@ -19,7 +19,12 @@ namespace ElectronMaster.View
         public ElectronDiagram()
         {
             InitializeComponent();
-            DataContext = this;
+        }
+
+        public ElectronDiagram(Configuration subConfiguration)
+        {
+            InitializeComponent();
+            SubConfiguration = subConfiguration;
         }
 
         private void Render()

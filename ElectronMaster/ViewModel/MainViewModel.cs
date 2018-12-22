@@ -154,6 +154,7 @@ namespace ElectronMaster.ViewModel
                 OnPropertyChanged(nameof(TextConfiguration));
                 OnPropertyChanged(nameof(Configurations));
                 OnPropertyChanged(nameof(RareGasConfiguration));
+                OnPropertyChanged(nameof(GraphicalConfigurations));
             }
         }
 
@@ -172,6 +173,9 @@ namespace ElectronMaster.ViewModel
         }
 
         public ObservableCollection<Configuration> Configurations { get; private set; } = new ObservableCollection<Configuration>();
+
+        public IEnumerable<ElectronDiagram> GraphicalConfigurations =>
+            Configurations.Select(x => new ElectronDiagram(x));
 
         public FlowDocument TextConfiguration
         {
