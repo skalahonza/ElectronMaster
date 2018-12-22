@@ -59,9 +59,6 @@
         </ScrollViewer>
 
         <Separator Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Top" VerticalContentAlignment="Top" Visibility="{Binding ExaminedElement,Converter={StaticResource NullVisibilityConverter}}" d:IsHidden="True" />
-        <!--<ScrollViewer Grid.Row="1" Grid.Column="0" 
-                      Grid.ColumnSpan="4" VerticalScrollBarVisibility="Auto"                       
-                      HorizontalAlignment="Center" d:IsHidden="True"></ScrollViewer>-->
         <ItemsControl ItemsSource="{Binding GraphicalConfigurations}" x:Name="SchematickaKonfigurace" Grid.Row="1" 
                       HorizontalAlignment="Center" Grid.ColumnSpan="4"
                       Grid.Column="0">
@@ -131,9 +128,15 @@
                 <ImageBrush ImageSource="../Images/floppy-disk.png"/>
             </Button.Background>
         </Button>
-        <Separator Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" Visibility="{Binding Visibility, ElementName=TextovaKonfiguraceTb}" d:IsHidden="True" />
+        <Separator Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" 
+                   Visibility="{Binding ExaminedElement,Converter={StaticResource NullVisibilityConverter}}" d:IsHidden="True" />
 
-        <TextBlock x:Name="StabilitaTB" Visibility="Collapsed" Grid.Row="2" Grid.ColumnSpan="4" Text="Element má specifickou elektronovou konfiguraci. Ordbital D poslední periody se zaplňuje dříve." FontSize="16" Foreground="#FFE44424" HorizontalAlignment="Center"/>
+        <TextBlock x:Name="StabilitaTB" Grid.Row="2"
+                   Grid.ColumnSpan="4" 
+                   Visibility="{Binding ExaminedElement.Element.SpecialConfiguration, FallbackValue=Collapsed, TargetNullValue=Collapsed
+                                ,Converter={StaticResource BooleanToVisibilityConverter}}"
+                   Text="Element má specifickou elektronovou konfiguraci. Ordbital D poslední periody se zaplňuje dříve." 
+                   FontSize="16" Foreground="#FFE44424" HorizontalAlignment="Center"/>
 
         <TextBlock x:Name="textBlock" Grid.Row="3" Text="Nekovy" Background="#FFE44424" Foreground="White" Tag="0"                    
                    TextAlignment="Center" Padding="5" FontSize="16">
