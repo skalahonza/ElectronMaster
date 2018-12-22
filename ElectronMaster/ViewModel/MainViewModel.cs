@@ -245,7 +245,7 @@ namespace ElectronMaster.ViewModel
                 SelectedElementType = null;
                 SearchText = "";
                 ApplyFilter.Execute(null);
-            });
+            }, o => (!string.IsNullOrEmpty(SearchText) || SelectedElementType != null));
 
         public GenericRelayCommand<object> ApplyFilter => new GenericRelayCommand<object>(o =>
         {

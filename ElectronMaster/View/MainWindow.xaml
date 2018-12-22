@@ -178,7 +178,7 @@
             </i:Interaction.Triggers>
         </TextBlock>
 
-        <controls:PlaceholderTextBox x:Name="SearchTextBox" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="0"
+        <controls:PlaceholderTextBox x:Name="SearchTextBox" Grid.Row="4" Grid.ColumnSpan="3" Grid.Column="0"
                                      PlaceholderText="Hledat..." 
                                      Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                      FontSize="24" VerticalContentAlignment="Center" Padding="37.5,0,37.5,0"
@@ -188,6 +188,7 @@
             <Image Source="../Images/magnifier12.png"/>
         </Border>
 
+        <Button Content="Vyprázdnit filtr" Grid.Row="4" Grid.Column="3" Command="{Binding ClearFilter}"/>
 
         <TabControl x:Name="tabControl" Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="5" Background="{x:Null}" BorderThickness="0">
             <TabItem Header="Seznam">
