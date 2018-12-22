@@ -274,19 +274,15 @@ namespace ElectronMaster.ViewModel
             }                       
         });
 
-        public GenericRelayCommand<ElementType> ChanggeElementType => new GenericRelayCommand<ElementType>(type =>
+        public GenericRelayCommand<ElementType> ChangeElementType => new GenericRelayCommand<ElementType>(type =>
             {
                 SelectedElementType = type;
                 ApplyFilter?.Execute(null);
             });
 
-        public GenericRelayCommand<Element> ExaminedElementChanged => new GenericRelayCommand<Element>(element =>
+        public GenericRelayCommand<ElementFrameViewModel> ExaminedElementChanged => new GenericRelayCommand<ElementFrameViewModel>(element =>
             {
-                //změnit ramecek zkoumaného rpvku
-                // text orazek plyn konfiurace
-                //hlaska o textu     
-                //ExaminedElement = element;                
-                //jednotlivé rendrovací komponenty budou mít referenci na tento prvek a hotovo
+                ExaminedElement = element;                                
             });
 
         private void RenderPeriodicTable()
