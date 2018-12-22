@@ -251,7 +251,7 @@ namespace ElectronMaster.ViewModel
         {
             //deactivate all
             foreach (var elementFrameViewModel in Elements)
-                elementFrameViewModel.IsActive = false;
+                elementFrameViewModel.IsActive = false;            
 
             //use filter
             var active = Elements.Where(x =>
@@ -269,6 +269,12 @@ namespace ElectronMaster.ViewModel
                 FilteredElements.Add(elementFrameViewModel);
             }                       
         });
+
+        public GenericRelayCommand<ElementType> ChanggeElementType => new GenericRelayCommand<ElementType>(type =>
+            {
+                SelectedElementType = type;
+                ApplyFilter?.Execute(null);
+            });
 
         public GenericRelayCommand<Element> ExaminedElementChanged => new GenericRelayCommand<Element>(element =>
             {

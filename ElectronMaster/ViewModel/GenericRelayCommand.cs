@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace ElectronMaster.ViewModel
 {
-    public class GenericRelayCommand<T> : ICommand where T : class
+    public class GenericRelayCommand<T> : ICommand
     {
         readonly Action<T> _execute;
         readonly Predicate<T> _canExecute;

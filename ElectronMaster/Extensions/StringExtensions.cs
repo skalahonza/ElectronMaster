@@ -7,6 +7,7 @@ namespace ElectronMaster.Extensions
     {
         public static bool Contains(this string source, string toCheck, StringComparison comp)
         {
+            if (toCheck == null) toCheck = string.Empty;
             return source?.IndexOf(toCheck, comp) >= 0;
         }
     }
