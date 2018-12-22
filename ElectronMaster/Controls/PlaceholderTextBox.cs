@@ -11,13 +11,13 @@ namespace ElectronMaster.Controls
         /// <summary>
         ///   Keeps track of whether placeholder text is visible to know when to call InvalidateVisual to show or hide it.
         /// </summary>
-        private bool isPlaceholderVisible;
+        private bool _isPlaceholderVisible;
 
         /// <summary>
         ///   Identifies the PlaceholderText dependency property.
         /// </summary>
         public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.Register(
-            "PlaceholderText",
+            nameof(PlaceholderText),
             typeof(string),
             typeof(PlaceholderTextBox),
             new FrameworkPropertyMetadata(
@@ -29,8 +29,8 @@ namespace ElectronMaster.Controls
         /// </summary>
         public string PlaceholderText
         {
-            get { return (string)GetValue(PlaceholderTextProperty); }
-            set { SetValue(PlaceholderTextProperty, value); }
+            get => (string)GetValue(PlaceholderTextProperty);
+            set => SetValue(PlaceholderTextProperty, value);
         }
 
         // Shadowed BackgroundProperty to disassociate base.Backgrouond and this.Background.
@@ -51,8 +51,8 @@ namespace ElectronMaster.Controls
         /// </summary>
         public new Brush Background
         {
-            get { return GetValue(BackgroundProperty) as Brush; }
-            set { SetValue(BackgroundProperty, value); }
+            get => GetValue(BackgroundProperty) as Brush;
+            set => SetValue(BackgroundProperty, value);
         }
 
         // Sets the base.Background to null to make it transparent. New background is painted in OnRender.
@@ -85,10 +85,10 @@ namespace ElectronMaster.Controls
                 if (!IsFocused && string.IsNullOrEmpty(Text))
                 {
                     // Need to show placeholder
-                    if (!isPlaceholderVisible)
+                    if (!_isPlaceholderVisible)
                         InvalidateVisual();
                 }
-                else if (isPlaceholderVisible)
+                else if (_isPlaceholderVisible)
                     // Need to hide placeholder
                     InvalidateVisual();
             base.OnPropertyChanged(e);
@@ -107,14 +107,14 @@ namespace ElectronMaster.Controls
         {
             base.OnRender(drawingContext);
 
-            isPlaceholderVisible = false;
+            _isPlaceholderVisible = false;
             drawingContext.DrawRectangle(Background, null, new Rect(RenderSize));
 
             if (!IsFocused && string.IsNullOrEmpty(Text) && !string.IsNullOrEmpty(PlaceholderText))
             {
                 // Draw placeholder
 
-                isPlaceholderVisible = true;
+                _isPlaceholderVisible = true;
                 var computedTextAlignment = ComputedTextAlignment();
                 // foreground brush does not need to be dynamic. OnRender called when SystemColors changes.
                 Brush foreground = SystemColors.GrayTextBrush.Clone();
@@ -175,24 +175,21 @@ namespace ElectronMaster.Controls
         /// </returns>
         private TextAlignment ComputedTextAlignment()
         {
-            if (DependencyPropertyHelper.GetValueSource(this, HorizontalContentAlignmentProperty).BaseValueSource ==
-                BaseValueSource.Local
-                &&
-                DependencyPropertyHelper.GetValueSource(this, TextAlignmentProperty).BaseValueSource !=
-                BaseValueSource.Local)
+            if (DependencyPropertyHelper.GetValueSource(this, HorizontalContentAlignmentProperty).BaseValueSource !=
+                BaseValueSource.Local ||
+                DependencyPropertyHelper.GetValueSource(this, TextAlignmentProperty).BaseValueSource ==
+                BaseValueSource.Local) return TextAlignment;
+            // HorizontalContentAlignment dominates
+            switch (HorizontalContentAlignment)
             {
-                // HorizontalContentAlignment dominates
-                switch (HorizontalContentAlignment)
-                {
-                    case HorizontalAlignment.Left:
-                        return TextAlignment.Left;
-                    case HorizontalAlignment.Right:
-                        return TextAlignment.Right;
-                    case HorizontalAlignment.Center:
-                        return TextAlignment.Center;
-                    case HorizontalAlignment.Stretch:
-                        return TextAlignment.Justify;
-                }
+                case HorizontalAlignment.Left:
+                    return TextAlignment.Left;
+                case HorizontalAlignment.Right:
+                    return TextAlignment.Right;
+                case HorizontalAlignment.Center:
+                    return TextAlignment.Center;
+                case HorizontalAlignment.Stretch:
+                    return TextAlignment.Justify;
             }
             return TextAlignment;
         }
