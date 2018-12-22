@@ -21,6 +21,8 @@
     <electronMaster:SizeConverter x:Key="SizeConverter"/>
     <electronMaster:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
     <electronMaster:ElementTypeToColorConverter x:Key="ElementTypeToColorConverter"/>
+    <electronMaster:BoolOpacityConverter x:Key="BoolOpacityConverter"/>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
     <Style TargetType="{x:Type TabItem}">
         <!--Úprava šířky-->
@@ -44,7 +46,7 @@
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="TextTrimming" Value="None"/>
     </Style>
-    
+
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Foreground" Value="#FF303438"/>
     </Style>
@@ -54,13 +56,30 @@
     </Style>
 
     <Style x:Key="nadpis" TargetType="{x:Type TextBlock}">
-     <Setter Property="FontSize" Value="20" />
-     <Setter Property="Foreground" Value="#42546C"/>
-     <Setter Property="Margin" Value="2"/>
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Foreground" Value="#42546C"/>
+        <Setter Property="Margin" Value="2"/>
     </Style>
 
     <Style x:Key="odstavec" TargetType="{x:Type TextBlock}">
         <Setter Property="Margin" Value="5"/>
+    </Style>
+
+    <!-- Controls -->
+    <Style TargetType="{x:Type controls:ElectronDiagram}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ElectronDiagram}">
+                    <ItemsControl ItemsSource="{Binding Shapes, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type controls:ElectronDiagram}}}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style TargetType="{x:Type controls:ElementContainer}">

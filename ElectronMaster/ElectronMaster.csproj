@@ -83,7 +83,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\AppUserControl.cs" />
+    <Compile Include="Controls\BindableRichTextBox.cs" />
+    <Compile Include="Controls\ElectronDiagram.cs" />
     <Compile Include="Controls\ElementContainer.cs" />
+    <Compile Include="Controls\PlaceholderTextBox.cs" />
     <Compile Include="Converters\ElementTypeToColorConverter.cs" />
     <Compile Include="Converters\NullVisibilityConverter.cs" />
     <Compile Include="Extensions\ElementExtensions.cs" />
@@ -94,21 +97,19 @@
     <Compile Include="Model\OrbitalType.cs" />
     <Compile Include="Model\ElementType.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModel\ElementFrameViewModel.cs" />
     <Compile Include="ViewModel\ElementViewModel.cs" />
     <Compile Include="ViewModel\GenericRelayCommand.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="View\ElectronDiagram.xaml.cs">
-      <DependentUpon>ElectronDiagram.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Converters\SizeConverter.cs" />
     <Page Include="View\BileKomponenty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ElectronDiagram.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -117,6 +118,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\ElectronDiagram.xaml.cs">
+      <DependentUpon>ElectronDiagram.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

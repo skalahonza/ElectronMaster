@@ -14,7 +14,7 @@ namespace ElectronMaster.ViewModel
         }
 
         private Element _element;
-        private bool _isActive;
+        private bool _isActive = true;
         public Element Element
         {
             get => _element;
@@ -31,41 +31,6 @@ namespace ElectronMaster.ViewModel
             set
             {
                 _isActive = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-
-    public class ElementFrameViewModel: ElementViewModel
-    {
-        private int row;
-        private int column;
-        public ElementFrameViewModel()
-        {            
-        }
-
-        public ElementFrameViewModel(Element element):base(element)
-        {            
-        }
-
-        public int Row
-        {
-            get => row;
-            set
-            {
-                if (value == row) return;
-                row = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int Column
-        {
-            get => column;
-            set
-            {
-                if (value == column) return;
-                column = value;
                 OnPropertyChanged();
             }
         }

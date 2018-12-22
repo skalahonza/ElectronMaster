@@ -147,6 +147,7 @@ namespace ElectronMaster.ViewModel
             get => _examinedElement;
             set
             {
+                if(value == null) return;
                 _examinedElement = value;
                 OnPropertyChanged();
                 Configurations = new ObservableCollection<Configuration>(ExaminedElement.Element.ElectronConfiguration());
@@ -157,6 +158,7 @@ namespace ElectronMaster.ViewModel
         }
 
         public ObservableCollection<ElementFrameViewModel> Elements { get; set; } = new ObservableCollection<ElementFrameViewModel>();
+        public ObservableCollection<ElementFrameViewModel> FilteredElements { get; set; } = new ObservableCollection<ElementFrameViewModel>();
 
         public string SearchText
         {
@@ -165,6 +167,7 @@ namespace ElectronMaster.ViewModel
             {
                 _searchText = value;
                 OnPropertyChanged();
+                ApplyFilter?.Execute(null);
             }
         }
 
@@ -229,7 +232,12 @@ namespace ElectronMaster.ViewModel
         public ElementType? SelectedElementType
         {
             get => _selectedElementType;
-            set { _selectedElementType = value; OnPropertyChanged(); }
+            set
+            {
+                _selectedElementType = value;
+                OnPropertyChanged();
+                ApplyFilter?.Execute(null);
+            }
         }
 
         public GenericRelayCommand<object> ClearFilter => new GenericRelayCommand<object>(o =>
@@ -253,8 +261,13 @@ namespace ElectronMaster.ViewModel
             if (SelectedElementType != null)
                 active = active.Where(x => x.Element.ElementType == SelectedElementType.Value);
 
+            FilteredElements.Clear();
+
             foreach (var elementFrameViewModel in active)
+            {
                 elementFrameViewModel.IsActive = true;
+                FilteredElements.Add(elementFrameViewModel);
+            }                       
         });
 
         public GenericRelayCommand<Element> ExaminedElementChanged => new GenericRelayCommand<Element>(element =>
@@ -330,23 +343,27 @@ namespace ElectronMaster.ViewModel
             }
 
             foreach (var elementFrameViewModel in elements.OrderBy(x => x.Element.Electrons))
+            {
                 Elements.Add(elementFrameViewModel);
-        }        
+                FilteredElements.Add(elementFrameViewModel);
+            }
+        }
 
         private IEnumerable<ElementFrameViewModel> AdHocElements()
         {
-            yield return new ElementFrameViewModel(_elements[0]){Column = 0,Row = 0};
-            yield return new ElementFrameViewModel(_elements[1]){Column = 17,Row = 0};
-            yield return new ElementFrameViewModel(_elements[2]){Column = 0,Row = 1};
-            yield return new ElementFrameViewModel(_elements[3]){Column = 1,Row = 1};
-            yield return new ElementFrameViewModel(_elements[10]){Column = 0,Row = 2};
-            yield return new ElementFrameViewModel(_elements[11]){Column = 1,Row = 2};
-            yield return new ElementFrameViewModel(_elements[54]){Column = 0,Row = 5};
-            yield return new ElementFrameViewModel(_elements[55]){Column = 1,Row = 5};
-            yield return new ElementFrameViewModel(_elements[86]){Column = 0,Row = 6};
-            yield return new ElementFrameViewModel(_elements[87]){Column = 1,Row = 6};
-            yield return new ElementFrameViewModel(_elements[57]){Column = 2,Row = 5};
-            yield return new ElementFrameViewModel(_elements[88]){Column = 2,Row = 6};
+            yield return new ElementFrameViewModel(_elements[0]) { Column = 0, Row = 0 };
+            yield return new ElementFrameViewModel(_elements[1]) { Column = 17, Row = 0 };
+            yield return new ElementFrameViewModel(_elements[2]) { Column = 0, Row = 1 };
+            yield return new ElementFrameViewModel(_elements[3]) { Column = 1, Row = 1 };
+            yield return new ElementFrameViewModel(_elements[10]) { Column = 0, Row = 2 };
+            yield return new ElementFrameViewModel(_elements[11]) { Column = 1, Row = 2 };
+            yield return new ElementFrameViewModel(_elements[54]) { Column = 0, Row = 5 };
+            yield return new ElementFrameViewModel(_elements[55]) { Column = 1, Row = 5 };
+            yield return new ElementFrameViewModel(_elements[86]) { Column = 0, Row = 6 };
+            yield return new ElementFrameViewModel(_elements[87]) { Column = 1, Row = 6 };
+
+            yield return new ElementFrameViewModel(_elements[56]) { Column = 2, Row = 5 };
+            yield return new ElementFrameViewModel(_elements[88]) { Column = 2, Row = 6 };
         }
     }
 }
