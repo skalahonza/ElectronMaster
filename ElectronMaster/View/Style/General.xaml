@@ -1,0 +1,119 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:electronMaster="clr-namespace:ElectronMaster"
+                    xmlns:controls="clr-namespace:ElectronMaster.Controls"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+
+    <Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Style.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                         Color="#336699" />
+            <!-- Background of selected item when not focussed -->
+            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"
+                         Color="#336699" />
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="LightBlue"/>
+        </Style.Resources>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    </Style>
+
+    <!--Úprava vzhledů tab itemů: každý je široký jako třetina apliakce-->
+    <electronMaster:SizeConverter x:Key="SizeConverter"/>
+    <electronMaster:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
+    <electronMaster:ElementTypeToColorConverter x:Key="ElementTypeToColorConverter"/>
+    <electronMaster:BoolOpacityConverter x:Key="BoolOpacityConverter"/>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+    <Style TargetType="{x:Type TabItem}">
+        <!--Úprava šířky-->
+        <Setter Property="Width" Value="{Binding ElementName=MainGrid, Path=ActualWidth, Converter={StaticResource SizeConverter}}"/>
+        <Setter Property="Background" Value="#222222"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="#222222"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#222222"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="#FF303438"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="TextTrimming" Value="None"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="Foreground" Value="#FF303438"/>
+    </Style>
+
+    <Style TargetType="{x:Type RichTextBox}">
+        <Setter Property="Foreground" Value="#FF303438"/>
+    </Style>
+
+    <Style x:Key="nadpis" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Foreground" Value="#42546C"/>
+        <Setter Property="Margin" Value="2"/>
+    </Style>
+
+    <Style x:Key="odstavec" TargetType="{x:Type TextBlock}">
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+
+    <!-- Controls -->
+    <Style TargetType="{x:Type controls:ElementContainer}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ElementContainer}">
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Rectangle x:Name="ZnackaPozadi" Grid.RowSpan="3" Fill="{Binding Element.ElementType, Converter={StaticResource ElementTypeToColorConverter}}"/>
+                        <TextBlock x:Name="NazevCesky" Grid.Column="1" FontSize="14" Text="{Binding Element.CzechName}" Margin="5,0,0,0" ToolTip="Název prvku česky"/>
+                        <TextBlock x:Name="TypPrvkuTb" Grid.Column="1" Grid.Row="1" FontSize="14" Text="{Binding Element.ElementType}" Margin="5,0,0,0"/>
+                        <TextBlock x:Name="PocetElektronu"  Grid.Column="1" Grid.Row="2" FontSize="14" Text="{Binding Element.Electrons}" Margin="5,0,0,0" ToolTip="Počet elektronů"/>
+
+                        <TextBlock x:Name="Znacka" Grid.RowSpan="2" FontSize="40" Text="{Binding Element.Symbol}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="NazevLatinsky" Grid.Row="2" FontSize="14" Text="{Binding Element.LatinName}" Foreground="White" HorizontalAlignment="Center"/>
+                        <Separator Grid.Row="3" Grid.ColumnSpan="2" Margin="0,4,0,0" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:ElementContainer}" x:Key="FrameStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ElementContainer}">
+                    <Grid HorizontalAlignment="Stretch" ToolTip="{Binding Element.CzechName}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Rectangle Grid.RowSpan="3" Fill="{Binding Element.ElementType, Converter={StaticResource ElementTypeToColorConverter}}"/>
+
+                        <TextBlock Grid.Row="2" Text="{Binding Element.CzechName}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Grid.Row="1" Text="{Binding Element.Symbol}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Element.Electrons}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

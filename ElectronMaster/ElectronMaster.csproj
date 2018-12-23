@@ -53,7 +53,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Obrázky\ikona.ico</ApplicationIcon>
+    <ApplicationIcon>Images\ikona.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>ElectronMaster.App</StartupObject>
@@ -62,9 +62,15 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Blend.Sdk.WPF.1.0.1\lib\net45\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expression.Blend.Sdk.WPF.1.0.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -82,26 +88,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ElektronovyDiagram.xaml.cs">
-      <DependentUpon>ElektronovyDiagram.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Prvek.cs" />
-    <Compile Include="RadekPrvku.xaml.cs">
-      <DependentUpon>RadekPrvku.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RamecPrvku.xaml.cs">
-      <DependentUpon>RamecPrvku.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SizeConverter.cs" />
-    <Page Include="BileKomponenty.xaml">
+    <Compile Include="Controls\AppUserControl.cs" />
+    <Compile Include="Controls\BindableRichTextBox.cs" />
+    <Compile Include="Controls\ElementContainer.cs" />
+    <Compile Include="Controls\PlaceholderTextBox.cs" />
+    <Compile Include="Converters\ElementTypeToColorConverter.cs" />
+    <Compile Include="Converters\NullVisibilityConverter.cs" />
+    <Compile Include="Extensions\ElementExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Model\Configuration.cs" />
+    <Compile Include="Model\Element.cs" />
+    <Compile Include="Model\IElement.cs" />
+    <Compile Include="Model\OrbitalType.cs" />
+    <Compile Include="Model\ElementType.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModel\ElementFrameViewModel.cs" />
+    <Compile Include="ViewModel\ElementViewModel.cs" />
+    <Compile Include="ViewModel\GenericRelayCommand.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="Converters\SizeConverter.cs" />
+    <Page Include="View\Style\General.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ElektronovyDiagram.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="View\ElectronDiagram.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -109,18 +124,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\ElectronDiagram.xaml.cs">
+      <DependentUpon>ElectronDiagram.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="RadekPrvku.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="RamecPrvku.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -140,6 +150,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -150,18 +161,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Obrázky\GoID.jpg" />
-    <Resource Include="Obrázky\floppy-disk.png" />
-    <Resource Include="Obrázky\floppy-disk-blue.png" />
-    <Resource Include="Obrázky\pozadi.png" />
-    <Resource Include="Obrázky\ikona.ico" />
-    <Resource Include="Obrázky\ikona.png" />
+    <Resource Include="Images\GoID.jpg" />
+    <Resource Include="Images\floppy-disk.png" />
+    <Resource Include="Images\floppy-disk-blue.png" />
+    <Resource Include="Images\pozadi.png" />
+    <Resource Include="Images\ikona.ico" />
+    <Resource Include="Images\ikona.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Obrázky\magnifier12.png" />
+    <Resource Include="Images\magnifier12.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Obrázky\diagram.png" />
+    <Resource Include="Images\diagram.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -180,6 +191,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
