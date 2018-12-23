@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Windows.Documents;
 using NodaTime;
 
 namespace ElectronMaster.Model.Wolfram
@@ -6,13 +8,13 @@ namespace ElectronMaster.Model.Wolfram
     public class ElementInfo
     {
         public Element Element { get; set; }
-        public DateTime Discovery { get; set; }        
+        public LocalDateTime Discovery { get; set; }
+        public List<ElementInfoSection> Sections { get; set; } = new List<ElementInfoSection>();
     }
 
-    public class ElementWolframInfo
+    public class ElementInfoSection
     {
-        public int ProtonNumber { get; set; }
-        public string EnglishName { get; set; }
-        public LocalDateTime Discovery { get; set; }
+        public string Title { get; set; }
+        public string Text { get; set; }
     }
 }

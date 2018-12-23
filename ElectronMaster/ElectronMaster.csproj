@@ -99,8 +99,10 @@
     <Compile Include="Model\IElement.cs" />
     <Compile Include="Model\OrbitalType.cs" />
     <Compile Include="Model\ElementType.cs" />
+    <Compile Include="Model\Wolfram\ElementWolframInfo.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\IElementInfoService.cs" />
+    <Compile Include="Services\WolframService.cs" />
     <Compile Include="ViewModel\ElementFrameViewModel.cs" />
     <Compile Include="ViewModel\ElementViewModel.cs" />
     <Compile Include="ViewModel\GenericRelayCommand.cs" />

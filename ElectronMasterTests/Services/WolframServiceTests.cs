@@ -13,8 +13,7 @@ namespace ElectronMasterTests.Services
         public async Task GetElementInfoTest()
         {
             var service = new WolframService();
-            var result = await service.GetElementInfo(new Element() { Electrons = 29 });
-            
+            var result = await service.GetElementInfo(new Element() { Electrons = 29 });            
         }
     }
 }
