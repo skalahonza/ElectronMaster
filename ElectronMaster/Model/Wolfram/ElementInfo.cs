@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Documents;
 using NodaTime;
+using Wolfram.Alpha.Models.Output;
 
 namespace ElectronMaster.Model.Wolfram
 {
@@ -16,5 +17,6 @@ namespace ElectronMaster.Model.Wolfram
     {
         public string Title { get; set; }
         public string Text { get; set; }
+        public Image Image { get; set; }
     }
 }

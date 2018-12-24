@@ -10,8 +10,8 @@ namespace ElectronMaster.Extensions
         {
             //pokud je poslední orbital typu P a navíc je zaplněný jedná se o vzácný plyn
             return elements.Where(
-                x =>                    
-                    x.ElectronConfiguration().Last().OrbitalType == OrbitalType.p &&                    
+                x =>
+                    x.ElectronConfiguration().Last().OrbitalType == OrbitalType.p &&
                     x.ElectronConfiguration().Last().Electrons == 6);
         }
 

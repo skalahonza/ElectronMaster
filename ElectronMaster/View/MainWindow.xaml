@@ -28,7 +28,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="75" Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="35"/>
@@ -36,8 +36,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!-- Examined element -->
-        <controls:ElementContainer DataContext="{Binding ExaminedElement}"                                    
-                                   Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"/>
+        <StackPanel Orientation="Vertical" Visibility="{Binding ExaminedElement, Converter={StaticResource NullVisibilityConverter}}">
+            <controls:ElementContainer DataContext="{Binding ExaminedElement}"/>
+            <Button Content="Info" Command="{Binding ViewElementInfoCommand}" CommandParameter="{Binding ExaminedElement.Element}"/>
+        </StackPanel>
 
         <ScrollViewer x:Name="scrollViewer" Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" MaxHeight="75" VerticalAlignment="Top" >
             <controls:BindableRichTextBox x:Name="TextovaKonfiguraceTb" FontSize="18" 
@@ -316,5 +318,15 @@
                 </ScrollViewer>
             </TabItem>
         </TabControl>
+
+        <!--Element info overlay-->
+        <Grid Grid.Row="1" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="4" Background="White"
+              Visibility="{Binding IsExaminedElementInfoVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+              >
+            <ProgressBar IsIndeterminate="True" 
+                         Visibility="{Binding IsLoadingVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="50"/>
+            <controls:ElementInfoView ElementInfo="{Binding ExaminedElementInfo}" />
+        </Grid>
     </Grid>
 </Window>

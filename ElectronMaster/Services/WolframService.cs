@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using CsvHelper;
 using ElectronMaster.CSV;
+using ElectronMaster.Extensions;
 using ElectronMaster.Model;
 using ElectronMaster.Model.Wolfram;
 using Wolfram.Alpha;
@@ -42,7 +43,7 @@ namespace ElectronMaster.Services
             }
 
             return dict;
-        }
+        }        
 
         public async Task<ElementInfo> GetElementInfo(Element element)
         {            
@@ -50,17 +51,21 @@ namespace ElectronMaster.Services
             var elementWolframInfo = info[element.Electrons];
             var request = new WolframAlphaRequest(elementWolframInfo.EnglishName);            
             var response = await _service.Compute(request);
-            
+
+            var pods = response.QueryResult.Pods.FilterPods("Input interpretation", "Periodic table location","Image");
+
             var result = new ElementInfo
             {
                 Element = element,
                 Discovery = elementWolframInfo.Discovery,
-                Sections = response.QueryResult.Pods.Select(x => new ElementInfoSection
+                Sections = pods.Select(x => new ElementInfoSection
                 {                    
                     Title = x.Title,
-                    Text = string.Join("",x.SubPods.SelectMany(y => y.Plaintext))
+                    Text = string.Join("",x.SubPods.SelectMany(y => y.Plaintext)),
+                    Image = x.SubPods.Select(y => y.Image).FirstOrDefault()
                 }).ToList()
-            };
+            };            
+
             return result;
         }
     }

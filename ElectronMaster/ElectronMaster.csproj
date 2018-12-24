@@ -87,12 +87,14 @@
     <Compile Include="Controls\AppUserControl.cs" />
     <Compile Include="Controls\BindableRichTextBox.cs" />
     <Compile Include="Controls\ElementContainer.cs" />
+    <Compile Include="Controls\ElementInfoView.cs" />
     <Compile Include="Controls\PlaceholderTextBox.cs" />
     <Compile Include="Converters\ElementTypeToColorConverter.cs" />
     <Compile Include="Converters\NullVisibilityConverter.cs" />
     <Compile Include="CSV\ElementWolframInfoMap.cs" />
     <Compile Include="Extensions\ElementExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\WolframExtensions.cs" />
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\Element.cs" />
     <Compile Include="Model\Wolfram\ElementInfo.cs" />

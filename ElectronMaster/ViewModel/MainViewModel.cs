@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 using ElectronMaster.Model;
 using ElectronMaster.Extensions;
+using ElectronMaster.Model.Wolfram;
+using ElectronMaster.Services;
 using ElectronMaster.View;
 
 namespace ElectronMaster.ViewModel
@@ -136,6 +139,10 @@ namespace ElectronMaster.ViewModel
             new Element("Uuo", "Ununoctium", "Ununoctium", ElementType.Umělý, 118)
         };
         private ElementType? _selectedElementType;
+        private readonly IElementInfoService _elementInfoService = new WolframService();
+        private ElementInfo _examinedElementInfo;
+        private bool _isExaminedElementInfoVisible;
+        private bool _isLoadingVisible;
 
         public MainViewModel()
         {
@@ -147,7 +154,7 @@ namespace ElectronMaster.ViewModel
             get => _examinedElement;
             set
             {
-                if(value == null) return;
+                if (value == null) return;
                 _examinedElement = value;
                 OnPropertyChanged();
                 Configurations = new ObservableCollection<Configuration>(ExaminedElement.Element.ElectronConfiguration());
@@ -155,6 +162,37 @@ namespace ElectronMaster.ViewModel
                 OnPropertyChanged(nameof(Configurations));
                 OnPropertyChanged(nameof(RareGasConfiguration));
                 OnPropertyChanged(nameof(GraphicalConfigurations));
+            }
+        }
+
+        public ElementInfo ExaminedElementInfo
+        {
+            get => _examinedElementInfo;
+            private set
+            {
+                _examinedElementInfo = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsExaminedElementInfoVisible
+        {
+            get => _isExaminedElementInfoVisible;
+            set
+            {
+                _isExaminedElementInfoVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsLoadingVisible
+        {
+            get => _isLoadingVisible;
+            set
+            {
+                if (value == _isLoadingVisible) return;
+                _isLoadingVisible = value;
+                OnPropertyChanged();
             }
         }
 
@@ -255,7 +293,7 @@ namespace ElectronMaster.ViewModel
         {
             //deactivate all
             foreach (var elementFrameViewModel in Elements)
-                elementFrameViewModel.IsActive = false;            
+                elementFrameViewModel.IsActive = false;
 
             //use filter
             var active = Elements.Where(x =>
@@ -271,7 +309,7 @@ namespace ElectronMaster.ViewModel
             {
                 elementFrameViewModel.IsActive = true;
                 FilteredElements.Add(elementFrameViewModel);
-            }                       
+            }
         });
 
         public GenericRelayCommand<ElementType> ChangeElementType => new GenericRelayCommand<ElementType>(type =>
@@ -282,8 +320,20 @@ namespace ElectronMaster.ViewModel
 
         public GenericRelayCommand<ElementFrameViewModel> ExaminedElementChanged => new GenericRelayCommand<ElementFrameViewModel>(element =>
             {
-                ExaminedElement = element;                                
+                ExaminedElement = element;
             });
+
+        public GenericRelayCommand<Element> ViewElementInfoCommand => new GenericRelayCommand<Element>(async element =>
+        {
+            IsExaminedElementInfoVisible = true;
+            IsLoadingVisible = true;
+            ExaminedElementInfo = await await _elementInfoService.GetElementInfo(element)
+                .ContinueWith(task =>
+            {
+                IsLoadingVisible = false;
+                return task;
+            });
+        }, element => element != null);
 
         private void RenderPeriodicTable()
         {
