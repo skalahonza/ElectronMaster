@@ -73,60 +73,8 @@
         </ItemsControl>
 
         <Button Grid.Row="1" Grid.Column="3" ToolTip="Uložit schématickou konfiguraci jako obrázek" Width="20" Height="20" HorizontalAlignment="Right" 
-                VerticalAlignment="Bottom" Margin="2,4" BorderBrush="{x:Null}" Style="{DynamicResource ButtonStyle1}" Visibility="{Binding ExaminedElement,Converter={StaticResource NullVisibilityConverter}}" Click="SaveAsImage">
-            <Button.Resources>
-                <Style x:Key="FocusVisual">
-                    <Setter Property="Control.Template">
-                        <Setter.Value>
-                            <ControlTemplate>
-                                <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-                <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
-                <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-                <ImageBrush x:Key="Button.MouseOver.Background" ImageSource="../Images/floppy-disk-blue.png"/>
-                <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-                <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-                <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
-                <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
-                    <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-                    <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-                    <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                    <Setter Property="BorderThickness" Value="1"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    <Setter Property="VerticalContentAlignment" Value="Center"/>
-                    <Setter Property="Padding" Value="1"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsDefaulted" Value="true">
-                                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                    </Trigger>
-                                    <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
-
-                                    </Trigger>
-                                    <Trigger Property="IsPressed" Value="true">
-                                        <Setter Property="Opacity" Value="0.5"/>
-                                    </Trigger>
-                                    <Trigger Property="IsEnabled" Value="false">
-                                        <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                        <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                        <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Resources>
+                VerticalAlignment="Bottom" Margin="2,4" BorderBrush="{x:Null}" Style="{DynamicResource FlatWhiteButton}" Visibility="{Binding ExaminedElement,Converter={StaticResource NullVisibilityConverter}}" 
+                Click="SaveAsImage">
             <Button.Background>
                 <ImageBrush ImageSource="../Images/floppy-disk.png"/>
             </Button.Background>
@@ -320,13 +268,18 @@
         </TabControl>
 
         <!--Element info overlay-->
-        <Grid Grid.Row="1" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="4" Background="White"
-              Visibility="{Binding IsExaminedElementInfoVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-              >
-            <ProgressBar IsIndeterminate="True" 
-                         Visibility="{Binding IsLoadingVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                         HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="50"/>
-            <controls:ElementInfoView ElementInfo="{Binding ExaminedElementInfo}" />
+        <Grid Grid.Row="2" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="4"
+              Visibility="{Binding IsExaminedElementInfoVisible, 
+            Converter={StaticResource BooleanToVisibilityConverter}}" Background="White">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsLoadingVisible, 
+                Converter={StaticResource BooleanToVisibilityConverter}}">
+                <TextBlock Text="Načítání dat z Wolfram Alpha" FontSize="18"/>
+                <ProgressBar IsIndeterminate="True"                 
+                              Height="15" />
+            </StackPanel>
+            <controls:ElementInfoView ElementInfo="{Binding ExaminedElementInfo}" Margin="0,20,0,0"/>
+            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Width="18" Height="18"
+                    Content="x" Command="{Binding CloseInfo}"/>
         </Grid>
     </Grid>
 </Window>

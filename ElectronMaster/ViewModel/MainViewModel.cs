@@ -312,6 +312,11 @@ namespace ElectronMaster.ViewModel
             }
         });
 
+        public GenericRelayCommand<object> CloseInfo => new GenericRelayCommand<object>(o =>
+            {
+                IsExaminedElementInfoVisible = false;
+            });
+
         public GenericRelayCommand<ElementType> ChangeElementType => new GenericRelayCommand<ElementType>(type =>
             {
                 SelectedElementType = type;
