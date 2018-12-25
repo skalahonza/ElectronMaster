@@ -330,8 +330,9 @@ namespace ElectronMaster.ViewModel
 
         public GenericRelayCommand<Element> ViewElementInfoCommand => new GenericRelayCommand<Element>(async element =>
         {
+            ExaminedElementInfo = null;
             IsExaminedElementInfoVisible = true;
-            IsLoadingVisible = true;
+            IsLoadingVisible = true;            
             ExaminedElementInfo = await await _elementInfoService.GetElementInfo(element)
                 .ContinueWith(task =>
             {

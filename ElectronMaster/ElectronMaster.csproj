@@ -104,6 +104,7 @@
     <Compile Include="Model\Wolfram\ElementWolframInfo.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\IElementInfoService.cs" />
+    <Compile Include="Services\MemoryCacheDecorator.cs" />
     <Compile Include="Services\WolframService.cs" />
     <Compile Include="ViewModel\ElementFrameViewModel.cs" />
     <Compile Include="ViewModel\ElementViewModel.cs" />
