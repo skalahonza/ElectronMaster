@@ -139,7 +139,7 @@ namespace ElectronMaster.ViewModel
             new Element("Uuo", "Ununoctium", "Ununoctium", ElementType.Umělý, 118)
         };
         private ElementType? _selectedElementType;
-        private readonly IElementInfoService _elementInfoService = new WolframService();
+        private readonly IElementInfoService _elementInfoService = new MemoryCacheDecorator(new WolframService());
         private ElementInfo _examinedElementInfo;
         private bool _isExaminedElementInfoVisible;
         private bool _isLoadingVisible;
