@@ -94,6 +94,7 @@
     <Compile Include="CSV\ElementWolframInfoMap.cs" />
     <Compile Include="Extensions\ElementExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\VisualTreeExtensions.cs" />
     <Compile Include="Extensions\WolframExtensions.cs" />
     <Compile Include="Model\Configuration.cs" />
     <Compile Include="Model\Element.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Model\Wolfram\ElementWolframInfo.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\IElementInfoService.cs" />
+    <Compile Include="Services\ImageCapturer.cs" />
     <Compile Include="Services\MemoryCacheDecorator.cs" />
     <Compile Include="Services\WolframService.cs" />
     <Compile Include="ViewModel\ElementFrameViewModel.cs" />

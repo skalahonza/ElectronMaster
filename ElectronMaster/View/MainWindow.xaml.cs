@@ -1,9 +1,8 @@
 ﻿using System.Diagnostics;
-using System.IO;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+using ElectronMaster.Extensions;
+using ElectronMaster.Services;
 using Microsoft.Win32;
 
 namespace ElectronMaster.View
@@ -36,33 +35,8 @@ namespace ElectronMaster.View
             var sfd = new SaveFileDialog { Filter = "Obrázek PNG|*.png" };
             if (sfd.ShowDialog() == true)
             {
-                const int dpi = 92;
-
-                var rtb = new RenderTargetBitmap(
-                    (int)SchematickaKonfigurace.ActualWidth, //width 
-                    (int)SchematickaKonfigurace.ActualHeight, //height 
-                    dpi, //dpi x 
-                    dpi, //dpi y 
-                    PixelFormats.Pbgra32 // pixelformat 
-                    );
-                rtb.Render(SchematickaKonfigurace);
-                SaveRTBAsPNG(rtb, sfd.FileName);
-            }
-        }
-
-        /// <summary>
-        /// Vyexportuje vyrendrovaný obrázek jako soubor
-        /// </summary>
-        /// <param name="bmp">Cílový obrázek</param>
-        /// <param name="filename">Cíl souboru</param>
-        private void SaveRTBAsPNG(RenderTargetBitmap bmp, string filename)
-        {
-            var enc = new PngBitmapEncoder();
-            enc.Frames.Add(BitmapFrame.Create(bmp));
-
-            using (var stm = File.Create(filename))
-            {
-                enc.Save(stm);
+                var wrap = SchematickaKonfigurace.GetItemsPanel();
+                ImageCapture.SaveToPng(wrap,sfd.FileName);
             }
         }
     }    
