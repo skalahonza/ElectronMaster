@@ -77,7 +77,9 @@ namespace ElectronMaster.Services
 
         public Dictionary<LocalDateTime, List<Element>> GetElementDiscovery(IDictionary<int, Element> elements)
         {
-            var tmp = ElementsInfo.Value.GroupBy(x => x.Value.Discovery, x => x.Value)
+            var tmp = ElementsInfo.Value
+                .Where(x => elements.Keys.Contains(x.Value.ProtonNumber))
+                .GroupBy(x => x.Value.Discovery, x => x.Value)
                 .ToDictionary(x => x.Key, x => x.Where(y => elements.Keys.Contains(y.ProtonNumber))
                     .Select(y => elements[y.ProtonNumber])
                     .ToList());

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using ElectronMaster.Model;
 using NodaTime;
@@ -15,7 +16,11 @@ namespace ElectronMaster.Controls
         public ObservableCollection<Element> Elements
         {
             get => (ObservableCollection<Element>) GetValue(PropertyTypeProperty);
-            set { SetValue(PropertyTypeProperty, value); OnPropertyChanged();}
+            set
+            {
+                SetValue(PropertyTypeProperty, value);
+                OnPropertyChanged();
+            }
         }
 
         public static readonly DependencyProperty DiscoveredProperty = DependencyProperty.Register(
@@ -32,6 +37,6 @@ namespace ElectronMaster.Controls
             }
         }
 
-        public string DiscoveredText => Discovered.ToString("yyyy gg", DateTimeFormatInfo.CurrentInfo);
+        public string DiscoveredText => Discovered.ToString("yyyy gg", DateTimeFormatInfo.CurrentInfo);        
     }
 }
