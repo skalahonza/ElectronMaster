@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using CsvHelper;
 using ElectronMaster.CSV;
+using ElectronMaster.Exceptions;
 using ElectronMaster.Extensions;
 using ElectronMaster.Model;
 using ElectronMaster.Model.Wolfram;
@@ -52,6 +53,11 @@ namespace ElectronMaster.Services
             var elementWolframInfo = info[element.Electrons];
             var request = new WolframAlphaRequest(elementWolframInfo.EnglishName);
             var response = await _service.Compute(request);
+
+            if (!response.QueryResult.Success)
+            {
+                throw new WolframException(response.QueryResult.Error.Code,response.QueryResult.Error.Message);
+            }
 
             var pods = response.QueryResult.Pods.FilterPods("Input interpretation", "Periodic table location", "Image");
 

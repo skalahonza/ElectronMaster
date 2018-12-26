@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
+using ElectronMaster.Exceptions;
 using ElectronMaster.Model;
 using ElectronMaster.Extensions;
 using ElectronMaster.Model.Wolfram;
@@ -354,12 +355,19 @@ namespace ElectronMaster.ViewModel
             ExaminedElementInfo = null;
             IsExaminedElementInfoVisible = true;
             IsLoadingVisible = true;
-            ExaminedElementInfo = await await _elementInfoService.GetElementInfo(element)
-                .ContinueWith(task =>
+            try
             {
-                IsLoadingVisible = false;
-                return task;
-            });
+                ExaminedElementInfo = await await _elementInfoService.GetElementInfo(element)
+                    .ContinueWith(task =>
+                    {
+                        IsLoadingVisible = false;
+                        return task;
+                    });
+            }
+            catch (WolframException e)
+            {
+                MessageBox.Show(e.Message, "Wolfram error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }, element => element != null);
 
         private void RenderPeriodicTable()

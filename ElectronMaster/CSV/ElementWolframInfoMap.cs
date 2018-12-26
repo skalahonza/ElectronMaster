@@ -23,7 +23,7 @@ namespace ElectronMaster.CSV
         }
 
         private LocalDateTime ParseDateTime(string dateTime)
-        {
+        {            
             var ex = default(Exception);
             foreach (var pattern in GetPatterns())
             {

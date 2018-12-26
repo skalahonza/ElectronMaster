@@ -93,6 +93,7 @@
     <Compile Include="Converters\ElementTypeToColorConverter.cs" />
     <Compile Include="Converters\NullVisibilityConverter.cs" />
     <Compile Include="CSV\ElementWolframInfoMap.cs" />
+    <Compile Include="Exceptions\WolframException.cs" />
     <Compile Include="Extensions\ElementExtensions.cs" />
     <Compile Include="Extensions\ObservableCollectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
