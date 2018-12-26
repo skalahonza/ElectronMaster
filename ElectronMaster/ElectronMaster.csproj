@@ -89,6 +89,7 @@
     <Compile Include="Controls\ElementContainer.cs" />
     <Compile Include="Controls\ElementInfoView.cs" />
     <Compile Include="Controls\PlaceholderTextBox.cs" />
+    <Compile Include="Controls\TimeLineNode.cs" />
     <Compile Include="Converters\ElementTypeToColorConverter.cs" />
     <Compile Include="Converters\NullVisibilityConverter.cs" />
     <Compile Include="CSV\ElementWolframInfoMap.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="ViewModel\ElementViewModel.cs" />
     <Compile Include="ViewModel\GenericRelayCommand.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\TimeLineViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Converters\SizeConverter.cs" />
     <Page Include="View\Style\General.xaml">

@@ -10,6 +10,7 @@ using ElectronMaster.CSV;
 using ElectronMaster.Extensions;
 using ElectronMaster.Model;
 using ElectronMaster.Model.Wolfram;
+using NodaTime;
 using Wolfram.Alpha;
 using Wolfram.Alpha.Models;
 
@@ -23,7 +24,7 @@ namespace ElectronMaster.Services
             _service = new WolframAlphaService(ConfigurationManager.AppSettings["WolframApiKey"]);
         }
 
-        private readonly Lazy<Dictionary<int, ElementWolframInfo>> _elementsInfo = new Lazy<Dictionary<int, ElementWolframInfo>>(GetElements);
+        private static readonly Lazy<Dictionary<int, ElementWolframInfo>> ElementsInfo = new Lazy<Dictionary<int, ElementWolframInfo>>(GetElements);        
 
         private static Dictionary<int, ElementWolframInfo> GetElements()
         {
@@ -47,7 +48,7 @@ namespace ElectronMaster.Services
 
         public async Task<ElementInfo> GetElementInfo(Element element)
         {            
-            var info = _elementsInfo.Value;
+            var info = ElementsInfo.Value;
             var elementWolframInfo = info[element.Electrons];
             var request = new WolframAlphaRequest(elementWolframInfo.EnglishName);            
             var response = await _service.Compute(request);
@@ -67,6 +68,18 @@ namespace ElectronMaster.Services
             };            
 
             return result;
+        }
+
+        public LocalDateTime GetElementDiscovered(Element element)
+        {
+            return ElementsInfo.Value[element.Electrons].Discovery;
+        }
+
+        public Dictionary<LocalDateTime, List<Element>> GetElementDiscovery(Element[] elements)
+        {
+            var tmp = ElementsInfo.Value.GroupBy(x => x.Value.Discovery, x => x.Value)
+                .ToDictionary(x => x.Key, x => x.Select(y => elements[y.ProtonNumber-1]).ToList());
+            return tmp;
         }
     }
 }

@@ -147,7 +147,19 @@ namespace ElectronMaster.ViewModel
         public MainViewModel()
         {
             RenderPeriodicTable();
+            RenderTimeLine();
         }
+
+        private void RenderTimeLine()
+        {
+            TimeLineViewModels = new ObservableCollection<TimeLineViewModel>(
+            _elementInfoService.GetElementDiscovery(_elements).Select(x => new TimeLineViewModel
+            {
+                Discovered = x.Key,
+                Elements = new ObservableCollection<Element>(x.Value)
+            }).OrderBy(x => x.Discovered));
+        }
+
 
         public ElementFrameViewModel ExaminedElement
         {
@@ -198,6 +210,7 @@ namespace ElectronMaster.ViewModel
 
         public ObservableCollection<ElementFrameViewModel> Elements { get; set; } = new ObservableCollection<ElementFrameViewModel>();
         public ObservableCollection<ElementFrameViewModel> FilteredElements { get; set; } = new ObservableCollection<ElementFrameViewModel>();
+        public ObservableCollection<TimeLineViewModel> TimeLineViewModels { get; set; }
 
         public string SearchText
         {
@@ -332,7 +345,7 @@ namespace ElectronMaster.ViewModel
         {
             ExaminedElementInfo = null;
             IsExaminedElementInfoVisible = true;
-            IsLoadingVisible = true;            
+            IsLoadingVisible = true;
             ExaminedElementInfo = await await _elementInfoService.GetElementInfo(element)
                 .ContinueWith(task =>
             {

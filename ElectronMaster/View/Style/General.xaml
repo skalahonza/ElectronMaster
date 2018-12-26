@@ -134,14 +134,26 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Rectangle x:Name="ZnackaPozadi" Grid.RowSpan="3" Fill="{Binding Element.ElementType, Converter={StaticResource ElementTypeToColorConverter}}"/>
-                        <TextBlock x:Name="NazevCesky" Grid.Column="1" FontSize="14" Text="{Binding Element.CzechName}" Margin="5,0,0,0" ToolTip="Název prvku česky"/>
-                        <TextBlock x:Name="TypPrvkuTb" Grid.Column="1" Grid.Row="1" FontSize="14" Text="{Binding Element.ElementType}" Margin="5,0,0,0"/>
-                        <TextBlock x:Name="PocetElektronu"  Grid.Column="1" Grid.Row="2" FontSize="14" Text="{Binding Element.Electrons}" Margin="5,0,0,0" ToolTip="Počet elektronů"/>
+                        <Rectangle x:Name="ZnackaPozadi" Grid.RowSpan="3" Fill="{Binding Element.ElementType, Converter={StaticResource ElementTypeToColorConverter},
+                            RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:ElementContainer}}}"/>
+                        <TextBlock x:Name="NazevCesky" Grid.Column="1" FontSize="14" Text="{Binding Element.CzechName,
+                            RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:ElementContainer}}}" Margin="5,0,0,0" ToolTip="Název prvku česky"/>
+                        <TextBlock x:Name="TypPrvkuTb" Grid.Column="1" Grid.Row="1" FontSize="14" Text="{Binding Element.ElementType,
+                            RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:ElementContainer}}}" Margin="5,0,0,0"/>
+                        <TextBlock x:Name="PocetElektronu"  Grid.Column="1" Grid.Row="2" FontSize="14" Text="{Binding Element.Electrons,
+                            RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:ElementContainer}}}" Margin="5,0,0,0" ToolTip="Počet elektronů"/>
 
-                        <TextBlock x:Name="Znacka" Grid.RowSpan="2" FontSize="40" Text="{Binding Element.Symbol}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock x:Name="NazevLatinsky" Grid.Row="2" FontSize="14" Text="{Binding Element.LatinName}" Foreground="White" HorizontalAlignment="Center"/>
-                        <Separator Grid.Row="3" Grid.ColumnSpan="2" Margin="0,4,0,0" />
+                        <TextBlock x:Name="Znacka" Grid.RowSpan="2" FontSize="40" Text="{Binding Element.Symbol,
+                            RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:ElementContainer}}}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="NazevLatinsky" Grid.Row="2" FontSize="14" Text="{Binding Element.LatinName,
+                            RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:ElementContainer}}}" Foreground="White" HorizontalAlignment="Center"/>
+                        
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -152,17 +164,27 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ElementContainer}">
-                    <Grid HorizontalAlignment="Stretch" ToolTip="{Binding Element.CzechName}">
+                    <Grid HorizontalAlignment="Stretch" ToolTip="{Binding Element.CzechName,
+                            RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:ElementContainer}}}">
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Rectangle Grid.RowSpan="3" Fill="{Binding Element.ElementType, Converter={StaticResource ElementTypeToColorConverter}}"/>
+                        <Rectangle Grid.RowSpan="3" Fill="{Binding Element.ElementType, Converter={StaticResource ElementTypeToColorConverter},
+                            RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:ElementContainer}}}"/>
 
-                        <TextBlock Grid.Row="2" Text="{Binding Element.CzechName}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
-                        <TextBlock Grid.Row="1" Text="{Binding Element.Symbol}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        <TextBlock Text="{Binding Element.Electrons}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                        <TextBlock Grid.Row="2" Text="{Binding Element.CzechName,
+                            RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:ElementContainer}}}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Grid.Row="1" Text="{Binding Element.Symbol,
+                            RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:ElementContainer}}}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding Element.Electrons,
+                            RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:ElementContainer}}}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -199,4 +221,52 @@
         </Setter>
     </Style>
 
+    <Style TargetType="{x:Type controls:TimeLineNode}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:TimeLineNode}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Ellipse
+                                Fill="{Binding Elements[0].ElementType,
+                                Converter={StaticResource ElementTypeToColorConverter},
+                                RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:TimeLineNode}}}"
+                                     StrokeThickness="{Binding Elements.Count,
+                                RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:TimeLineNode}}}"
+                                     Width="50" Height="50"
+                                     VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="1" Text="{Binding DiscoveredText,
+                                RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:TimeLineNode}}}"
+                                   Margin="5,0,0,0"
+                                   VerticalAlignment="Center"/>
+                        <ItemsControl  Grid.Column="2" VerticalAlignment="Center"
+                                       Margin="5,0,0,0"
+                                      ItemsSource="{Binding Elements,
+                                RelativeSource={RelativeSource FindAncestor, 
+                                AncestorType={x:Type controls:TimeLineNode}}}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <controls:ElementContainer Element="{Binding}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
