@@ -15,7 +15,7 @@
         <ResourceDictionary Source="Style/General.xaml"/>
     </Window.Resources>
     <Window.DataContext>
-        <viewModel:MainViewModel/>
+        <viewModel:MainViewModel />
     </Window.DataContext>
     <Grid x:Name="MainGrid">
         <Grid.Background>
@@ -36,9 +36,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!-- Examined element -->
-        <StackPanel Orientation="Vertical" Visibility="{Binding ExaminedElement, Converter={StaticResource NullVisibilityConverter}}">
-            <controls:ElementContainer DataContext="{Binding ExaminedElement}"/>
-            <Button Content="Info" Command="{Binding ViewElementInfoCommand}" CommandParameter="{Binding ExaminedElement.Element}"/>
+        <StackPanel Orientation="Vertical" 
+                    Visibility="{Binding ExaminedElement, Converter={StaticResource NullVisibilityConverter}}">
+            <controls:ElementContainer Element="{Binding ExaminedElement.Element}"/>
+            <Button Content="Více infromací"      
+                    Height="35"
+                    Command="{Binding ViewElementInfoCommand}" 
+                    CommandParameter="{Binding ExaminedElement.Element}"/>
         </StackPanel>
 
         <ScrollViewer x:Name="scrollViewer" Grid.Column="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" MaxHeight="75" VerticalAlignment="Top" >
@@ -144,7 +148,10 @@
                               SelectedItem="{Binding ExaminedElement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
+                            <StackPanel Orientation="Vertical">
                             <controls:ElementContainer Element="{Binding Element}" />
+                                <Separator/>
+                            </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -225,50 +232,29 @@
                     </ItemsControl>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Informace">
+            <TabItem Header="TimeLine">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="O programu" Style="{StaticResource nadpis}"/>
-                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource odstavec}" Text="Program slouží k vytvoření elektronové konfigurace jednotlivých prvků periodické tabulky. Element si, buď můžete vybrat ze seznamu anebo přímo z tabulky. Pro přehlednost můžete použít vyhledávací pole nebo kliknout na příslušnou kategorii (nekovy, polokovy, kovy, umělé prvky) a zvýrazní se vám prvky zvolené kategorie. Program vytvoří konfiguraci textovou i podle vzácného plynu a dokonce i vykreslí diagram. Pokud si přejete diagram uložit jako obrázek, klepněte na malou disketu." TextWrapping="Wrap"/>
-                        <TextBlock Grid.Row="2" Style="{StaticResource nadpis}" Text="Algoritmus konfigurace"/>
-                        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource odstavec}" Text="Celý proces elektronové konfigurace obstarává několik metod. Hlavní metoda spouští konfigurace pro jednotlivé periody 1 až 7. Pro každou periodu se nakonfigurují příslušné orbitaly." TextWrapping="Wrap"/>
-                        <Image Grid.Row="4" Grid.ColumnSpan="2" Source="../Images/diagram.png" />
-                        <Separator Grid.Row="5" Grid.ColumnSpan="2"/>
-                        <TextBlock Grid.Column="1" Grid.Row="6" Text="Copyright © 2015 Jan Skála" VerticalAlignment="Bottom"  TextAlignment="Right" Margin="2"/>
-                        <TextBlock Grid.Row="6" Text="http://goid.azurewebsites.net" VerticalAlignment="Bottom" HorizontalAlignment="Left" TextDecorations="Underline" Margin="2" MouseDown="TextBlock_MouseDown" >
-                            <TextBlock.Style>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="Foreground" Value="#3485b4"/>
-                                    <Style.Triggers>
-                                        <Trigger Property ="IsMouseOver" Value="True">
-                                            <Setter Property= "Foreground" Value="#FF303438"/>
-                                            <Setter Property="Cursor" Value="Hand"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-
-                    </Grid>
+                    <ItemsControl ItemsSource="{Binding TimeLineViewModels}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <controls:TimeLineNode Discovered="{Binding Discovered}" Elements="{Binding Elements}"/>
+                                    <Separator/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </ScrollViewer>
             </TabItem>
         </TabControl>
 
         <!--Element info overlay-->
-        <Grid Grid.Row="2" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="4"
+        <Grid Grid.Row="2" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="4" d:IsHidden="True"
               Visibility="{Binding IsExaminedElementInfoVisible, 
             Converter={StaticResource BooleanToVisibilityConverter}}" Background="White">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding IsLoadingVisible, 

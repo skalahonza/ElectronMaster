@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using ElectronMaster.Model;
 using ElectronMaster.Model.Wolfram;
+using NodaTime;
 
 namespace ElectronMaster.Services
 {
@@ -23,6 +24,16 @@ namespace ElectronMaster.Services
                 _cache[result.Element.Electrons] = result;
             }
             return result;
+        }
+
+        public LocalDateTime GetElementDiscovered(Element element)
+        {
+            return _service.GetElementDiscovered(element);
+        }
+
+        public Dictionary<LocalDateTime, List<Element>> GetElementDiscovery(IDictionary<int, Element> elements)
+        {
+            return _service.GetElementDiscovery(elements);
         }
     }
 }
