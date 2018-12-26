@@ -11,6 +11,6 @@ namespace ElectronMaster.Services
     {
         Task<ElementInfo> GetElementInfo(Element element);
         LocalDateTime GetElementDiscovered(Element element);
-        Dictionary<LocalDateTime, List<Element>> GetElementDiscovery(Element[] elements);
+        Dictionary<LocalDateTime, List<Element>> GetElementDiscovery(IDictionary<int, Element> elements);
     }
 }

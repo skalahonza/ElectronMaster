@@ -31,7 +31,7 @@ namespace ElectronMaster.Services
             return _service.GetElementDiscovered(element);
         }
 
-        public Dictionary<LocalDateTime, List<Element>> GetElementDiscovery(Element[] elements)
+        public Dictionary<LocalDateTime, List<Element>> GetElementDiscovery(IDictionary<int, Element> elements)
         {
             return _service.GetElementDiscovery(elements);
         }

@@ -152,12 +152,17 @@ namespace ElectronMaster.ViewModel
 
         private void RenderTimeLine()
         {
-            TimeLineViewModels = new ObservableCollection<TimeLineViewModel>(
-            _elementInfoService.GetElementDiscovery(_elements).Select(x => new TimeLineViewModel
-            {
-                Discovered = x.Key,
-                Elements = new ObservableCollection<Element>(x.Value)
-            }).OrderBy(x => x.Discovered));
+            RenderTimeLine(_elements);
+        }
+        private void RenderTimeLine(IEnumerable<Element> elements)
+        {            
+           var range = _elementInfoService.GetElementDiscovery(elements.ToDictionary(x => x.Electrons,
+                x => x)).Select(x => new TimeLineViewModel
+                {
+                    Discovered = x.Key,
+                    Elements = new ObservableCollection<Element>(x.Value)
+                }).OrderBy(x => x.Discovered);
+            TimeLineViewModels.AddRange(range);
         }
 
 
@@ -210,7 +215,7 @@ namespace ElectronMaster.ViewModel
 
         public ObservableCollection<ElementFrameViewModel> Elements { get; set; } = new ObservableCollection<ElementFrameViewModel>();
         public ObservableCollection<ElementFrameViewModel> FilteredElements { get; set; } = new ObservableCollection<ElementFrameViewModel>();
-        public ObservableCollection<TimeLineViewModel> TimeLineViewModels { get; set; }
+        public ObservableCollection<TimeLineViewModel> TimeLineViewModels { get; set; } = new ObservableCollection<TimeLineViewModel>();
 
         public string SearchText
         {
@@ -323,6 +328,9 @@ namespace ElectronMaster.ViewModel
                 elementFrameViewModel.IsActive = true;
                 FilteredElements.Add(elementFrameViewModel);
             }
+
+            TimeLineViewModels.Clear();
+            RenderTimeLine(FilteredElements.Select(x => x.Element));
         });
 
         public GenericRelayCommand<object> CloseInfo => new GenericRelayCommand<object>(o =>
@@ -397,7 +405,7 @@ namespace ElectronMaster.ViewModel
             protons = 58;
             for (int row = 7; row < 9; row++)
             {
-                for (int column = 3; column < 18; column++)
+                for (int column = 3; column < 17; column++)
                 {
                     //TODO oddělení lantanoidů a aktinoidů od zbytku tabulky
                     AddElement(protons, row, column);
