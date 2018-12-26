@@ -3,8 +3,19 @@
                     xmlns:electronMaster="clr-namespace:ElectronMaster"
                     xmlns:controls="clr-namespace:ElectronMaster.Controls"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:converters="clr-namespace:ElectronMaster.Converters"
+                    mc:Ignorable="d">
 
+    <Color x:Key="RedAccent">#FFE44424</Color>
+    <Color x:Key="BlueAccent">#FF67BCDB</Color>
+    <Color x:Key="GreenAccent">#FFA2AB58</Color>
+    <Color x:Key="BlackAccent">#252526</Color>
+
+    <SolidColorBrush x:Key="RedAccentBrush" Color="{StaticResource RedAccent}"/>
+    <SolidColorBrush x:Key="BlueAccentBrush" Color="{StaticResource BlueAccent}"/>
+    <SolidColorBrush x:Key="GreenAccentBrush" Color="{StaticResource GreenAccent}"/>
+    <SolidColorBrush x:Key="BlackAccentBrush" Color="{StaticResource BlackAccent}"/>
 
     <Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
         <Style.Resources>
@@ -19,16 +30,16 @@
     </Style>
 
     <!--Úprava vzhledů tab itemů: každý je široký jako třetina apliakce-->
-    <electronMaster:SizeConverter x:Key="SizeConverter"/>
-    <electronMaster:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
-    <electronMaster:ElementTypeToColorConverter x:Key="ElementTypeToColorConverter"/>
-    <electronMaster:BoolOpacityConverter x:Key="BoolOpacityConverter"/>
+    <converters:SizeConverter x:Key="SizeConverter"/>
+    <converters:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
+    <converters:ElementTypeToColorConverter x:Key="ElementTypeToColorConverter"/>
+    <converters:BoolOpacityConverter x:Key="BoolOpacityConverter"/>
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
     <Style TargetType="{x:Type TabItem}">
         <!--Úprava šířky-->
         <Setter Property="Width" Value="{Binding ElementName=MainGrid, Path=ActualWidth, Converter={StaticResource SizeConverter}}"/>
-        <Setter Property="Background" Value="#222222"/>
+        <Setter Property="Background" Value="{StaticResource BlackAccentBrush}"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontSize" Value="15"/>
         <Style.Triggers>

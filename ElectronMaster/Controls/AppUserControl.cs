@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
-using ElectronMaster.Annotations;
+using ElectronMaster.Properties;
 
 namespace ElectronMaster.Controls
 {

@@ -1,16 +1,15 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace ElectronMaster
+namespace ElectronMaster.Converters
 {
     public class SizeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter,
     CultureInfo culture)
         {
-            double width = Double.Parse(value.ToString());
+            var width = double.Parse(value?.ToString() ?? throw new ArgumentNullException(nameof(value)));
             return (width / 3) - 2; //Dvojka se odečítá aby nevznikly dva řádky
         }
 
@@ -31,7 +30,7 @@ namespace ElectronMaster
             }
             else
             {
-                throw new ArgumentException($"Expected type {typeof(bool).Name}. Instead {value.GetType().Name} given.",nameof(value));
+                throw new ArgumentException($@"Expected type {typeof(bool).Name}. Instead {value?.GetType().Name} given.",nameof(value));
             }
         }
 

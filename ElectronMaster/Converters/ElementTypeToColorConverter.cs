@@ -4,7 +4,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using ElectronMaster.Model;
 
-namespace ElectronMaster
+namespace ElectronMaster.Converters
 {
     public class ElementTypeToColorConverter : IValueConverter
     {
@@ -24,7 +24,7 @@ namespace ElectronMaster
                         return (SolidColorBrush)(new BrushConverter().ConvertFrom("#252526"));
                 }
             }
-            throw new ArgumentException($"Expected type {typeof(ElementType)} instead {value?.GetType()} given.",nameof(value));
+            throw new ArgumentException($@"Expected type {typeof(ElementType)} instead {value?.GetType()} given.",nameof(value));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

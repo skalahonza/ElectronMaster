@@ -35,7 +35,7 @@ namespace ElectronMaster.Model
         public List<Configuration> ElectronConfiguration()
         {
             var result = new List<Configuration>();
-            int period = 1;
+            var period = 1;
             while (_electronsForConfiguration > 0)
             {
                 result.AddRange(PeriodConfiguration(period));
@@ -49,7 +49,7 @@ namespace ElectronMaster.Model
             //kontrola pro stabilitu D5 a D10
             //když je D4 nebo D9 tak elektron z orbitalu S se přesune do orbitalu D
 
-            for (int limit = 4; limit <= 9; limit += 5)
+            for (var limit = 4; limit <= 9; limit += 5)
             {
                 if (result[result.Count - 1].OrbitalType == OrbitalType.d &&
                     result[result.Count - 1].Electrons == limit
@@ -59,7 +59,7 @@ namespace ElectronMaster.Model
                     result[result.Count - 1].Electrons++;
 
                     //hledání nejbližšího s orbitalu
-                    for (int i = result.Count - 1; i >= 0; i--)
+                    for (var i = result.Count - 1; i >= 0; i--)
                         if (result[i].OrbitalType == OrbitalType.s)
                         {
                             result[i].Electrons--;

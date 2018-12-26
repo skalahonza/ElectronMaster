@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using ElectronMaster.Annotations;
+using ElectronMaster.Properties;
 
 namespace ElectronMaster.ViewModel
 {

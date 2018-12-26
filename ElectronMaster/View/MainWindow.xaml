@@ -91,9 +91,9 @@
                    Visibility="{Binding ExaminedElement.Element.SpecialConfiguration, FallbackValue=Collapsed, TargetNullValue=Collapsed
                                 ,Converter={StaticResource BooleanToVisibilityConverter}}"
                    Text="Element má specifickou elektronovou konfiguraci. Ordbital D poslední periody se zaplňuje dříve." 
-                   FontSize="16" Foreground="#FFE44424" HorizontalAlignment="Center"/>
+                   FontSize="16" Foreground="{StaticResource RedAccentBrush}" HorizontalAlignment="Center"/>
 
-        <TextBlock x:Name="textBlock" Grid.Row="3" Text="Nekovy" Background="#FFE44424" Foreground="White" Tag="0"                    
+        <TextBlock x:Name="textBlock" Grid.Row="3" Text="Nekovy" Background="{StaticResource RedAccentBrush}" Foreground="White" Tag="0"                    
                    TextAlignment="Center" Padding="5" FontSize="16">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDown">
@@ -101,7 +101,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Polokovy" Background="#FF67BCDB"                    
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="Polokovy" Background="{StaticResource BlueAccentBrush}"                    
                    Foreground="White" Tag="1" TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" 
                    FontSize="{Binding FontSize, ElementName=textBlock}">
             <i:Interaction.Triggers>
@@ -110,7 +110,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBlock>
-        <TextBlock Grid.Column="2" Grid.Row="3" Text="Kovy" Background="#FFA2AB58" Foreground="White" Tag="2"                    
+        <TextBlock Grid.Column="2" Grid.Row="3" Text="Kovy" Background="{StaticResource GreenAccentBrush}" Foreground="White" Tag="2"                    
                    TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" 
                    FontSize="{Binding FontSize, ElementName=textBlock}">
             <i:Interaction.Triggers>
@@ -119,7 +119,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBlock>
-        <TextBlock Grid.Column="3" Grid.Row="3" Text="Umělé prvky" Background="#252526" Foreground="White" Tag="3"                    
+        <TextBlock Grid.Column="3" Grid.Row="3" Text="Umělé prvky" Background="{StaticResource BlackAccentBrush}" Foreground="White" Tag="3"                    
                    TextAlignment="Center" Padding="{Binding Padding, ElementName=textBlock}" 
                    FontSize="{Binding FontSize, ElementName=textBlock}">
             <i:Interaction.Triggers>
@@ -232,7 +232,7 @@
                     </ItemsControl>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="TimeLine">
+            <TabItem Header="Timeline">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <ItemsControl ItemsSource="{Binding TimeLineViewModels}">
                         <ItemsControl.ItemsPanel>
@@ -263,9 +263,15 @@
                 <ProgressBar IsIndeterminate="True"                 
                               Height="15" />
             </StackPanel>
-            <controls:ElementInfoView ElementInfo="{Binding ExaminedElementInfo}" Margin="0,20,0,0"/>
-            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Width="18" Height="18"
-                    Content="x" Command="{Binding CloseInfo}"/>
+            <controls:ElementInfoView ElementInfo="{Binding ExaminedElementInfo}" />
+            <Button HorizontalAlignment="Right" VerticalAlignment="Top"                     
+                    Margin="0,10,50,0"
+                    Height="35"
+                    Width="75"
+                    Content="Zavřít" 
+                    Foreground="White"
+                    Background="{StaticResource RedAccentBrush}"
+                    Command="{Binding CloseInfo}"/>
         </Grid>
     </Grid>
 </Window>

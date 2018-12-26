@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
@@ -276,7 +275,7 @@ namespace ElectronMaster.ViewModel
                         text.Inlines.Add(new Run(closestRareGas.Symbol + "]"));
                     }
 
-                    for (int i = closestRareGas.ElectronConfiguration().Count;
+                    for (var i = closestRareGas.ElectronConfiguration().Count;
                         i < ExaminedElement.Element.ElectronConfiguration().Count;
                         i++)
                     {
@@ -390,18 +389,18 @@ namespace ElectronMaster.ViewModel
                 elements.Add(adHocElement);
 
             //perioda 4 a 5
-            int protons = 19;
-            for (int row = 3; row < 5; row++)
-                for (int column = 0; column < 18; column++)
+            var protons = 19;
+            for (var row = 3; row < 5; row++)
+                for (var column = 0; column < 18; column++)
                 {
                     AddElement(protons, row, column);
                     protons++;
                 }
             //4 až 8 skupina 6. a 7. periody
             protons = 72;
-            for (int row = 5; row < 7; row++)
+            for (var row = 5; row < 7; row++)
             {
-                for (int column = 3; column < 18; column++)
+                for (var column = 3; column < 18; column++)
                 {
                     AddElement(protons, row, column);
                     protons++;
@@ -411,9 +410,9 @@ namespace ElectronMaster.ViewModel
 
             //lantanoidy a aktinoidy
             protons = 58;
-            for (int row = 7; row < 9; row++)
+            for (var row = 7; row < 9; row++)
             {
-                for (int column = 3; column < 17; column++)
+                for (var column = 3; column < 17; column++)
                 {
                     //TODO oddělení lantanoidů a aktinoidů od zbytku tabulky
                     AddElement(protons, row, column);
@@ -423,9 +422,9 @@ namespace ElectronMaster.ViewModel
             }
             //prvky třetí až osmé skupiny
             protons = 5;
-            for (int row = 1; row < 3; row++)
+            for (var row = 1; row < 3; row++)
             {
-                for (int column = 12; column < 18; column++)
+                for (var column = 12; column < 18; column++)
                 {
                     AddElement(protons, row, column);
                     protons++;

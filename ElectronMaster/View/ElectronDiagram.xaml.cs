@@ -4,8 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using ElectronMaster.Annotations;
 using ElectronMaster.Model;
+using ElectronMaster.Properties;
 
 namespace ElectronMaster.View
 {
@@ -30,15 +30,15 @@ namespace ElectronMaster.View
         private void Render()
         {
             //rozpoznání orbitalu  
-            int electronsToConfig = SubConfiguration.Electrons;
+            var electronsToConfig = SubConfiguration.Electrons;
 
             ToolTip = SubConfiguration.ToString();
             Width = (int)(SubConfiguration.OrbitalType) * 100 + 50; //přizpůsobení šířky
 
             //vykreslení potřebného množství čtverečku
-            for (int count = 0; count < (int)SubConfiguration.OrbitalType * 2 + 1; count++)
+            for (var count = 0; count < (int)SubConfiguration.OrbitalType * 2 + 1; count++)
             {
-                Rectangle rect = new Rectangle() { Width = 50, Height = 50, Stroke = Brushes.Gray, Fill = Brushes.White, StrokeThickness = 3 };
+                var rect = new Rectangle() { Width = 50, Height = 50, Stroke = Brushes.Gray, Fill = Brushes.White, StrokeThickness = 3 };
 
                 Canvas.SetLeft(rect, count * 50);
                 KresliciPlocha.Children.Add(rect);
@@ -47,7 +47,7 @@ namespace ElectronMaster.View
             //výstavbový princip
             //spinové pravidlo
             //elektrony s kladným spinem
-            for (int count = 0; count < (int)SubConfiguration.OrbitalType * 2 + 1; count++)
+            for (var count = 0; count < (int)SubConfiguration.OrbitalType * 2 + 1; count++)
             {
                 if (electronsToConfig > 0)
                 {
@@ -56,7 +56,7 @@ namespace ElectronMaster.View
                 }
             }
             //elektrony s opačným spinem
-            for (int count = 0; count < (int)SubConfiguration.OrbitalType * 2 + 1; count++)
+            for (var count = 0; count < (int)SubConfiguration.OrbitalType * 2 + 1; count++)
             {
                 if (electronsToConfig > 0)
                 {
