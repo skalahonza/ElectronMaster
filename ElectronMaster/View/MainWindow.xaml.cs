@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows;
 using ElectronMaster.Extensions;
 using ElectronMaster.Services;
 using Microsoft.Win32;
@@ -16,14 +14,6 @@ namespace ElectronMaster.View
         {
             InitializeComponent();
         }    
-
-        /// <summary>
-        /// Odkaz na GoID
-        /// </summary>
-        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Process.Start("http://goid.azurewebsites.net/");
-        }
 
         /// <summary>
         /// Uloží schématickou konfiguraci jako obrázek
